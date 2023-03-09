@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "414347545630",
+    "firebase_url": "https://mydiplomesite-default-rtdb.firebaseio.com",
+    "project_id": "mydiplomesite",
+    "storage_bucket": "mydiplomesite.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414347545630:android:0e0dc987aca5c0949b720f",
+        "android_client_info": {
+          "package_name": "com.denisal.studentsmarks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414347545630-0kmirqthmt7nlirb270ggv4bott8vc5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvuuBEH5AeooA9XqMohBxw-2AmOyD5NCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414347545630-0kmirqthmt7nlirb270ggv4bott8vc5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/gradeStudents"
+        android:icon="@drawable/outline_fact_check_24"
+        android:title="Успеваемость" />
+
+    <item
+        android:id="@+id/trafficStudents"
+        android:icon="@drawable/outline_people_alt_24"
+        android:title="Посещаемость" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/outline_settings_24"
+        android:title="Настройки" />
+</menu>
