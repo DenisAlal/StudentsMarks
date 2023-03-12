@@ -111,6 +111,10 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 }).start()
 
             }
+            val loadManual = binding.loadStudentsManual
+            loadManual.setOnClickListener{
+                Toast.makeText(applicationContext, "Нужно добавить", Toast.LENGTH_SHORT)
+            }
         }
         private fun checkForStoragePermission() {
             if (ContextCompat.checkSelfPermission(
@@ -371,14 +375,12 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
 
         private fun startProcess() {
             binding.process.isVisible = true
-            binding.loadStudents.isVisible = false
-            binding.sendDataStud.isVisible = false
+            binding.linearLayout.isVisible = false
         }
         private fun success() {
             binding.process.isVisible = false
             binding.success.isVisible = true
-            binding.loadStudents.isVisible = false
-            binding.sendDataStud.isVisible = false
+            binding.linearLayout.isVisible = false
         }
 
 
