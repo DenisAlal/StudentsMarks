@@ -25,9 +25,8 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         val user = FirebaseAuth.getInstance().currentUser
         if(user != null){
-            uid = user.uid;
+            uid = user.uid
         }
-        Log.e("uid", uid)
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 /*

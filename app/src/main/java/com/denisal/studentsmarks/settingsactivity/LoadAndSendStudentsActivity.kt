@@ -38,7 +38,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-
             binding = ActivityLoadAndSendStudentsBinding.inflate(layoutInflater)
             val view = binding.root
             setContentView(view)
@@ -49,6 +48,8 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             binding.sendDataStud.isEnabled = false;
             binding.success.isVisible = false
             binding.process.isVisible = false
+            var getTeacherID = GetIdClass()
+            getTeacherID.get()
             init()
         }
 
@@ -108,8 +109,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 Thread(Runnable {
                     sendData()
                 }).start()
-
-                //success()
 
             }
         }
@@ -325,14 +324,13 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 }
 
             }
-            Log.w("uid", uid)
-
+            Log.e("teacher_id", teacherID.toString())
             binding.sendDataStud.isEnabled = true;
         }
 
         private fun sendData() {
             runOnUiThread { startProcess() }
-            if (uid != "null") {
+            if (teacherID != -1) {
                 try {
                     Class.forName("com.mysql.jdbc.Driver")
                     val cn: Connection = DriverManager.getConnection(url, user, pass)
@@ -340,8 +338,8 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
 
                     for (index in studData.indices) {
                         val value = studData[index]
-                        val insert = "INSERT INTO student (id, uid, studGroup, fullName) VALUES " +
-                                "(NULL, '${uid}','${value.group}','${value.fullName}');"
+                        val insert = "INSERT INTO student (id, teacher_id, studGroup, fullName) VALUES " +
+                                "(NULL, '${teacherID}','${value.group}','${value.fullName}');"
                         ps.execute(insert)
                     }
                     if (ps != null) {

@@ -5,5 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".scanning.TrafficScanningActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="50dp">
 
+        <TextView
+            android:id="@+id/text1T"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Выберите предмет"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinnerSubjTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/text2T"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Введите тему занятия"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/trafficTopic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Тема занятия"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text3T"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/pickDateTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Выбрать дату занятия" />
+
+
+        <Spinner
+            android:id="@+id/spinnerSubjTrafficType"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/startScanTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Начать сканирование" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.SQLException
+import kotlin.concurrent.thread
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
@@ -34,10 +39,12 @@ class SignUpActivity : AppCompatActivity() {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            sendData()
                             val intent = Intent(this, SignInActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
                             Toast.makeText(this, "Регистрация прошла успешно", Toast.LENGTH_SHORT).show()
+
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
@@ -51,5 +58,33 @@ class SignUpActivity : AppCompatActivity() {
 
             }
         }
+
+    }
+
+    private fun sendData() {
+        val teacherName = binding.nameEt.text.toString()
+        val fireUser = FirebaseAuth.getInstance().currentUser
+        if(fireUser != null){
+            uid = fireUser.uid;
+        }
+        thread { //Создание потока
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val ps = cn.createStatement()
+                val insert = "INSERT INTO teacher (id, uid, fullName) VALUES (NULL, '$uid','$teacherName');"
+                ps.execute(insert)
+                if (ps != null) {
+                    ps!!.close()
+                }
+                if (cn != null) {
+                    cn.close()
+                }
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
     }
 }

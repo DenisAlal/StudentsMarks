@@ -11,7 +11,6 @@ import java.util.*
 
 class GradeScanningActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val courses = arrayOf<String?>("Выберите тип занятия","Лекция", "Практические занятия")
-
     private val cal: Calendar = Calendar.getInstance()
     private var year = cal.get(Calendar.YEAR)
     private var month = getMonth(cal.get(Calendar.MONTH).toString())
@@ -23,7 +22,7 @@ class GradeScanningActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Успеваемость"
         setContentView(R.layout.activity_grade_scanning)
-        val spin = findViewById<Spinner>(R.id.spinner_subj_grade_type)
+        val spin = findViewById<Spinner>(R.id.spinnerSubjGradeType)
         spin.onItemSelectedListener = this
         val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
             this,
@@ -36,16 +35,16 @@ class GradeScanningActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
 
 
         val pickerDateBtn: Button = findViewById(R.id.pickDateGrade)
-        val text: TextView = findViewById(R.id.textView6)
+        val text: TextView = findViewById(R.id.text3G)
 
-        text.text = "Выберите дату занятия, сейчас $day.$month.$year"
+        text.text = "Выберите дату занятия, сейчас указана дата, $day.$month.$year"
         pickerDateBtn.setOnClickListener {
             val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, myear, mmonth, mdayOfMonth ->
                 year = myear
                 month = getMonth(mmonth.toString())
                 day = getDay(mdayOfMonth.toString())
-                text.text = "Вы выбрали дату, $mdayOfMonth.$month.$year"
-            }, year, month.toInt(), day.toInt())
+                text.text = "Вы выбрали дату, $day.$month.$year"
+            }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
             datePickerDialog.show()
         }
 

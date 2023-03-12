@@ -7,14 +7,29 @@
     tools:context=".settingsactivity.NewSubjectActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="50dp">
 
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Введите название предмета" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Название предмета"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textView3"
@@ -33,5 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Практические занятия" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Создать предмет" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

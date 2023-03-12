@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.HomeActivity
 import com.denisal.studentsmarks.databinding.ActivitySignInBinding
+import com.denisal.studentsmarks.uid
 import com.google.firebase.auth.FirebaseAuth
 
 

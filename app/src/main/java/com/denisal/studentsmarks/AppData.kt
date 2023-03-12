@@ -9,4 +9,4 @@ data class StudentsData(
 var filenameDelete = ""
 val studData: MutableList<StudentsData> = mutableListOf()
 var uid: String = "null"
-
+var teacherID: Int = -1

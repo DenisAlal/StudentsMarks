@@ -6,47 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".scanning.GradeScanningActivity">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="50dp"
+        >
+
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/text1G"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Выберите предмет" />
+            android:text="Выберите предмет"
+            android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/spinner_subj_grade"
+            android:id="@+id/spinnerSubjGrade"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:spinnerMode="dropdown" />
+
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/text2G"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Введите тему занятия" />
+            android:text="Введите тему занятия"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/gradeTopic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="Тема занятия"
             android:inputType="textPersonName"
-            android:hint="Тема занятия" />
+            android:textSize="16sp" />
+
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/text3G"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="" />
+            android:text=""
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/pickDateGrade"
@@ -57,7 +66,7 @@
 
 
         <Spinner
-            android:id="@+id/spinner_subj_grade_type"
+            android:id="@+id/spinnerSubjGradeType"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -68,6 +77,6 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Начать сканирование посещаемости" />
+            android:text="Начать сканирование" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

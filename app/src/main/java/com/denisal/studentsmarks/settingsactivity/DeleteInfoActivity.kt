@@ -30,6 +30,8 @@ class DeleteInfoActivity : AppCompatActivity() {
         val removeStudents: CheckBox = binding.studentsCheck
         val removeDB: CheckBox = binding.gradeDelete
         val accept: EditText = binding.acceptText
+        var getTeacherID = GetIdClass()
+        getTeacherID.get()
         removeStudents.setOnClickListener{
             binding.gradeDelete.isChecked = removeStudents.isChecked
         }
@@ -49,7 +51,7 @@ class DeleteInfoActivity : AppCompatActivity() {
             } else {
                 val errorToast = Toast.makeText(
                     this@DeleteInfoActivity,
-                    "Ошибка, введите подтверждение верно!",
+                    "Ошибка, введите подтверждение!",
                     Toast.LENGTH_SHORT
                 )
                 errorToast.show()
@@ -70,12 +72,12 @@ class DeleteInfoActivity : AppCompatActivity() {
     private fun deleteStudList() {
         Log.e("delete stud", "delete stud")
         runOnUiThread {}
-        if (uid != "null") {
+        if (teacherID != -1) {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
                 val ps = cn.createStatement()
-                val insert = "DELETE FROM student WHERE uid='$uid'"
+                val insert = "DELETE FROM student WHERE teacher_id='$teacherID'"
                 ps.execute(insert)
                 if (ps != null) {
                     ps!!.close()
@@ -92,6 +94,7 @@ class DeleteInfoActivity : AppCompatActivity() {
         }
     }
     private fun deleteDB() {
+
         Log.e("delete DB", "delete DB")
     }
 }

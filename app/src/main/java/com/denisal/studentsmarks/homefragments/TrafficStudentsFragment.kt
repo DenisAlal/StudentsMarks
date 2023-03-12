@@ -1,13 +1,22 @@
 package com.denisal.studentsmarks.homefragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.denisal.studentsmarks.R
-class TrafficStudentsFragment : Fragment() {
+import com.denisal.studentsmarks.scanning.GradeScanningActivity
+import com.denisal.studentsmarks.scanning.GradeViewActivity
+import com.denisal.studentsmarks.scanning.TrafficScanningActivity
+import com.denisal.studentsmarks.scanning.TrafficViewActivity
 
+class TrafficStudentsFragment : Fragment() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -17,8 +26,18 @@ class TrafficStudentsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_traffic_students, container, false)
+        val view =  inflater.inflate(R.layout.fragment_traffic_students, container, false)
+        val scanTraffic: Button = view.findViewById(R.id.scanTraffic)
+        scanTraffic.setOnClickListener {
+            val intent = Intent(activity, TrafficScanningActivity::class.java)
+            startActivity(intent)
+        }
+        val trafficView: Button = view.findViewById(R.id.trafficView)
+        trafficView.setOnClickListener {
+            val intent = Intent(activity, TrafficViewActivity::class.java)
+            startActivity(intent)
+        }
+        return view
     }
 
     companion object {

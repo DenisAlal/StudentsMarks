@@ -13,6 +13,7 @@ import com.denisal.studentsmarks.auth.SignInActivity
 import com.denisal.studentsmarks.settingsactivity.DeleteInfoActivity
 import com.denisal.studentsmarks.settingsactivity.LoadAndSendStudentsActivity
 import com.denisal.studentsmarks.settingsactivity.NewSubjectActivity
+import com.denisal.studentsmarks.settingsactivity.ViewStudentsActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.sql.Connection
 import java.sql.DriverManager
@@ -20,8 +21,6 @@ import java.sql.SQLException
 import kotlin.concurrent.thread
 
 class SettingsFragment : Fragment() {
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -35,10 +34,14 @@ class SettingsFragment : Fragment() {
             val intent = Intent(activity, LoadAndSendStudentsActivity::class.java)
             startActivity(intent)
         }
-
         val createSubject: Button = view.findViewById(R.id.createSub)
         createSubject.setOnClickListener{
             val intent = Intent(activity, NewSubjectActivity::class.java)
+            startActivity(intent)
+        }
+        val viewStud: Button = view.findViewById(R.id.viewStud)
+        viewStud.setOnClickListener {
+            val intent = Intent(activity, ViewStudentsActivity::class.java)
             startActivity(intent)
         }
         val deleteInformation: Button = view.findViewById(R.id.delInfo)
@@ -53,37 +56,7 @@ class SettingsFragment : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
-
         return view
-
-    }
-    private fun checkStud(): Boolean {
-        var check = false
-        var cn: Connection
-        thread {
-            try {
-                Class.forName("com.mysql.jdbc.Driver")
-                cn = DriverManager.getConnection(url, user, pass)
-                val ps = cn.createStatement()
-                val resultSet = ps!!.executeQuery("SELECT * FROM student WHERE uid = '${uid}'")
-                while (resultSet.next()) {
-                    check = true
-                    Log.d("mysqlConnection: " , resultSet.getString("id"))
-                    break
-                }
-                if (ps != null) {
-                    ps!!.close()
-                }
-                if (cn != null) {
-                    cn.close()
-                }
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
-        }.join()
-        return check
     }
     companion object {
         @JvmStatic

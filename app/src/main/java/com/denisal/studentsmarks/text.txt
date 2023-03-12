@@ -1,1 +1,1 @@
-CREATE TABLE `denisago_db`.`student` ( `id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `uid` TEXT NOT NULL , `studGroup` TEXT NOT NULL , `fullName` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `fan651sh_denisdb`.`student` ( `id` INT NOT NULL AUTO_INCREMENT , `uid` TEXT NOT NULL , `studGroup` TEXT NOT NULL , `fullName` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
