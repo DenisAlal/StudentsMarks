@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.denisal.studentsmarks.databinding.ActivityHomeBinding
+import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.homefragments.GradeStudentsFragment
 import com.denisal.studentsmarks.homefragments.SettingsFragment
 import com.denisal.studentsmarks.homefragments.TrafficStudentsFragment
@@ -23,6 +24,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportFragmentManager.beginTransaction().add(R.id.container, GradeStudentsFragment.newInstance()).commit();
         bottomNavigationView = findViewById(R.id.bottom_navigation)
+        val getID = GetFromDB()
+        getID.get()
         val user = FirebaseAuth.getInstance().currentUser
         if(user != null){
             uid = user.uid

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivityDeleteInfoBinding
+import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -30,8 +31,8 @@ class DeleteInfoActivity : AppCompatActivity() {
         val removeStudents: CheckBox = binding.studentsCheck
         val removeDB: CheckBox = binding.gradeDelete
         val accept: EditText = binding.acceptText
-        var getTeacherID = GetIdClass()
-        getTeacherID.get()
+        val getID = GetFromDB()
+        getID.get()
         removeStudents.setOnClickListener{
             binding.gradeDelete.isChecked = removeStudents.isChecked
         }

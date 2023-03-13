@@ -24,7 +24,7 @@
             android:text="Введите название предмета" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/nameSub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -38,19 +38,19 @@
             android:text="Выберите тип проводимых занятий" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/lectionCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Лекция" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/practiceCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Практические занятия" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/createSubjectBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Создать предмет" />

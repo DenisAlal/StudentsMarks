@@ -26,12 +26,14 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 import com.denisal.studentsmarks.databinding.ActivityLoadAndSendStudentsBinding
+import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.dbfunctions.InsertToDB
 
 class LoadAndSendStudentsActivity : AppCompatActivity() {
         private lateinit var binding: ActivityLoadAndSendStudentsBinding
         private val tag: String = "main"
         private val requestCode = 101
-        private val PICK_FILE = 100
+        private val pickFile = 100
         private var file: File? = null
         private var fileUri: Uri? = null
         private var fileName: String? = ""
@@ -48,11 +50,10 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             binding.sendDataStud.isEnabled = false;
             binding.success.isVisible = false
             binding.process.isVisible = false
-            var getTeacherID = GetIdClass()
-            getTeacherID.get()
+            val getID = GetFromDB()
+            getID.get()
             init()
         }
-
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
             return when (item.itemId) {
                 android.R.id.home -> {
@@ -95,7 +96,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 "org.apache.poi.javax.xml.stream.XMLEventFactory",
                 "com.fasterxml.aalto.stax.EventFactoryImpl"
             );
-
             setupClickListener()
         }
         private fun setupClickListener() {
@@ -105,7 +105,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             }
             val butSend = binding.sendDataStud
             butSend.setOnClickListener{
-
                 Thread(Runnable {
                     sendData()
                 }).start()
@@ -113,7 +112,19 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             }
             val loadManual = binding.loadStudentsManual
             loadManual.setOnClickListener{
-                Toast.makeText(applicationContext, "Нужно добавить", Toast.LENGTH_SHORT)
+                val insert = InsertToDB()
+                val fioCheck = binding.fioET.text.toString()
+                val group = binding.groupET.text.toString()
+                if (fioCheck.isNotEmpty() && group.isNotEmpty()) {
+                    val check = insert.insertOneStudent(fioCheck,group)
+                    if(check) {
+                        Toast.makeText(this, "Данные загружены", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Ошибка загрузки", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Необходимо заполнить все поля!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         private fun checkForStoragePermission() {
@@ -138,14 +149,14 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                 addCategory(Intent.CATEGORY_OPENABLE)
             }
-            startActivityForResult(intent, PICK_FILE)
+            startActivityForResult(intent, pickFile)
         }
-        @Deprecated("Deprecated in Java")
+
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             var newUri = ""
             when(requestCode) {
-                PICK_FILE -> {
+                pickFile -> {
                     if (resultCode == Activity.RESULT_OK) {
                         var mimeTypeExtension: String? = ""
                         data?.data?.also { uri ->
@@ -153,7 +164,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                             mimeTypeExtension = uri.getExtention(this)
                             Log.e(tag, "ApachPOI Selected file mimeTypeExtension : " + mimeTypeExtension)
                             if (mimeTypeExtension != null && mimeTypeExtension?.isNotEmpty() == true) {
-
                                 if (mimeTypeExtension?.contentEquals("xlsx") == true
                                     || mimeTypeExtension?.contentEquals("xls") == true
                                 ) {
@@ -172,10 +182,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                     }
                 }
             }
-
             copyFileAndExtract(newUri)
-
-
         }
 
         fun Uri.getExtention(context: Context): String? {
@@ -190,28 +197,21 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                             context,
                             context.packageName + ".provider",
                             File(this.path)
-                        )
-                            .toString()
+                        ).toString()
                     )
                 } else {
                     MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(File(this.path)).toString())
-
                 }
             }
-
             return extension
         }
         private fun copyFileAndExtract(uri: String) {
-
             val dir = File(this.filesDir, "doc")
             dir.mkdirs()
             fileName = getFileName(uri.toUri())
-
             filenameDelete = fileName.toString()
-
             file = File(dir, fileName)
             file?.createNewFile()
-
             val fileOut = FileOutputStream(file)
             try {
                 contentResolver.openInputStream(uri.toUri())?.use { inputStream ->
@@ -229,8 +229,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 file?.apply {
                     Log.e("absolute path", this.absolutePath)
                     exelReader(this.absolutePath)
-                    //viewModel.readExcelFileFromAssets(this.absolutePath)
-
                 }
             }
         }
@@ -361,8 +359,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 runOnUiThread { success() }
             }
         }
-
-
         @Suppress("DEPRECATION")
         private fun cellCheck(cell: Cell): String {
             var cellValue = ""

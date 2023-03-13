@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:text="Ввкдите ФИО в формате Иванов Иван Иванович, и группу в виде БИ-41.1" />
+            android:layout_marginVertical="10dp"
+            android:text="Для добавления студента в список, ведите ФИО в формате Иванов Иван Иванович, и группу в виде БИ-41.1"
+            android:textAlignment="center" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fioLayout"
@@ -32,6 +34,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/emailLayout"
+
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -63,16 +66,15 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:text="Добавить студента вручную"
-            tools:visibility="visible"/>
+            android:text="Добавить студента вручную" />
+
         <Button
             android:id="@+id/loadStudents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:text="Выбрать документ"
-            tools:visibility="visible" />
+            android:text="Выбрать документ" />
 
         <Button
             android:id="@+id/sendDataStud"
@@ -80,8 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:text="Отправить данные"
-            tools:visibility="visible" />
+            android:text="Отправить данные" />
 
     </LinearLayout>
 

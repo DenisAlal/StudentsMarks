@@ -2,11 +2,15 @@ package com.denisal.studentsmarks.scanning
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.R
+import com.denisal.studentsmarks.StudentsData
+import com.denisal.studentsmarks.SubjData
+import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import java.util.*
 
 class GradeScanningActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -22,17 +26,30 @@ class GradeScanningActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Успеваемость"
         setContentView(R.layout.activity_grade_scanning)
-        val spin = findViewById<Spinner>(R.id.spinnerSubjGradeType)
-        spin.onItemSelectedListener = this
-        val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
-            this,
-            android.R.layout.simple_spinner_item,
-            courses)
+        val DB = GetFromDB()
+        DB.get()
+        val studData: MutableList<SubjData> = DB.getDataForSpinner()
+        val arraySpinner = arrayOf(1, 2, 3, 4, 5)
+        // select subj
+        if(studData.isEmpty()) {
+            val spinner: Spinner = findViewById(R.id.spinnerSubjGrade)
+            spinner.isEnabled = false
+            Log.e("123", "error")
+//////////////////////////////////////////остановился здесь, сделать разбор массива
+        } else {
+            val spinSubj = findViewById<Spinner>(R.id.spinnerSubjGrade)
+            spinSubj.onItemSelectedListener = this
+            val add: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, arraySpinner)
+            add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinSubj.adapter = add
+        }
 
-        ad.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item)
-        spin.adapter = ad
-
+        // type subj
+        val spinType = findViewById<Spinner>(R.id.spinnerSubjGradeType)
+        spinType.onItemSelectedListener = this
+        val add: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, courses)
+        add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinType.adapter = add
 
         val pickerDateBtn: Button = findViewById(R.id.pickDateGrade)
         val text: TextView = findViewById(R.id.text3G)
@@ -66,13 +83,9 @@ class GradeScanningActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         return newDay
     }
 
-
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (position == 0) {
-            Toast.makeText(applicationContext,
-                "Выберите тип занятия",
-                Toast.LENGTH_LONG)
-                .show()
+            //Toast.makeText(applicationContext, "Выберите тип занятия", Toast.LENGTH_LONG).show()
 
         } else {
             Toast.makeText(applicationContext,

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.*
+import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -24,7 +25,7 @@ class ViewStudentsActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val iconEmpty  = findViewById<ImageView>(R.id.iconEmpty)
         val textEmpty  = findViewById<TextView>(R.id.textEmpty)
-        var teacherID = GetIdClass()
+        var teacherID = GetFromDB()
         teacherID.get()
         iconEmpty.isVisible = false
         textEmpty.isVisible = false
