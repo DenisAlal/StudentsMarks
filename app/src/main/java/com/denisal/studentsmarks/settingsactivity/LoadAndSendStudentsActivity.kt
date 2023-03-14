@@ -50,8 +50,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             binding.sendDataStud.isEnabled = false;
             binding.success.isVisible = false
             binding.process.isVisible = false
-            val getID = GetFromDB()
-            getID.get()
+            Log.e("","$teacherID")
             init()
         }
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -64,7 +63,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 else -> super.onOptionsItemSelected(item)
             }
         }
-        fun deleteFile () {
+        private fun deleteFile () {
             val dir = File(this.filesDir, "doc")
             file = File(dir, filenameDelete)
             if (isFileExists(file!!)) {
@@ -80,7 +79,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 Log.e("File", "deleted!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             }
         }
-        fun isFileExists(file: File): Boolean {
+        private fun isFileExists(file: File): Boolean {
             return file.exists() && !file.isDirectory
         }
         private fun init() {
@@ -185,7 +184,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             copyFileAndExtract(newUri)
         }
 
-        fun Uri.getExtention(context: Context): String? {
+        private fun Uri.getExtention(context: Context): String? {
             var extension: String? = ""
             extension = if (this.scheme == ContentResolver.SCHEME_CONTENT) {
                 val mime = MimeTypeMap.getSingleton()
@@ -258,10 +257,8 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 var ignore = false
                 var i = "1"
                 row.forEach { cell ->
-                    if (cell.toString().toLowerCase() == "номер"
-                        || cell.toString().toLowerCase() == "группа"
-                        || cell.toString().toLowerCase() == "подгруппа"
-                        || cell.toString().toLowerCase() == "фио") {
+                    if (cell.toString().toLowerCase() == "номер" || cell.toString().toLowerCase() == "группа"
+                        || cell.toString().toLowerCase() == "подгруппа" || cell.toString().toLowerCase() == "фио") {
                         Log.w("parsing", "find header")
                         ignore = true
                     } else {
@@ -300,10 +297,8 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                             }
                         }
                     }
-
                 }
                 if (!ignore) {
-
                     when(val3) {
                         "Подг А" -> {
                             newGroup = "$val2.1"
@@ -324,7 +319,6 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 } else {
                     Log.w("read exel", "ignore")
                 }
-
             }
             Log.e("teacher_id", teacherID.toString())
             binding.sendDataStud.isEnabled = true;

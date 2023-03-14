@@ -15,28 +15,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var binding: ActivityHomeBinding
-
-    lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var binding: ActivityHomeBinding
+    private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction().add(R.id.container, GradeStudentsFragment.newInstance()).commit();
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        val getID = GetFromDB()
-        getID.get()
         val user = FirebaseAuth.getInstance().currentUser
         if(user != null){
             uid = user.uid
         }
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                /*
-                R.id.QRCode -> {
-                    openFragment(QrCodeFragment.newInstance());
-                    return@setOnItemSelectedListener true
-                }*/
                 R.id.gradeStudents -> {
                     openFragment(GradeStudentsFragment.newInstance())
                     return@setOnItemSelectedListener true
@@ -52,6 +44,9 @@ class HomeActivity : AppCompatActivity() {
             }
             false
         }
+        val getID = GetFromDB()
+        getID.get()
+        Log.e("","$teacherID")
     }
 
     private fun openFragment(fragment: Fragment) {
@@ -61,5 +56,6 @@ class HomeActivity : AppCompatActivity() {
         transaction.commit()
 
     }
+
 
 }

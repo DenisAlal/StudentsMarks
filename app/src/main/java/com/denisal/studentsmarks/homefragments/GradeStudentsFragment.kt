@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.GradeScanningActivity
+import com.denisal.studentsmarks.scanning.CreateSubjectActivity
 import com.denisal.studentsmarks.scanning.GradeViewActivity
-import com.denisal.studentsmarks.settingsactivity.LoadAndSendStudentsActivity
+import com.denisal.studentsmarks.teacherID
 import com.denisal.studentsmarks.uid
 
 
@@ -29,9 +29,14 @@ class GradeStudentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_grade_students, container, false)
-        val scanGrade: Button = view.findViewById(R.id.scanGrade)
-        scanGrade.setOnClickListener {
-            val intent = Intent(activity, GradeScanningActivity::class.java)
+        val createSubject: Button = view.findViewById(R.id.createSubject)
+        createSubject.setOnClickListener {
+            val intent = Intent(activity, CreateSubjectActivity::class.java)
+            startActivity(intent)
+        }
+        val gradeScan: Button = view.findViewById(R.id.gradeScan)
+        gradeScan.setOnClickListener {
+            val intent = Intent(activity, CreateSubjectActivity::class.java)
             startActivity(intent)
         }
         val gradeView: Button = view.findViewById(R.id.gradeView)

@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.GradeScanningActivity
-import com.denisal.studentsmarks.scanning.GradeViewActivity
-import com.denisal.studentsmarks.scanning.TrafficScanningActivity
+import com.denisal.studentsmarks.scanning.CreateSubjectActivity
 import com.denisal.studentsmarks.scanning.TrafficViewActivity
 
 class TrafficStudentsFragment : Fragment() {
@@ -27,9 +25,14 @@ class TrafficStudentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_traffic_students, container, false)
-        val scanTraffic: Button = view.findViewById(R.id.scanTraffic)
-        scanTraffic.setOnClickListener {
-            val intent = Intent(activity, TrafficScanningActivity::class.java)
+        val createSubTraffic: Button = view.findViewById(R.id.createSubTraffic)
+        createSubTraffic.setOnClickListener {
+            val intent = Intent(activity, CreateSubjectActivity::class.java)
+            startActivity(intent)
+        }
+        val trafdicScan: Button = view.findViewById(R.id.trafficScan)
+        trafdicScan.setOnClickListener {
+            val intent = Intent(activity, CreateSubjectActivity::class.java)
             startActivity(intent)
         }
         val trafficView: Button = view.findViewById(R.id.trafficView)

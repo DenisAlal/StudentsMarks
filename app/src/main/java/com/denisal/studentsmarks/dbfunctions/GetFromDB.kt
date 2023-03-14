@@ -47,6 +47,7 @@ class GetFromDB() {
                     val teachid = result.getInt(3)
                     val lecture = result.getInt(4)
                     val practic = result.getInt(5)
+                    subjData.add(SubjData(id,name,teachid,lecture,practic))
                     Log.e("data:", "$id $name $teachid $lecture $practic")
                 }
                 if (cn != null) {

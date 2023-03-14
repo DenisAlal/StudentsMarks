@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanning.TrafficScanningActivity">
+    tools:context=".scanning.CreateSubjectActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,10 +13,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="50dp">
+        android:layout_marginHorizontal="50dp"
+        >
 
         <TextView
-            android:id="@+id/text1T"
+            android:id="@+id/text1G"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -24,14 +25,14 @@
             android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/spinnerSubjTraffic"
+            android:id="@+id/spinnerSubj"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:spinnerMode="dropdown" />
 
         <TextView
-            android:id="@+id/text2T"
+            android:id="@+id/text2G"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,7 +40,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/trafficTopic"
+            android:id="@+id/gradeTopic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,7 +50,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/text3T"
+            android:id="@+id/text3G"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,25 +58,39 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/pickDateTraffic"
+            android:id="@+id/pickDate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:text="Выбрать дату занятия" />
 
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/pickTime"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Выбрать время занятия" />
+
 
         <Spinner
-            android:id="@+id/spinnerSubjTrafficType"
+            android:id="@+id/spinnerSubjType"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:spinnerMode="dropdown" />
 
         <Button
-            android:id="@+id/startScanTraffic"
+            android:id="@+id/startScanGrade"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Начать сканирование" />
+            android:text="Сохранить занятие" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

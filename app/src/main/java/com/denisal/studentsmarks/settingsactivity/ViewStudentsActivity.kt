@@ -23,12 +23,7 @@ class ViewStudentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_student)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val iconEmpty  = findViewById<ImageView>(R.id.iconEmpty)
-        val textEmpty  = findViewById<TextView>(R.id.textEmpty)
-        var teacherID = GetFromDB()
-        teacherID.get()
-        iconEmpty.isVisible = false
-        textEmpty.isVisible = false
+        visibleSetup()
         recyclerView.layoutManager = LinearLayoutManager(this)
         val actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
@@ -41,10 +36,15 @@ class ViewStudentsActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
     }
+    private fun visibleSetup(){
+        val iconEmpty  = findViewById<ImageView>(R.id.iconEmpty)
+        val textEmpty  = findViewById<TextView>(R.id.textEmpty)
+        iconEmpty.isVisible = false
+        textEmpty.isVisible = false
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-
                 finish()
                 true
             }
@@ -70,8 +70,6 @@ class ViewStudentsActivity : AppCompatActivity() {
             iconEmpty.isVisible = true
         }
     }
-
-
     private fun getStudents() {
 
         runOnUiThread {
@@ -90,13 +88,10 @@ class ViewStudentsActivity : AppCompatActivity() {
                     val group = result.getString(3)
                     val fio = result.getString(4)
                     Log.e("select    ", "$id-$uid-$group-$fio")
-                    val student = StudentsViewModel(fio = fio, group = group)
+                    val student = StudentsViewModel(id = id, fio = fio, group = group)
                     data.add(student)
                 }
-
-                if (cn != null) {
-                    cn.close()
-                }
+                cn.close()
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()
             } catch (e: SQLException) {

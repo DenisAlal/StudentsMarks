@@ -16,7 +16,7 @@ class StudentsAdapter(private  val mList :List<StudentsViewModel>):RecyclerView.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val studentsViewModel = mList[position]
-
+        holder.tvid.text = studentsViewModel.id.toString()
         holder.tvFIO.text = studentsViewModel.fio
         holder.tvGroup.text = studentsViewModel.group
     }
@@ -24,6 +24,7 @@ class StudentsAdapter(private  val mList :List<StudentsViewModel>):RecyclerView.
         return  mList.size
     }
     class ViewHolder(itemView :View):RecyclerView.ViewHolder(itemView){
+        val tvid :TextView = itemView.findViewById(R.id.tvid)
         val tvFIO :TextView = itemView.findViewById(R.id.tvFIO)
         val tvGroup : TextView = itemView.findViewById(R.id.tvGroup)
     }

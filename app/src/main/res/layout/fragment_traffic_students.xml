@@ -18,9 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/traffic256" />
-
         <Button
-            android:id="@+id/scanTraffic"
+            android:id="@+id/createSubTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:text="Создание занятия" />
+        <Button
+            android:id="@+id/trafficScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"

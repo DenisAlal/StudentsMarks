@@ -19,6 +19,22 @@
         android:layout_marginHorizontal="30dp"
         android:text="Удалить список студентов?"
         />
+    <CheckBox
+        android:id="@+id/courseDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:text="Удалить данные о предметах?"
+        />
+    <CheckBox
+        android:id="@+id/lessonDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:text="Удалить данные о занятиях??"
+        />
 
     <CheckBox
         android:id="@+id/gradeDelete"

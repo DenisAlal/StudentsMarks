@@ -64,11 +64,9 @@
         <activity
             android:name=".scanning.GradeViewActivity"
             android:exported="false" />
+
         <activity
-            android:name=".scanning.TrafficScanningActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.GradeScanningActivity"
+            android:name=".scanning.CreateSubjectActivity"
             android:exported="false" />
         <activity
             android:name=".scanning.QrTrafficActivity"
