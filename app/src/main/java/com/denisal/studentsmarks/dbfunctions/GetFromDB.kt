@@ -61,4 +61,30 @@ class GetFromDB() {
         }.join()
         return subjData
     }
+    fun getArraySubjDuplicate(courseName: String):Boolean {
+        var ret = false
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val searchAccounts = "SELECT * FROM course WHERE teacher_id = '$teacherID'"
+                val searchAccountsQuery = cn.prepareStatement(searchAccounts)
+                val result = searchAccountsQuery.executeQuery()
+                while (result.next()){
+                    val name = result.getString(2)
+                    if(courseName.toLowerCase() == name.toLowerCase()) {
+                        ret = true
+                    }
+                }
+                if (cn != null) {
+                    cn.close()
+                }
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return ret
+    }
 }

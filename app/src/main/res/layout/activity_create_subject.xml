@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".scanning.CreateSubjectActivity">
+
     <LinearLayout
+        android:id="@+id/emptyArray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="50dp"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/text1G"
@@ -31,66 +32,147 @@
             android:layout_weight="1"
             android:spinnerMode="dropdown" />
 
-        <TextView
-            android:id="@+id/text2G"
+        <LinearLayout
+            android:id="@+id/enterSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Введите тему занятия"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/gradeTopic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Тема занятия"
-            android:inputType="textPersonName"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/text2G"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Введите тему занятия"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/gradeTopic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Тема занятия"
+                android:inputType="textPersonName"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/text3G"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/pickDate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Выбрать дату занятия" />
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/pickTime"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Выбрать время занятия" />
+
+
+            <Spinner
+                android:id="@+id/spinnerSubjType"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown" />
+
+            <Button
+                android:id="@+id/saveSubject"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Сохранить занятие" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emptyArrayView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/text3G"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp" />
+            android:text="Ваш список предметов пуст! Для того чтобы создать занятие сначала создайте предмет!"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:contentDescription="Empty"
+            app:srcCompat="@drawable/baseline_event_busy_24_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/success"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Занятие успешно создано"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/successImg"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:contentDescription="Success"
+            app:srcCompat="@drawable/baseline_check_circle_24" />
 
         <Button
-            android:id="@+id/pickDate"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="Выбрать дату занятия" />
-
-        <TextView
-            android:id="@+id/text4"
+            android:id="@+id/again"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textSize="16sp" />
-        <Button
-            android:id="@+id/pickTime"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="Выбрать время занятия" />
-
-
-        <Spinner
-            android:id="@+id/spinnerSubjType"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
+            android:text="Создать новое занятие" />
 
         <Button
-            android:id="@+id/startScanGrade"
+            android:id="@+id/exit"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="Сохранить занятие" />
+            android:layout_height="wrap_content"
+            android:text="Выход" />
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

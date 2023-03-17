@@ -2,7 +2,6 @@ package com.denisal.studentsmarks.homefragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,9 @@ import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.auth.SignInActivity
 import com.denisal.studentsmarks.settingsactivity.DeleteInfoActivity
 import com.denisal.studentsmarks.settingsactivity.LoadAndSendStudentsActivity
-import com.denisal.studentsmarks.settingsactivity.NewSubjectActivity
+import com.denisal.studentsmarks.settingsactivity.CreateCourseActivity
 import com.denisal.studentsmarks.settingsactivity.ViewStudentsActivity
 import com.google.firebase.auth.FirebaseAuth
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.SQLException
-import kotlin.concurrent.thread
 
 class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +31,7 @@ class SettingsFragment : Fragment() {
         }
         val createSubject: Button = view.findViewById(R.id.createSub)
         createSubject.setOnClickListener{
-            val intent = Intent(activity, NewSubjectActivity::class.java)
+            val intent = Intent(activity, CreateCourseActivity::class.java)
             startActivity(intent)
         }
         val viewStud: Button = view.findViewById(R.id.viewStud)

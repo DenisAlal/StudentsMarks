@@ -5,27 +5,28 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.denisal.studentsmarks.databinding.ActivityNewSubjectBinding
+import com.denisal.studentsmarks.databinding.ActivityCreateCourseBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
 import com.denisal.studentsmarks.teacherID
 
-class NewSubjectActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityNewSubjectBinding
+class CreateCourseActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCreateCourseBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNewSubjectBinding.inflate(layoutInflater)
+        binding = ActivityCreateCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Создание предмета"
-        val getID = GetFromDB()
-        getID.get()
+        val db = GetFromDB()
+        db.get()
 
         binding.createSubjectBtn.setOnClickListener{
             val checkName = binding.nameSub.text.toString()
             val insert = InsertToDB()
+            val checkDuplicate = db.getArraySubjDuplicate(checkName)
             if (checkName.isNotEmpty() && teacherID != -1){
                 val pract =  binding.practiceCheck
                 val lect = binding.lectionCheck
@@ -38,13 +39,18 @@ class NewSubjectActivity : AppCompatActivity() {
                     if (pract.isChecked) {
                         checkPract = 1
                     }
-                    Log.e("check", "$checkName $checkLect $checkPract")
-                    val check = insert.insertCourse(checkName, checkLect, checkPract)
-                    if(check) {
-                        Toast.makeText(this, "Предмет создан", Toast.LENGTH_SHORT).show()
+                    if (checkDuplicate) {
+                        Toast.makeText(this, "Предмет с таким названием уже существует!", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Ошибка создания предмета", Toast.LENGTH_SHORT).show()
+                        Log.e("check", "$checkName $checkLect $checkPract")
+                        val check = insert.insertCourse(checkName, checkLect, checkPract)
+                        if(check) {
+                            Toast.makeText(this, "Предмет создан", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Ошибка создания предмета", Toast.LENGTH_SHORT).show()
+                        }
                     }
+
                 } else {
                     Toast.makeText(applicationContext, "Выберите тип занятий", Toast.LENGTH_SHORT).show()
                 }
