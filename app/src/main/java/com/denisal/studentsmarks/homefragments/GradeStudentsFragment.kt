@@ -9,16 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.CreateSubjectActivity
-import com.denisal.studentsmarks.scanning.GradeViewActivity
+import com.denisal.studentsmarks.scanning.*
 import com.denisal.studentsmarks.teacherID
 import com.denisal.studentsmarks.uid
 
 
 class GradeStudentsFragment : Fragment() {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("uid", uid)
@@ -34,9 +30,14 @@ class GradeStudentsFragment : Fragment() {
             val intent = Intent(activity, CreateSubjectActivity::class.java)
             startActivity(intent)
         }
+        val gradeTask: Button = view.findViewById(R.id.gradeTask)
+        gradeTask.setOnClickListener {
+            val intent = Intent(activity, CreateTaskActivity::class.java)
+            startActivity(intent)
+        }
         val gradeScan: Button = view.findViewById(R.id.gradeScan)
         gradeScan.setOnClickListener {
-            val intent = Intent(activity, CreateSubjectActivity::class.java)
+            val intent = Intent(activity, QrGradeActivity::class.java)
             startActivity(intent)
         }
         val gradeView: Button = view.findViewById(R.id.gradeView)
@@ -48,7 +49,6 @@ class GradeStudentsFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() = GradeStudentsFragment().apply {}
     }

@@ -94,4 +94,32 @@ class InsertToDB {
         }
         return ret
     }
+    fun insertTask(name: String, courseid: Int, lessonid: Int): Boolean {
+        var ret = true
+        if (teacherID != -1) {
+            thread {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver")
+                    val cn: Connection = DriverManager.getConnection(url, user, pass)
+                    val ps = cn.createStatement()
+                    val insert =
+                        "INSERT INTO `task`(`id`, `name`, `course_id`, `lesson_id`) VALUES " +
+                                "(NULL,'$name',$courseid, $lessonid)"
+                    ps.execute(insert)
+                    ps?.close()
+                    cn.close()
+                } catch (e: ClassNotFoundException) {
+                    ret = false
+                    e.printStackTrace()
+                } catch (e: SQLException) {
+                    ret = false
+                    e.printStackTrace()
+                }
+            }.join()
+        } else {
+            ret = false
+        }
+        return ret
+
+    }
 }

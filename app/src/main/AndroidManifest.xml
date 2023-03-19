@@ -23,9 +23,11 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".scanning.CreateTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".settingsactivity.ViewStudentsActivity"
             android:exported="false" />
-
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -64,7 +66,6 @@
         <activity
             android:name=".scanning.GradeViewActivity"
             android:exported="false" />
-
         <activity
             android:name=".scanning.CreateSubjectActivity"
             android:exported="false" />

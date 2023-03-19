@@ -13,12 +13,12 @@ class GetFromDB() {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val searchAccounts = "SELECT * FROM teacher WHERE uid = '$uid'"
-                val searchAccountsQuery = cn.prepareStatement(searchAccounts)
-                val result = searchAccountsQuery.executeQuery()
+                val sql = "SELECT * FROM teacher WHERE uid = '$uid'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
                 while (result.next()){
                     val id = result.getInt(1)
-                    val UniqId = result.getString(2)
+                    val uniqId = result.getString(2)
                     teacherID = id
                 }
 
@@ -38,9 +38,9 @@ class GetFromDB() {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val searchAccounts = "SELECT * FROM course WHERE teacher_id = '$teacherID'"
-                val searchAccountsQuery = cn.prepareStatement(searchAccounts)
-                val result = searchAccountsQuery.executeQuery()
+                val sql = "SELECT * FROM course WHERE teacher_id = '$teacherID'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
                 while (result.next()){
                     val id = result.getInt(1)
                     val name = result.getString(2)
@@ -67,9 +67,9 @@ class GetFromDB() {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val searchAccounts = "SELECT * FROM course WHERE teacher_id = '$teacherID'"
-                val searchAccountsQuery = cn.prepareStatement(searchAccounts)
-                val result = searchAccountsQuery.executeQuery()
+                val sql = "SELECT * FROM course WHERE teacher_id = '$teacherID'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
                 while (result.next()){
                     val name = result.getString(2)
                     if(courseName.toLowerCase() == name.toLowerCase()) {
@@ -86,5 +86,34 @@ class GetFromDB() {
             }
         }.join()
         return ret
+    }
+    fun getLesson(getID: Int): MutableList<LessonData> {
+        val subjData: MutableList<LessonData> = mutableListOf()
+        thread {
+            try {
+                //сощздать правитльный data class, посмротреть структуру в бд
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val sql = "SELECT * FROM lesson WHERE course_id = '$getID'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()){
+                    val id = result.getInt(1)
+                    val name = result.getString(2)
+                    val date= result.getString(4)
+                    val time= result.getString(5)
+                    val courseId= result.getInt(6)
+                    val lessonType= result.getString(7)
+                    subjData.add(LessonData(id,name,date,time,courseId,lessonType ))
+                    Log.e("data:", "$id $name $date $time $courseId $lessonType")
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return subjData
     }
 }

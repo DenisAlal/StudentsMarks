@@ -13,6 +13,16 @@ data class SubjData(
     val lecture: Int,
     val practic: Int,
 )
+data class LessonData(
+    val id: Int,
+    val name: String,
+    val date: String,
+    val time: String,
+    val courseId: Int,
+    val lessonType: String,
+)
+
+
 var filenameDelete = ""
 val studData: MutableList<StudentsData> = mutableListOf()
 var uid: String = "null"

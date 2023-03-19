@@ -8,17 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.CreateSubjectActivity
-import com.denisal.studentsmarks.scanning.TrafficViewActivity
+import com.denisal.studentsmarks.scanning.*
+import com.google.zxing.qrcode.encoder.QRCode
 
 class TrafficStudentsFragment : Fragment() {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +24,14 @@ class TrafficStudentsFragment : Fragment() {
             val intent = Intent(activity, CreateSubjectActivity::class.java)
             startActivity(intent)
         }
-        val trafdicScan: Button = view.findViewById(R.id.trafficScan)
-        trafdicScan.setOnClickListener {
-            val intent = Intent(activity, CreateSubjectActivity::class.java)
+        val gradeTask: Button = view.findViewById(R.id.trafficTask)
+        gradeTask.setOnClickListener {
+            val intent = Intent(activity, CreateTaskActivity::class.java)
+            startActivity(intent)
+        }
+        val trafficScan: Button = view.findViewById(R.id.trafficScan)
+        trafficScan.setOnClickListener {
+            val intent = Intent(activity, QrTrafficActivity::class.java)
             startActivity(intent)
         }
         val trafficView: Button = view.findViewById(R.id.trafficView)
