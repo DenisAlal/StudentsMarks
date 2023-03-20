@@ -24,11 +24,7 @@ class TrafficStudentsFragment : Fragment() {
             val intent = Intent(activity, CreateSubjectActivity::class.java)
             startActivity(intent)
         }
-        val gradeTask: Button = view.findViewById(R.id.trafficTask)
-        gradeTask.setOnClickListener {
-            val intent = Intent(activity, CreateTaskActivity::class.java)
-            startActivity(intent)
-        }
+
         val trafficScan: Button = view.findViewById(R.id.trafficScan)
         trafficScan.setOnClickListener {
             val intent = Intent(activity, QrTrafficActivity::class.java)

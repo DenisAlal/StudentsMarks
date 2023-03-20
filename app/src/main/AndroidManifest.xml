@@ -23,6 +23,15 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".scanning.AssessmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".scanning.ChooseLessonTrafficActivity"
+            android:exported="false" />
+        <activity
+            android:name=".scanning.ChooseTaskGradeActivity"
+            android:exported="false" />
+        <activity
             android:name=".scanning.CreateTaskActivity"
             android:exported="false" />
         <activity

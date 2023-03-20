@@ -21,8 +21,21 @@ data class LessonData(
     val courseId: Int,
     val lessonType: String,
 )
+data class TaskData(
+    val id: Int,
+    val name: String,
+    val courseId: Int,
+    val lessonId: Int,
+)
+data class DateTimeData(
+    val data: String,
+    val time: String,
+)
 
 
+
+var id_task = -1
+var listStudent: List<String> = listOf()
 var filenameDelete = ""
 val studData: MutableList<StudentsData> = mutableListOf()
 var uid: String = "null"

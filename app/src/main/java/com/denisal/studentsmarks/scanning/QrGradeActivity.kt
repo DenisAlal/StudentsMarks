@@ -1,9 +1,12 @@
 package com.denisal.studentsmarks.scanning
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
@@ -15,16 +18,19 @@ import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.denisal.studentsmarks.HomeActivity
 import com.denisal.studentsmarks.R
+import com.denisal.studentsmarks.id_task
+import com.denisal.studentsmarks.listStudent
 
 class QrGradeActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
-
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.title = "Сканирование успеваемости студента"
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_grade)
-        var actionBar = getSupportActionBar()
+        val actionBar = supportActionBar
+        Log.e("task_id", "$id_task")
         actionBar?.setHomeButtonEnabled(true);
         actionBar?.setDisplayHomeAsUpEnabled(true);
         if (ContextCompat.checkSelfPermission(this@QrGradeActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
@@ -32,7 +38,14 @@ class QrGradeActivity : AppCompatActivity() {
         } else {
             startScanning()
         }
-
+        val choose: Button = findViewById(R.id.choose)
+        choose.setOnClickListener{
+            if (id_task !=  -1  && listStudent.isNotEmpty()){
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                val intent = Intent(this, AssessmentActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -57,7 +70,6 @@ class QrGradeActivity : AppCompatActivity() {
                 i = 0
             }
         }
-        // Parameters (default values)
         val scannerView: CodeScannerView = findViewById(R.id.scanner_viewGrade)
         codeScanner = CodeScanner(this, scannerView)
         codeScanner.camera = CodeScanner.CAMERA_BACK // or CAMERA_FRONT or specific camera id
@@ -71,17 +83,18 @@ class QrGradeActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                listStudent = it.text.split("|")
+                Toast.makeText(this, "ФИО: ${listStudent[0]}", Toast.LENGTH_LONG).show()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             runOnUiThread {
-                Toast.makeText(this, "Camera initialization error: ${it.message}",
+               Toast.makeText(applicationContext, "Ошибка камеры: ${it.message}",
                     Toast.LENGTH_LONG).show()
             }
         }
-
-        scannerView.setOnClickListener {
+        val restart: Button = findViewById(R.id.restart)
+        restart.setOnClickListener {
             codeScanner.startPreview()
         }
     }
@@ -90,10 +103,10 @@ class QrGradeActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 123) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Доступ к камере получен", Toast.LENGTH_LONG).show()
                 startScanning()
             } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Отказано в доступе к камере", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -101,13 +114,13 @@ class QrGradeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if(::codeScanner.isInitialized) {
-            codeScanner?.startPreview()
+            codeScanner.startPreview()
         }
     }
 
     override fun onPause() {
         if(::codeScanner.isInitialized) {
-            codeScanner?.releaseResources()
+            codeScanner.releaseResources()
         }
         super.onPause()
     }

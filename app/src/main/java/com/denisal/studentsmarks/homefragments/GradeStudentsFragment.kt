@@ -37,7 +37,7 @@ class GradeStudentsFragment : Fragment() {
         }
         val gradeScan: Button = view.findViewById(R.id.gradeScan)
         gradeScan.setOnClickListener {
-            val intent = Intent(activity, QrGradeActivity::class.java)
+            val intent = Intent(activity, ChooseTaskGradeActivity::class.java)
             startActivity(intent)
         }
         val gradeView: Button = view.findViewById(R.id.gradeView)

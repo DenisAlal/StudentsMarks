@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scanning.ChooseTaskGradeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите предмет" />
+
+        <Spinner
+            android:id="@+id/chooseCourse"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+
+        <TextView
+            android:id="@+id/textLesson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите занятие" />
+
+        <Spinner
+            android:id="@+id/chooseLesson"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите дату" />
+
+        <Spinner
+            android:id="@+id/chooseDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите время" />
+
+        <Spinner
+            android:id="@+id/chooseTime"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+        <TextView
+            android:id="@+id/textTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите задание" />
+
+        <Spinner
+            android:id="@+id/chooseTask"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+
+        <Button
+            android:id="@+id/goScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сканировать QR" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

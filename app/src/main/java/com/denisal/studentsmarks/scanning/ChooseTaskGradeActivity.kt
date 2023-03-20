@@ -1,5 +1,6 @@
 package com.denisal.studentsmarks.scanning
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,81 +8,54 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
-import com.denisal.studentsmarks.LessonData
-import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.SubjData
-import com.denisal.studentsmarks.databinding.ActivityCreateTaskBinding
+import com.denisal.studentsmarks.*
+import com.denisal.studentsmarks.databinding.ActivityChooseTaskGradeBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
-import com.denisal.studentsmarks.dbfunctions.InsertToDB
 
-class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class ChooseTaskGradeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private var subjArray: MutableList<SubjData> = mutableListOf()
-    private var getCourses: MutableList<LessonData> = mutableListOf()
+    private var getLesson: MutableList<LessonData> = mutableListOf()
     private var choiceLesson: MutableList<LessonData> = mutableListOf()
     private var choiceDate: MutableList<String> = mutableListOf()
+    private var tasks: MutableList<TaskData> = mutableListOf()
+    private var getIDCourse = 0
     private val db = GetFromDB()
-    private val insertToDB = InsertToDB()
-    private lateinit var binding: ActivityCreateTaskBinding
+    private lateinit var binding: ActivityChooseTaskGradeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCreateTaskBinding.inflate(layoutInflater)
+        binding = ActivityChooseTaskGradeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val arrayEmptyView: LinearLayout = findViewById(R.id.emptyView)
-        arrayEmptyView.isVisible = false
         val actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Создание задания"
+        actionBar?.title = "Выбор задания"
         subjArray = db.getDataForSpinner()
         init()
     }
-
     private fun init() {
-        val saveTask: Button = findViewById(R.id.saveTask)
-        val spinCourse: Spinner = findViewById(R.id.choiceCourse)
-        val spinLesson: Spinner = findViewById(R.id.choiceLesson)
-        val spinDate: Spinner = findViewById(R.id.choiceData)
-        val spinTime: Spinner = findViewById(R.id.choiceTime)
-        val nameTask: TextView = findViewById(R.id.nameTask)
-        saveTask.setOnClickListener {
-            val position = spinCourse.selectedItemPosition
-            if (nameTask.text.isNotEmpty()) {
-                for (index in getCourses.indices) {
-                    val value = getCourses[index]
-                    if (value.courseId == subjArray[position].id
-                        && value.date == spinDate.selectedItem
-                        && value.time == spinTime.selectedItem
-                    ) {
-                        val lesCheck = spinLesson.selectedItem.toString()
-                        if (lesCheck == value.name) {
-                            val check = insertToDB.insertTask(
-                                nameTask.text.toString(),
-                                value.courseId,
-                                value.id
-                            )
-                            if (check) {
-                                nameTask.text = ""
-
-                            }
-                        }
-                    }
+        val goScan: Button = findViewById(R.id.goScan)
+        val spinCourse: Spinner = findViewById(R.id.chooseCourse)
+        val spintask: Spinner = findViewById(R.id.chooseTask)
+        goScan.setOnClickListener {
+            if(spintask.selectedItem.toString() != "Не было найдено заданий") {
+                if (tasks.isNotEmpty()) {
+                    val position = spintask.selectedItemPosition
+                    id_task = tasks[position].id
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    val intent = Intent(this, QrGradeActivity::class.java)
+                    startActivity(intent)
                 }
-
             } else {
-                Toast.makeText(applicationContext, "Введите название задания", Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(applicationContext, "Сначала необходимо создать задание", Toast.LENGTH_LONG).show()
             }
-
         }
-
         if (subjArray.isNotEmpty()) {
             val arrayForSpinnerSubj: ArrayList<String> = arrayListOf()
             for (index in subjArray.indices) {
                 val value = subjArray[index]
                 arrayForSpinnerSubj.add(value.name)
             }
-
             spinCourse.onItemSelectedListener = this
             val add: ArrayAdapter<*> = ArrayAdapter<Any?>(
                 this, android.R.layout.simple_spinner_item,
@@ -92,6 +66,7 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
 
         } else {
             spinCourse.isVisible = false
+
         }
     }
 
@@ -106,24 +81,35 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-        if (parent.id == R.id.choiceCourse) {
-            val getID = subjArray[position].id
-            getData(getID)
+        if (parent.id == R.id.chooseCourse) {
+            getIDCourse = subjArray[position].id
+            Log.e("idCourse", getIDCourse.toString())
+            getCourse(getIDCourse)
         }
-        if (parent.id == R.id.choiceLesson) {
+        if (parent.id == R.id.chooseLesson) {
             getDate()
         }
-        if (parent.id == R.id.choiceData) {
+        if (parent.id == R.id.chooseDate) {
             getTime()
         }
+        if (parent.id == R.id.chooseTime) {
+            getDataTask()
+        }
+        if (parent.id == R.id.chooseTask) {
+
+        }
+
     }
 
-    private fun getData(getID: Int) {
-        getCourses.clear()
-        getCourses = db.getLesson(getID)
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    private fun getCourse(getID: Int) {
+        getLesson.clear()
+        getLesson = db.getLesson(getID)
         val lessonArray: MutableList<String> = arrayListOf()
-        for (index in getCourses.indices) {
-            val value = getCourses[index].name
+        for (index in getLesson.indices) {
+            val value = getLesson[index].name
             if (lessonArray.isEmpty()) {
                 lessonArray.add(value)
             } else {
@@ -132,7 +118,7 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                 }
             }
         }
-        val spinLesson = findViewById<Spinner>(R.id.choiceLesson)
+        val spinLesson = findViewById<Spinner>(R.id.chooseLesson)
         if (lessonArray.isNotEmpty()) {
             spinLesson.onItemSelectedListener = this
             val add: ArrayAdapter<*> = ArrayAdapter<Any?>(
@@ -142,21 +128,17 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
             add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinLesson.adapter = add
         } else {
-            val arrayEmp: LinearLayout = findViewById(R.id.empty)
-            val arrayEmptyView: LinearLayout = findViewById(R.id.emptyView)
-            arrayEmp.isVisible = false
-            arrayEmptyView.isVisible = true
-        }
 
+        }
     }
 
     private fun getDate() {
-        val lesson: Spinner = findViewById(R.id.choiceLesson)
-        val spinnerData: Spinner = findViewById(R.id.choiceData)
+        val lesson: Spinner = findViewById(R.id.chooseLesson)
+        val spinnerData: Spinner = findViewById(R.id.chooseDate)
         choiceLesson.clear()
         choiceDate.clear()
-        for (index in getCourses.indices) {
-            val value = getCourses[index]
+        for (index in getLesson.indices) {
+            val value = getLesson[index]
             if (value.name.contains(lesson.selectedItem.toString())) {
                 choiceLesson.add(
                     LessonData(
@@ -186,12 +168,12 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
     }
 
     private fun getTime() {
-        val lesson: Spinner = findViewById(R.id.choiceLesson)
-        val dateSpinner: Spinner = findViewById(R.id.choiceData)
-        val timeSpinner: Spinner = findViewById(R.id.choiceTime)
+        val lesson: Spinner = findViewById(R.id.chooseLesson)
+        val dateSpinner: Spinner = findViewById(R.id.chooseDate)
+        val timeSpinner: Spinner = findViewById(R.id.chooseTime)
         val choiceTime: MutableList<String> = mutableListOf()
-        for (index in getCourses.indices) {
-            val value = getCourses[index]
+        for (index in getLesson.indices) {
+            val value = getLesson[index]
             if (value.name.contains(lesson.selectedItem.toString()) &&
                 value.date.contains(dateSpinner.selectedItem.toString())
             ) {
@@ -211,6 +193,45 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         }
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) {
+    private fun getDataTask() {
+        val lesson: Spinner = findViewById(R.id.chooseLesson)
+        val dateSpinner: Spinner = findViewById(R.id.chooseDate)
+        val timeSpinner: Spinner = findViewById(R.id.chooseTime)
+        val taskSpinner: Spinner = findViewById(R.id.chooseTask)
+        val getLesson: MutableList<LessonData> = db.getLessonForTask(
+            getIDCourse,
+            lesson.selectedItem.toString(),
+            dateSpinner.selectedItem.toString(),
+            timeSpinner.selectedItem.toString()
+        )
+        if (getLesson.isNotEmpty()) {
+            tasks= db.getTasks(getIDCourse, getLesson[0].id)
+            val namesTasks: MutableList<String> = arrayListOf()
+            if (tasks.isNotEmpty()) {
+                for (index in tasks.indices) {
+                    val value = tasks[index].name
+                    namesTasks.add(value)
+                }
+                taskSpinner.onItemSelectedListener = this
+                val add: ArrayAdapter<*> = ArrayAdapter(
+                    this, android.R.layout.simple_spinner_item,
+                    namesTasks
+                )
+                add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                taskSpinner.adapter = add
+            } else {
+                val nullTasks = arrayListOf("Не было найдено заданий")
+                taskSpinner.onItemSelectedListener = this
+                val add: ArrayAdapter<*> = ArrayAdapter(
+                    this, android.R.layout.simple_spinner_item,
+                    nullTasks
+                )
+                add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                taskSpinner.adapter = add
+            }
+        } else {
+
+        }
+
     }
 }

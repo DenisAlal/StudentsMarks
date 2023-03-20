@@ -248,6 +248,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             val workbook: Workbook = WorkbookFactory.create(File(path))
             val sheet: Sheet = workbook.getSheetAt(0)
             val dataFormatter = DataFormatter()
+            studData.clear()
             sheet.forEach { row ->
                 var newGroup = ""
                 var val1 = ""

@@ -77,7 +77,8 @@ class InsertToDB {
                     val cn: Connection = DriverManager.getConnection(url, user, pass)
                     val ps = cn.createStatement()
                     val insert =
-                        "INSERT INTO `lesson`(`id`, `name`, `teacher_id`, `date`, `time`, `course_id`, `lessonType`) VALUES (NULL,'$name',$teacherID,'$date','$time',$course_id, '$selectedType')"
+                        "INSERT INTO `lesson`(`id`, `name`, `teacher_id`, `date`, `time`, " +
+                                "`course_id`, `lessonType`) VALUES (NULL,'$name',$teacherID,'$date','$time',$course_id, '$selectedType')"
                     ps.execute(insert)
                     ps?.close()
                     cn.close()
@@ -105,6 +106,33 @@ class InsertToDB {
                     val insert =
                         "INSERT INTO `task`(`id`, `name`, `course_id`, `lesson_id`) VALUES " +
                                 "(NULL,'$name',$courseid, $lessonid)"
+                    ps.execute(insert)
+                    ps?.close()
+                    cn.close()
+                } catch (e: ClassNotFoundException) {
+                    ret = false
+                    e.printStackTrace()
+                } catch (e: SQLException) {
+                    ret = false
+                    e.printStackTrace()
+                }
+            }.join()
+        } else {
+            ret = false
+        }
+        return ret
+    }
+    fun insertAssessment(value: String, date: String, studentIDAssessment: Int, taskIDAssessment: Int): Boolean {
+        var ret = true
+        if (teacherID != -1) {
+            thread {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver")
+                    val cn: Connection = DriverManager.getConnection(url, user, pass)
+                    val ps = cn.createStatement()
+                    val insert =
+                        "INSERT INTO `assessment`(`id`, `value`, `date`, `student_id`, `task_id`) VALUES " +
+                                "(NULL,'$value','$date', $studentIDAssessment, $taskIDAssessment)"
                     ps.execute(insert)
                     ps?.close()
                     cn.close()
