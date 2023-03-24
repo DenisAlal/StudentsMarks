@@ -30,7 +30,7 @@ class ChooseTaskGradeActivity : AppCompatActivity(), AdapterView.OnItemSelectedL
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Выбор задания"
-        subjArray = db.getDataForSpinner()
+        subjArray = db.getDataCourse()
         init()
     }
     private fun init() {

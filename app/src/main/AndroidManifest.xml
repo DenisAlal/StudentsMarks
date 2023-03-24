@@ -23,6 +23,9 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".scanning.SetTaskAndFIOActivity"
+            android:exported="false" />
+        <activity
             android:name=".scanning.AssessmentActivity"
             android:exported="false" />
         <activity

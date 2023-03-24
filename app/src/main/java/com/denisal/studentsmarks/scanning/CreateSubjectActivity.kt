@@ -30,7 +30,7 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         actionBar?.title = "Успеваемость"
         setContentView(R.layout.activity_create_subject)
         val db = GetFromDB()
-        subjArray = db.getDataForSpinner()
+        subjArray = db.getDataCourse()
         val arrayEmpty: LinearLayout = findViewById(R.id.emptyArrayView)
         arrayEmpty.isVisible = false
         val successView: LinearLayout = findViewById(R.id.success)

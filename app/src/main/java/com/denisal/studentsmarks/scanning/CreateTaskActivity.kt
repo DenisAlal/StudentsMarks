@@ -2,7 +2,6 @@ package com.denisal.studentsmarks.scanning
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -33,7 +32,7 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Создание задания"
-        subjArray = db.getDataForSpinner()
+        subjArray = db.getDataCourse()
         init()
     }
 

@@ -258,8 +258,10 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 var ignore = false
                 var i = "1"
                 row.forEach { cell ->
-                    if (cell.toString().toLowerCase() == "номер" || cell.toString().toLowerCase() == "группа"
-                        || cell.toString().toLowerCase() == "подгруппа" || cell.toString().toLowerCase() == "фио") {
+                    if (cell.toString().toLowerCase() == "номер" ||
+                        cell.toString().toLowerCase() == "группа" ||
+                        cell.toString().toLowerCase() == "подгруппа" ||
+                        cell.toString().toLowerCase() == "фио") {
                         Log.w("parsing", "find header")
                         ignore = true
                     } else {
@@ -339,12 +341,8 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                                 "(NULL, '${teacherID}','${value.group}','${value.fullName}');"
                         ps.execute(insert)
                     }
-                    if (ps != null) {
-                        ps!!.close()
-                    }
-                    if (cn != null) {
-                        cn.close()
-                    }
+                    ps?.close()
+                    cn.close()
                 } catch (e: ClassNotFoundException) {
                     e.printStackTrace()
                 } catch (e: SQLException) {

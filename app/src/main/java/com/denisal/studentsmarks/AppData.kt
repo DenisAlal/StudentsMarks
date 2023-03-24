@@ -27,12 +27,13 @@ data class TaskData(
     val courseId: Int,
     val lessonId: Int,
 )
-data class DateTimeData(
-    val data: String,
-    val time: String,
+data class DataListCourseAndLesson(
+    val posCourse: Int,
+    val posLesson: Int,
+    val idCourse: Int,
+    val idLesson: Int,
+
 )
-
-
 
 var id_task = -1
 var listStudent: List<String> = listOf()
