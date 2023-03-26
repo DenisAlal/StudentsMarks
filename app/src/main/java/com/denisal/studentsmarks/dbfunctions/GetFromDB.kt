@@ -55,6 +55,95 @@ class GetFromDB() {
         }.join()
         return courseArray
     }
+    fun getStudentsData(idStudent: Int): MutableList<StudentsData> {
+        val studentArray: MutableList<StudentsData> = mutableListOf()
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val sql = "SELECT * FROM student WHERE id = '$idStudent' AND teacher_id = '$teacherID'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()) {
+                    val id = result.getInt(1)
+                    val group = result.getString(3)
+                    val fullName = result.getString(4)
+                    studentArray.add(StudentsData(id, group, fullName))
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return studentArray
+    }
+    fun getFullData(idCourse: Int, idLesson: Int): MutableList<FullData> {
+        val studentArray: MutableList<FullData> = mutableListOf()
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                //val sql = "SELECT * FROM `assessment` INNER JOIN `task` ON task_id = task.id " +
+                //        "INNER JOIN `student` ON student_id = student.id " +
+               //         "WHERE task.course_id = $idCourse"
+                val sql = "SELECT * FROM `assessment` INNER JOIN `task` ON task_id = task.id " +
+                        "INNER JOIN `student` ON student_id = student.id WHERE task.course_id = $idCourse " +
+                        "AND student.teacher_id = $teacherID AND task.lesson_id = $idLesson"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()) {
+                    val id = result.getInt(1)
+                    val value = result.getString(2)
+                    val date = result.getString(3)
+                    val studId = result.getInt(4)
+                    val taskId = result.getInt(5)
+                    val idTask = result.getInt(6)
+                    val name = result.getString(7)
+                    val courseId = result.getInt(8)
+                    val lessonId = result.getInt(9)
+                    val idStud = result.getInt(10)
+                    val teacherID = result.getInt(11)
+                    val studGroup = result.getString(12)
+                    val fullName = result.getString(13)
+                    studentArray.add(FullData(id,value, date, studId, taskId, idTask, name, courseId, lessonId, idStud, teacherID, studGroup, fullName))
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return studentArray
+    }
+    fun getDataAssessments(taskID: Int): MutableList<DataAssessments> {
+        val assessmentsArray: MutableList<DataAssessments> = mutableListOf()
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val sql = "SELECT * FROM assessment WHERE task_id = '$taskID'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()) {
+                    val id = result.getInt(1)
+                    val value = result.getString(2)
+                    val date = result.getString(3)
+                    val studentIdAssess = result.getInt(4)
+                    val taskIdAssess = result.getInt(5)
+                    assessmentsArray.add(DataAssessments(id, value, date, studentIdAssess, taskIdAssess))
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return assessmentsArray
+    }
     fun getDataLesson(): MutableList<LessonData> {
         val lessonArray: MutableList<LessonData> = mutableListOf()
         thread {
@@ -189,7 +278,6 @@ class GetFromDB() {
                     val lessonType = result.getString(7)
                     oneLesson.add(LessonData(id, name, date, time, courseId, lessonType))
                 }
-                Log.e("dataaaaaaaaaaaaaaa:", oneLesson.toString())
                 cn.close()
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()
@@ -219,7 +307,6 @@ class GetFromDB() {
                     val fullName = result.getString(4)
                     studentData.add(StudentsData(id, groupStud, fullName))
                 }
-                Log.e("dataaaaaaaaaaaaaaa:", studentData.toString())
                 cn.close()
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()

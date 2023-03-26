@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanning.SetTaskAndFIOActivity">
-
+    tools:context=".scanning.ChangeAssessmentActivity">
     <LinearLayout
         android:id="@+id/emptyTasks"
         android:layout_width="match_parent"
@@ -27,17 +26,29 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="20dp"
                 >
+                <TextView
+                    android:id="@+id/student"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ФИО:"
+                    android:textSize="16sp"
+                    android:layout_marginVertical="2dp"/>
+                <TextView
+                    android:id="@+id/group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Группа:"
+                    android:textSize="16sp"
+                    android:layout_marginVertical="2dp"/>
 
                 <TextView
-                    android:id="@+id/info"
-                    android:layout_width="match_parent"
+                    android:id="@+id/task"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Задание:"
+                    android:textSize="16sp"
+                    android:layout_marginVertical="2dp"/>
 
-                    android:layout_marginTop="10dp"
-                    android:text="Выберите задание и ФИО студента:"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -48,39 +59,14 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="20dp">
-            <ExpandableListView
+
+            <TextView
+                android:id="@+id/textView7"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/expandableListViewTasks"
-                />
+                android:layout_height="wrap_content"
+                android:text="АБЭМА"
+                android:textSize="96sp" />
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/emptyViewTasks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Ваш список заданий для этого занятия пуст!"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:contentDescription="Empty"
-            app:srcCompat="@drawable/baseline_event_busy_24_gray" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

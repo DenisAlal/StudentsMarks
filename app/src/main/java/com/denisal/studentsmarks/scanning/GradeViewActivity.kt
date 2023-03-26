@@ -25,9 +25,6 @@ class GradeViewActivity : AppCompatActivity() {
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Просмотр успеваемости"
-
-
-
         courseArray = db.getDataCourse()
         lessonArray = db.getDataLesson()
         val tempListsID = mutableListOf<DataListCourseAndLesson>()

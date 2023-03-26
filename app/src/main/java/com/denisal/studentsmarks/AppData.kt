@@ -32,7 +32,36 @@ data class DataListCourseAndLesson(
     val posLesson: Int,
     val idCourse: Int,
     val idLesson: Int,
-
+)
+data class TaskListFIOAndLesson(
+    val posFIO: Int,
+    val posMark: Int,
+    val idFIO: Int,
+    val idMark: Int,
+    val taskName: String,
+    val groupStud: String,
+)
+data class DataAssessments(
+    val id: Int,
+    val value: String,
+    val date: String,
+    val studentIdAssess: Int,
+    val taskIdAssess: Int,
+)
+data class FullData(
+    val id: Int,
+    val value: String,
+    val date: String,
+    val studId: Int,
+    val taskId: Int,
+    val idTask: Int,
+    val name: String,
+    val courseId: Int,
+    val lessonId: Int,
+    val idStud: Int,
+    val teacherID: Int,
+    val studGroup: String,
+    val fullName: String,
 )
 
 var id_task = -1
