@@ -78,7 +78,6 @@ class GradeViewActivity : AppCompatActivity() {
         intent.putExtra("idLesson", idLesson)
         Log.e("Check position", "idкурс $idCourse ----- idгруппа $idLesson")
         startActivity(intent)
-        Toast.makeText(this,"$course  $lesson $idCourse $idLesson", Toast.LENGTH_SHORT).show()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

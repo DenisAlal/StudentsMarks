@@ -1,6 +1,5 @@
 package com.denisal.studentsmarks.dbfunctions
 
-import android.text.Editable
 import com.denisal.studentsmarks.*
 import java.sql.Connection
 import java.sql.DriverManager

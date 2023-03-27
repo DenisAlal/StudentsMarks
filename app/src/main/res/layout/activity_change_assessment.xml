@@ -48,6 +48,13 @@
                     android:text="Задание:"
                     android:textSize="16sp"
                     android:layout_marginVertical="2dp"/>
+                <TextView
+                    android:id="@+id/mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Оценка:"
+                    android:textSize="16sp"
+                    android:layout_marginVertical="2dp"/>
 
             </LinearLayout>
 
@@ -59,13 +66,44 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="20dp">
-
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textDateChange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="АБЭМА"
-                android:textSize="96sp" />
+                android:text=""
+                android:textSize="16sp"
+                android:layout_marginVertical="10dp"/>
+            <Button
+                android:id="@+id/dateBtnChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Укажите дату сдачи"
+                android:layout_marginVertical="10dp"/>
+            <EditText
+                android:id="@+id/editMark"
+                android:layout_marginVertical="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Введите оценку"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:layout_marginVertical="10dp"
+                android:id="@+id/change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Изменить" />
+
+            <Button
+                android:layout_marginVertical="10dp"
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Удалить"
+                android:background="@color/attention"
+                android:textColor="@color/white"/>
+
         </LinearLayout>
     </LinearLayout>
 

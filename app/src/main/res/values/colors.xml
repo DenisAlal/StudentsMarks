@@ -19,4 +19,5 @@
     <color name="blue">#039BE5</color>
     <color name="cyan">#0097A7</color>
     <color name="indigo">#3F51B5</color>
+    <color name="attention">#E53935</color>
 </resources>

@@ -25,9 +25,26 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Просмотр успеваемости"
         binding.emptyViewTasks.isVisible = false
-        val strCourse: String? = intent.getStringExtra("course")
-        val strLesson: String? = intent.getStringExtra("lesson")
+       // val strCourse: String? = intent.getStringExtra("course")
+       // val strLesson: String? = intent.getStringExtra("lesson")
+        loadData()
+    }
+    private fun goNext(assessment: Int, taskName: String, group: String, FIO: String, mark: String) {
+        val intent = Intent(this, ChangeAssessmentActivity::class.java)
+        intent.putExtra("Assessment", assessment)
+        intent.putExtra("Group", group)
+        intent.putExtra("FIO", FIO)
+        intent.putExtra("TaskName", taskName)
+        intent.putExtra("Mark", mark)
+        startActivity(intent)
+    }
 
+    override fun onRestart() {
+        super.onRestart()
+        loadData()
+
+    }
+    private fun loadData() {
         val strIDCourse: Int = intent.getIntExtra("idCourse",-1)
         val strIDLesson: Int = intent.getIntExtra("idLesson", -1)
         if (strIDCourse != -1 && strIDLesson != -1) {
@@ -55,7 +72,7 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
                                 if(valueTask.fullName == valueFio.fullName) {
                                     tempList.add("${valueTask.name}: ${valueTask.value}")
                                     selectedData.add(TaskListFIOAndLesson(i, i2,
-                                        valueFio.idStud, valueTask.id, valueTask.name, valueTask.studGroup))
+                                        valueFio.idStud, valueTask.id, valueTask.name, valueTask.studGroup, valueTask.value))
                                     i2++
                                     childMap[valueFio.fullName] = tempList
                                 }
@@ -76,7 +93,7 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
                     for(index in selectedData.indices) {
                         val value = selectedData[index]
                         if(value.posFIO == groupP && value.posMark == childP) {
-                            goNext(value.idMark, value.taskName, value.groupStud, FIO)
+                            goNext(value.idMark, value.taskName, value.groupStud, FIO, value.mark)
                         }
                     }
                     true
@@ -88,15 +105,6 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
         } else {
             Log.e("bundle", "empty")
         }
-    }
-    private fun goNext(assessment: Int, taskName: String, group: String, FIO: String) {
-        val intent = Intent(this, ChangeAssessmentActivity::class.java)
-        intent.putExtra("Assessment", assessment)
-        intent.putExtra("Group", group)
-        intent.putExtra("FIO", FIO)
-        intent.putExtra("TaskName", taskName)
-        startActivity(intent)
-        Toast.makeText(this,"$assessment", Toast.LENGTH_SHORT).show()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

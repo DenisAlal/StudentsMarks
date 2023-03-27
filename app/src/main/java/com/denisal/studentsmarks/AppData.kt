@@ -40,6 +40,7 @@ data class TaskListFIOAndLesson(
     val idMark: Int,
     val taskName: String,
     val groupStud: String,
+    val mark: String,
 )
 data class DataAssessments(
     val id: Int,

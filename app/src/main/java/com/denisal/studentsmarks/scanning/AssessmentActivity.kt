@@ -59,6 +59,7 @@ class AssessmentActivity : AppCompatActivity() {
                         dateIns, check[0].id, id_task)
                     if (checkInsert) {
                         Toast.makeText(applicationContext, "Данные успешно сохранены", Toast.LENGTH_LONG).show()
+                        finish()
                     } else {
                         Toast.makeText(applicationContext, "Ошибка загрузки данных", Toast.LENGTH_LONG).show()
                     }
