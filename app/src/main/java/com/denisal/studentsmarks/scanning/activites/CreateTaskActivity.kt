@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

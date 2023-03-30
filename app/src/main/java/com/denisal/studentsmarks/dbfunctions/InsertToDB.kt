@@ -147,6 +147,34 @@ class InsertToDB {
             ret = false
         }
         return ret
+    }
+    fun insertTraffic(arrayInsert: MutableList<Int>, lessonID: Int): Boolean  {
+        var ret = true
+        if (teacherID != -1) {
+            thread {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver")
+                    val cn: Connection = DriverManager.getConnection(url, user, pass)
+                    val ps = cn.createStatement()
 
+                    for (index in arrayInsert.indices) {
+                        val insert = "INSERT INTO `traffic`(`id`, `student_id`, `lesson_id`) " +
+                                "VALUES (NULL,'${arrayInsert[index]}','$lessonID')"
+                        ps.execute(insert)
+                    }
+                    ps?.close()
+                    cn.close()
+                } catch (e: ClassNotFoundException) {
+                    ret = false
+                    e.printStackTrace()
+                } catch (e: SQLException) {
+                    ret = false
+                    e.printStackTrace()
+                }
+            }.join()
+        } else {
+            ret = false
+        }
+        return ret
     }
 }

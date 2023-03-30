@@ -7,26 +7,32 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.R
 
-class StudentsAdapter(private val mList:List<ViewModelStudents>, val listener: ViewStudentsActivity)
-    :RecyclerView.Adapter<StudentsAdapter.ViewHolder>() {
+class LessonAdapter(private val mList:List<ViewModelLessons>, val listener: LessonViewActivity)
+    :RecyclerView.Adapter<LessonAdapter.ViewHolder>() {
     override fun   onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.student_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.lesson_item,parent,false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val studentsViewModel = mList[position]
-        holder.tvid.text = studentsViewModel.id.toString()
-        holder.tvFIO.text = studentsViewModel.fio
-        holder.tvGroup.text = studentsViewModel.group
+        holder.tvIDLesson.text = studentsViewModel.id.toString()
+        holder.tvNameLesson.text = studentsViewModel.name
+        holder.tvDate.text = studentsViewModel.date
+        holder.tvTime.text = studentsViewModel.time
+        holder.tvLessonType.text = studentsViewModel.lessonType
+
     }
     override fun getItemCount(): Int {
         return  mList.size
     }
     inner class ViewHolder(itemView :View):RecyclerView.ViewHolder(itemView){
-        val tvid :TextView = itemView.findViewById(R.id.tvid)
-        val tvFIO :TextView = itemView.findViewById(R.id.tvFIO)
-        val tvGroup : TextView = itemView.findViewById(R.id.tvGroup)
+        val tvIDLesson :TextView = itemView.findViewById(R.id.tvIDLesson)
+        val tvNameLesson :TextView = itemView.findViewById(R.id.tvNameLesson)
+        val tvDate :TextView = itemView.findViewById(R.id.tvDate)
+        val tvTime :TextView = itemView.findViewById(R.id.tvTime)
+        val tvLessonType :TextView = itemView.findViewById(R.id.tvLessonType)
+
         init {
             itemView.setOnClickListener{
                 val position = adapterPosition

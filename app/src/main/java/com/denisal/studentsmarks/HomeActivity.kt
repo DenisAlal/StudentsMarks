@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
             false
         }
         val getID = GetFromDB()
-        getID.get()
+        getID.getTeacher()
         Log.e("","$teacherID")
     }
 

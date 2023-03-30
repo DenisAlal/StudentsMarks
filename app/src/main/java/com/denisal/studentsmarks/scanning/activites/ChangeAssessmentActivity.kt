@@ -1,9 +1,8 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.activites
 
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import com.denisal.studentsmarks.databinding.ActivityChangeAssessmentBinding

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanning.ChangeAssessmentActivity">
+    tools:context=".scanning.activites.ChangeAssessmentActivity">
     <LinearLayout
         android:id="@+id/emptyTasks"
         android:layout_width="match_parent"

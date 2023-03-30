@@ -8,7 +8,7 @@ import java.sql.SQLException
 import kotlin.concurrent.thread
 
 class GetFromDB() {
-    fun get() {
+    fun getTeacher() {
         thread {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
@@ -85,9 +85,6 @@ class GetFromDB() {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
-                //val sql = "SELECT * FROM `assessment` INNER JOIN `task` ON task_id = task.id " +
-                //        "INNER JOIN `student` ON student_id = student.id " +
-               //         "WHERE task.course_id = $idCourse"
                 val sql = "SELECT * FROM `assessment` INNER JOIN `task` ON task_id = task.id " +
                         "INNER JOIN `student` ON student_id = student.id WHERE task.course_id = $idCourse " +
                         "AND student.teacher_id = $teacherID AND task.lesson_id = $idLesson"
@@ -298,7 +295,8 @@ class GetFromDB() {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
                 val sql =
-                    "SELECT * FROM student WHERE fullName = '$fio' AND studGroup = '$group' AND teacher_id = '$teacherID'"
+                    "SELECT * FROM student WHERE fullName = '$fio' AND " +
+                            "studGroup = '$group' AND teacher_id = '$teacherID'"
                 val query = cn.prepareStatement(sql)
                 val result = query.executeQuery()
                 while (result.next()) {
@@ -316,5 +314,82 @@ class GetFromDB() {
         }.join()
         return studentData
     }
-
+    fun checkStudentQR(
+    ): MutableList<StudentsData> {
+        val studentData: MutableList<StudentsData> = mutableListOf()
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val sql =
+                    "SELECT * FROM student WHERE teacher_id = '$teacherID'"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()) {
+                    val id = result.getInt(1)
+                    val groupStud = result.getString(3)
+                    val fullName = result.getString(4)
+                    studentData.add(StudentsData(id, groupStud, fullName))
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return studentData
+    }
+    fun getLessonDateTime(name: String): MutableList<LessonData> {
+        val lesson: MutableList<LessonData> = mutableListOf()
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val sql =
+                    "SELECT * FROM lesson WHERE name = '$name' AND teacher_id = $teacherID"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()) {
+                    val id = result.getInt(1)
+                    val name = result.getString(2)
+                    val date = result.getString(4)
+                    val time = result.getString(5)
+                    val courseId = result.getInt(6)
+                    val lessonType = result.getString(7)
+                    lesson.add(LessonData(id, name, date, time, courseId, lessonType))
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return lesson
+    }
+    fun getTraffic(lessonId: Int): MutableList<StudentsArray> {
+        val trafficData: MutableList<StudentsArray> = mutableListOf()
+        thread {
+            try {
+                Class.forName("com.mysql.jdbc.Driver")
+                val cn: Connection = DriverManager.getConnection(url, user, pass)
+                val sql =
+                    "SELECT student.studGroup, student.fullName FROM `traffic` INNER JOIN `student` ON student_id = student.id WHERE traffic.lesson_id = $lessonId"
+                val query = cn.prepareStatement(sql)
+                val result = query.executeQuery()
+                while (result.next()) {
+                    val groupStud = result.getString(1)
+                    val fullName = result.getString(2)
+                    trafficData.add(StudentsArray(fullName, groupStud ))
+                }
+                cn.close()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }.join()
+        return trafficData
+    }
 }

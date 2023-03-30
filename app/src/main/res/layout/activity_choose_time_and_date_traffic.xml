@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanning.activites.TrafficViewActivity">
+    tools:context=".scanning.activites.ChooseTimeAndDateTrafficActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +28,7 @@
                     android:id="@+id/info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Выберите предмет и занятие:"
+                    android:text="Выберите дату и время занятия:"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -44,7 +44,7 @@
             <ExpandableListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/expandableListView"
+                android:id="@+id/expandableListViewDateTime"
                 />
         </LinearLayout>
     </LinearLayout>

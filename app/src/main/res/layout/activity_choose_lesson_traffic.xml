@@ -1,9 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanning.ChooseLessonTrafficActivity">
+    tools:context=".scanning.activites.ChooseLessonTrafficActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textCourseTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите предмет" />
+
+        <Spinner
+            android:id="@+id/chooseCourseTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+
+        <TextView
+            android:id="@+id/textLessonTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите занятие" />
+
+        <Spinner
+            android:id="@+id/chooseLessonTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+        <TextView
+            android:id="@+id/textDateTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите дату" />
+
+        <Spinner
+            android:id="@+id/chooseDateTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+        <TextView
+            android:id="@+id/textTimeTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите время" />
+
+        <Spinner
+            android:id="@+id/chooseTimeTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="10dp" />
+        <Button
+            android:id="@+id/goScanTraffic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сканировать QR" />
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

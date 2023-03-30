@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.activites
 
 import android.Manifest
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
@@ -18,10 +17,7 @@ import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
-import com.denisal.studentsmarks.HomeActivity
-import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.id_task
-import com.denisal.studentsmarks.listStudent
+import com.denisal.studentsmarks.*
 
 class QrGradeActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
@@ -74,17 +70,17 @@ class QrGradeActivity : AppCompatActivity() {
         codeScanner = CodeScanner(this, scannerView)
         codeScanner.camera = CodeScanner.CAMERA_BACK // or CAMERA_FRONT or specific camera id
         codeScanner.formats = CodeScanner.ALL_FORMATS // list of type BarcodeFormat,
-        // ex. listOf(BarcodeFormat.QR_CODE)
         codeScanner.autoFocusMode = AutoFocusMode.SAFE // or CONTINUOUS
         codeScanner.scanMode = ScanMode.SINGLE // or CONTINUOUS or SINGLE
         codeScanner.isAutoFocusEnabled = true // Whether to enable auto focus or not
         codeScanner.isFlashEnabled = false // Whether to enable flash or not
 
-        // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                listStudent = it.text.split("|")
-                Toast.makeText(this, "ФИО: ${listStudent[0]}", Toast.LENGTH_LONG).show()
+                val listStudentsSplit: List<String> = it.text.split("|")
+                listStudent.add(listStudentsSplit[0])
+                listStudent.add(listStudentsSplit[1])
+                Toast.makeText(this, "ФИО: ${listStudentsSplit[0]}", Toast.LENGTH_LONG).show()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS

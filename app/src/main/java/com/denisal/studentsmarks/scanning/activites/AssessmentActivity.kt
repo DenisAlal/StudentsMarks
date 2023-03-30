@@ -1,12 +1,10 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.activites
 
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import com.denisal.studentsmarks.StudentsData
 import com.denisal.studentsmarks.databinding.ActivityAssessmentBinding
@@ -14,7 +12,6 @@ import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
 import com.denisal.studentsmarks.id_task
 import com.denisal.studentsmarks.listStudent
-import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 class AssessmentActivity : AppCompatActivity() {

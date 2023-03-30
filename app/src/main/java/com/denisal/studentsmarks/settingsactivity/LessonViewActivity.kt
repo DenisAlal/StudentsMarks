@@ -16,24 +16,23 @@ import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
-import kotlin.collections.ArrayList
 
-class ViewStudentsActivity : AppCompatActivity(), StudentsAdapter.MyClickListener {
-    private val data = ArrayList<ViewModelStudents>()
+class LessonViewActivity : AppCompatActivity(),LessonAdapter.MyClickListener {
+    private val data = ArrayList<ViewModelLessons>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_student)
+        setContentView(R.layout.activity_lesson_view)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         visibleSetup()
         val actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Список студентов"
+        actionBar?.title = "Список занятий"
         Thread {
-           getStudents()
+            getLessons()
         }.start()
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = StudentsAdapter(data, this@ViewStudentsActivity)
+        val adapter = LessonAdapter(data, this@LessonViewActivity)
         recyclerView.adapter = adapter
 
     }
@@ -71,7 +70,7 @@ class ViewStudentsActivity : AppCompatActivity(), StudentsAdapter.MyClickListene
             iconEmpty.isVisible = true
         }
     }
-    private fun getStudents() {
+    private fun getLessons() {
 
         runOnUiThread {
             loading()
@@ -80,17 +79,16 @@ class ViewStudentsActivity : AppCompatActivity(), StudentsAdapter.MyClickListene
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val searchAccounts = "SELECT * FROM student WHERE teacher_id = '${teacherID}'"
+                val searchAccounts = "SELECT * FROM lesson WHERE teacher_id = '$teacherID'"
                 val searchAccountsQuery = cn.prepareStatement(searchAccounts)
                 val result = searchAccountsQuery.executeQuery()
                 while (result.next()){
                     val id = result.getInt(1)
-                    val uid = result.getString(2)
-                    val group = result.getString(3)
-                    val fio = result.getString(4)
-                    Log.e("select    ", "$id-$uid-$group-$fio")
-                    val student = ViewModelStudents(id = id, fio = fio, group = group)
-                    data.add(student)
+                    val name = result.getString(2)
+                    val date = result.getString(4)
+                    val time = result.getString(5)
+                    val lessonType = result.getString(7)
+                    data.add(ViewModelLessons(id, name, date, time, lessonType))
                 }
                 cn.close()
             } catch (e: ClassNotFoundException) {
@@ -108,20 +106,21 @@ class ViewStudentsActivity : AppCompatActivity(), StudentsAdapter.MyClickListene
     override fun onClick(position: Int) {
 
         val builderSucceed = AlertDialog.Builder(this)
-            .setTitle("Удалить студента из списка?")
-            .setMessage("Внимание! Удаление студента произведет удаление его успеваемости и посещаемости из системы!")
+            .setTitle("Удалить занятие из списка?")
+            .setMessage("Внимание! Удаление предмета произведет удаление данные о успеваемости " +
+                    "и посещаемости из системы по этому предмету!")
             .setIcon(R.drawable.baseline_error_outline_24_orange)
         builderSucceed.setNegativeButton("Удалить"){ _, _ ->
             val recycler: RecyclerView = findViewById(R.id.recyclerView)
             recycler.removeAllViewsInLayout();
             val delete = DeleteFromDb()
-            delete.deleteOneStudent(data[position].id)
+            delete.deleteOneLesson(data[position].id)
             data.clear()
             Thread {
-                getStudents()
+                getLessons()
             }.start()
             recycler.layoutManager = LinearLayoutManager(this)
-            val adapter = StudentsAdapter(data, this@ViewStudentsActivity)
+            val adapter = LessonAdapter(data, this@LessonViewActivity)
             recycler.adapter = adapter
         }
         builderSucceed.setPositiveButton("Отмена"){ _, _ ->

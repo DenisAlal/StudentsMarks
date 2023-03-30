@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.*
-import com.google.zxing.qrcode.encoder.QRCode
+import com.denisal.studentsmarks.scanning.activites.ChooseLessonTrafficActivity
+import com.denisal.studentsmarks.scanning.activites.CreateSubjectActivity
+import com.denisal.studentsmarks.scanning.activites.TrafficViewActivity
 
 class TrafficStudentsFragment : Fragment() {
 
@@ -27,7 +28,7 @@ class TrafficStudentsFragment : Fragment() {
 
         val trafficScan: Button = view.findViewById(R.id.trafficScan)
         trafficScan.setOnClickListener {
-            val intent = Intent(activity, QrTrafficActivity::class.java)
+            val intent = Intent(activity, ChooseLessonTrafficActivity::class.java)
             startActivity(intent)
         }
         val trafficView: Button = view.findViewById(R.id.trafficView)

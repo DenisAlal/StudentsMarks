@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.*
-import com.denisal.studentsmarks.teacherID
+import com.denisal.studentsmarks.scanning.activites.ChooseTaskGradeActivity
+import com.denisal.studentsmarks.scanning.activites.CreateSubjectActivity
+import com.denisal.studentsmarks.scanning.activites.CreateTaskActivity
+import com.denisal.studentsmarks.scanning.activites.GradeViewActivity
 import com.denisal.studentsmarks.uid
 
 

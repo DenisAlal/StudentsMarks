@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.auth.SignInActivity
-import com.denisal.studentsmarks.settingsactivity.DeleteInfoActivity
-import com.denisal.studentsmarks.settingsactivity.LoadAndSendStudentsActivity
-import com.denisal.studentsmarks.settingsactivity.CreateCourseActivity
-import com.denisal.studentsmarks.settingsactivity.ViewStudentsActivity
+import com.denisal.studentsmarks.settingsactivity.*
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingsFragment : Fragment() {
@@ -37,6 +34,16 @@ class SettingsFragment : Fragment() {
         val viewStud: Button = view.findViewById(R.id.viewStud)
         viewStud.setOnClickListener {
             val intent = Intent(activity, ViewStudentsActivity::class.java)
+            startActivity(intent)
+        }
+        val viewCourse: Button = view.findViewById(R.id.viewCourse)
+        viewCourse.setOnClickListener {
+            val intent = Intent(activity, SubjectViewActivity::class.java)
+            startActivity(intent)
+        }
+        val viewLesson: Button = view.findViewById(R.id.viewLesson)
+        viewLesson.setOnClickListener {
+            val intent = Intent(activity, LessonViewActivity::class.java)
             startActivity(intent)
         }
         val deleteInformation: Button = view.findViewById(R.id.delInfo)

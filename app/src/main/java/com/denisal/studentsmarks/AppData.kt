@@ -64,9 +64,22 @@ data class FullData(
     val studGroup: String,
     val fullName: String,
 )
-
+data class StudentsArray(
+    val fio: String,
+    val group: String,
+)
+data class arrayCourseLesson(
+    val idLesson: Int,
+    val nameLesson: String,
+    val dateLesson: String,
+    val timeLesson: String,
+    val courseIDLesson: Int,
+    val idCourse: Int,
+    val nameCourse: String
+)
 var id_task = -1
-var listStudent: List<String> = listOf()
+var listStudent: MutableList<String> = arrayListOf()
+var studentArrayCheck: MutableList<StudentsArray> = arrayListOf()
 var filenameDelete = ""
 val studData: MutableList<StudentsData> = mutableListOf()
 var uid: String = "null"

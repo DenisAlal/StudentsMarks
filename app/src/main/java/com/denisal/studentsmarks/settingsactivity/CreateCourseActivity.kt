@@ -21,7 +21,7 @@ class CreateCourseActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Создание предмета"
         val db = GetFromDB()
-        db.get()
+        db.getTeacher()
 
         binding.createSubjectBtn.setOnClickListener{
             val checkName = binding.nameSub.text.toString()

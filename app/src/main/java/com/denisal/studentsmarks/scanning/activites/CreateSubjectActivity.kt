@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.activites
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog

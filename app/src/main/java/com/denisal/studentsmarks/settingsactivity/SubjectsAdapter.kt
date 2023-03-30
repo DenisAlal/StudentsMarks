@@ -7,26 +7,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.R
 
-class StudentsAdapter(private val mList:List<ViewModelStudents>, val listener: ViewStudentsActivity)
-    :RecyclerView.Adapter<StudentsAdapter.ViewHolder>() {
+class SubjectsAdapter(private val mList:List<ViewModelSubjects>, val listener: SubjectViewActivity)
+    :RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
     override fun   onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.student_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.subject_item,parent,false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val studentsViewModel = mList[position]
-        holder.tvid.text = studentsViewModel.id.toString()
-        holder.tvFIO.text = studentsViewModel.fio
-        holder.tvGroup.text = studentsViewModel.group
+        val subjViewModel = mList[position]
+        holder.tvID.text = subjViewModel.id.toString()
+        holder.tvName.text = subjViewModel.name
+        holder.tvLection.text = subjViewModel.lecture
+        holder.tvPractic.text = subjViewModel.practic
     }
     override fun getItemCount(): Int {
         return  mList.size
     }
     inner class ViewHolder(itemView :View):RecyclerView.ViewHolder(itemView){
-        val tvid :TextView = itemView.findViewById(R.id.tvid)
-        val tvFIO :TextView = itemView.findViewById(R.id.tvFIO)
-        val tvGroup : TextView = itemView.findViewById(R.id.tvGroup)
+        val tvID :TextView = itemView.findViewById(R.id.tvID)
+        val tvName :TextView = itemView.findViewById(R.id.tvName)
+        val tvLection :TextView = itemView.findViewById(R.id.tvLection)
+        val tvPractic :TextView = itemView.findViewById(R.id.tvPractic)
         init {
             itemView.setOnClickListener{
                 val position = adapterPosition

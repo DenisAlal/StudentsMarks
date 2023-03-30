@@ -1,15 +1,15 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.activites
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivitySetTaskAndFioactivityBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.scanning.CustomAdapter
 
 class SetTaskAndFIOActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySetTaskAndFioactivityBinding
