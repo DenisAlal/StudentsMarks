@@ -64,6 +64,7 @@ class QrTrafficActivity : AppCompatActivity() {
                         }
                     }
                     val check = insert.insertTraffic(arrayInsert, strGetID)
+                    Log.e("check", arrayInsert.toString())
                     if (check) {
                         val mDialogSuccess = LayoutInflater.from(this)
                             .inflate(R.layout.success, null)
@@ -161,7 +162,7 @@ class QrTrafficActivity : AppCompatActivity() {
                         windowFail.dismiss()
                     }
                 }.start()
-            } else {
+            } else  {
                 val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.success, null)
                 val mBuilderSuccess = AlertDialog.Builder(this)
                     .setView(mDialogSuccess).setTitle("Студент добавлен в список")

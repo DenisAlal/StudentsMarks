@@ -2,6 +2,7 @@ package com.denisal.studentsmarks.scanning.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -61,7 +62,20 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                                 value.id
                             )
                             if (check) {
-                                nameTask.text = ""
+                                val mBuilderSuccess = android.app.AlertDialog.Builder(this)
+                                    .setTitle("Задание добавлено")
+                                    .setMessage("Добавить еще одно задание?")
+                                    .setIcon(R.drawable.baseline_check_circle_24)
+                                mBuilderSuccess.setPositiveButton("Да") { _, _ ->
+                                    nameTask.text = ""
+
+                                }
+                                mBuilderSuccess.setNegativeButton("Нет") { _, _ ->
+                                    nameTask.text = ""
+                                    finish()
+                                }
+                                val alertDialogError: android.app.AlertDialog = mBuilderSuccess.create()
+                                alertDialogError.show()
 
                             }
                         }
@@ -115,6 +129,20 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         }
         if (parent.id == R.id.choiceData) {
             getTime()
+        }
+        if (parent.id == R.id.choiceTime) {
+            val spinLesson: Spinner = findViewById(R.id.choiceLesson)
+            val spinDate: Spinner = findViewById(R.id.choiceData)
+            val spinTime: Spinner = findViewById(R.id.choiceTime)
+            for(i in getCourses.indices) {
+                val value = getCourses[i]
+                if (value.name == spinLesson.selectedItem.toString() &&
+                    value.date == spinDate.selectedItem.toString() &&
+                    value.time == spinTime.selectedItem.toString()) {
+                    binding.lessonType.setText("Тип занятия: ${value.lessonType}")
+                    Log.e("aboba selectedItem" , spinLesson.selectedItem.toString())
+                }
+            }
         }
     }
 

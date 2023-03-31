@@ -25,8 +25,6 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Просмотр успеваемости"
         binding.emptyViewTasks.isVisible = false
-       // val strCourse: String? = intent.getStringExtra("course")
-       // val strLesson: String? = intent.getStringExtra("lesson")
         loadData()
     }
     private fun goNext(assessment: Int, taskName: String, group: String, FIO: String, mark: String) {

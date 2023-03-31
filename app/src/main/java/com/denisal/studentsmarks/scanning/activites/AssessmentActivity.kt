@@ -55,7 +55,7 @@ class AssessmentActivity : AppCompatActivity() {
                     val checkInsert = insert.insertAssessment(text.toString(),
                         dateIns, check[0].id, id_task)
                     if (checkInsert) {
-                        Toast.makeText(applicationContext, "Данные успешно сохранены", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, "Данные успешно сохранены", Toast.LENGTH_SHORT).show()
                         finish()
                     } else {
                         Toast.makeText(applicationContext, "Ошибка загрузки данных", Toast.LENGTH_LONG).show()

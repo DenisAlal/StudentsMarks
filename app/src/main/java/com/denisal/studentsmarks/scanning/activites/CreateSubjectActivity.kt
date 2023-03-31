@@ -17,6 +17,7 @@ import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
 import java.util.*
+
 class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val cal: Calendar = Calendar.getInstance()
     private var year = cal.get(Calendar.YEAR)
@@ -25,7 +26,6 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
     private var hour = getTime(cal.get(Calendar.HOUR_OF_DAY).toString())
     private var minute = getTime(cal.get(Calendar.MINUTE).toString())
     private var subjArray: MutableList<SubjData> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar = supportActionBar
@@ -44,7 +44,8 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             }
             val spinSubj: Spinner = findViewById(R.id.spinnerSubj)
             spinSubj.onItemSelectedListener = this
-            val add: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item,
+            val add: ArrayAdapter<*> = ArrayAdapter<Any?>(
+                this, android.R.layout.simple_spinner_item,
                 arrayForSpinnerSubj as List<Any?>
             )
             add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -55,16 +56,19 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             spinnerEmpty.isVisible = false
             val builderError = AlertDialog.Builder(this)
                 .setTitle("Загрузка завершилась ошибкой")
-                .setMessage("Ваш список предметов пуст! " +
-                        "Для того чтобы создать занятие сначала создайте предмет!")
+                .setMessage(
+                    "Ваш список предметов пуст! " +
+                            "Для того чтобы создать занятие сначала создайте предмет!"
+                )
                 .setIcon(R.drawable.baseline_error_outline_24_orange)
-            builderError.setPositiveButton("OK"){ _, _ ->
+            builderError.setPositiveButton("OK") { _, _ ->
                 finish()
             }
         }
         init()
 
     }
+
     private fun init() {
         val pickerDateBtn: Button = findViewById(R.id.pickDate)
         val pickerTimeBtn: Button = findViewById(R.id.pickTime)
@@ -79,22 +83,28 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
 
 
         pickerDateBtn.setOnClickListener {
-            DatePickerDialog(this,  { view, myYear, myMonth, myDayOfMonth ->
-                year = myYear
-                month = getMonth(myMonth.toString())
-                day = getDay(myDayOfMonth.toString())
-                text.text = "Вы выбрали дату, $year-$month-$day"
-            }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this,
+                { view, myYear, myMonth, myDayOfMonth ->
+                    year = myYear
+                    month = getMonth(myMonth.toString())
+                    day = getDay(myDayOfMonth.toString())
+                    text.text = "Вы выбрали дату, $year-$month-$day"
+                },
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
-        pickerTimeBtn.setOnClickListener{
-            TimePickerDialog(this, {view, myHour, myMinute ->
+        pickerTimeBtn.setOnClickListener {
+            TimePickerDialog(this, { view, myHour, myMinute ->
                 hour = getTime(myHour.toString())
                 minute = getTime(myMinute.toString())
                 text2.text = "Вы выбрали время, $hour:$minute"
             }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
-        save.setOnClickListener{
-            if(getText.text.isNotEmpty()) {
+        save.setOnClickListener {
+            if (getText.text.isNotEmpty()) {
                 val spinnerType: Spinner = findViewById(R.id.spinnerSubjType)
                 val spinnerSubj: Spinner = findViewById(R.id.spinnerSubj)
                 val selectedType = spinnerType.selectedItem.toString()
@@ -102,29 +112,38 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 val date = "$year-$month-$day"
                 val time = "$hour:$minute"
                 val courseId = subjArray[idSelectedSubj.toInt()].id
-                val check = insertToDB.insertLeson(getText.text.toString(), date, time, courseId, selectedType)
+                val check = insertToDB.insertLeson(
+                    getText.text.toString(),
+                    date,
+                    time,
+                    courseId,
+                    selectedType
+                )
                 if (check) {
                     val mBuilderSuccess = AlertDialog.Builder(this)
                         .setTitle("Занятие добавлено")
                         .setMessage("Добавить еще одно занятие?")
                         .setIcon(R.drawable.baseline_check_circle_24)
-                    mBuilderSuccess.setPositiveButton("Да"){ _, _ ->
+                    mBuilderSuccess.setPositiveButton("Да") { _, _ ->
                         getText.setText("")
 
                     }
-                    mBuilderSuccess.setNegativeButton("Нет"){ _, _ ->
+                    mBuilderSuccess.setNegativeButton("Нет") { _, _ ->
                         getText.setText("")
                         finish()
                     }
                     val alertDialogError: AlertDialog = mBuilderSuccess.create()
-                    alertDialogError.show()}
+                    alertDialogError.show()
+                }
             } else {
-                Toast.makeText(applicationContext, "Введите тему занятия!", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Введите тему занятия!", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -134,14 +153,16 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun getMonth(month: String): String {
         val newMon = month.toInt() + 1
         var newMonth = newMon.toString()
         if (month.length < 2) {
-             newMonth = "0$newMonth"
+            newMonth = "0$newMonth"
         }
         return newMonth
     }
+
     private fun getDay(day: String): String {
         val newd = day.toInt()
         var newDay = newd.toString()
@@ -150,6 +171,7 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         }
         return newDay
     }
+
     private fun getTime(day: String): String {
         val newt = day.toInt()
         var newTime = newt.toString()
@@ -158,11 +180,12 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         }
         return newTime
     }
+
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
         val subjTypeArray: MutableList<String> = mutableListOf()
         if (parent.id == R.id.spinnerSubj) {
             val check = subjArray[position]
-            if(check.lecture == 1) {
+            if (check.lecture == 1) {
                 subjTypeArray.add("Лекция")
             }
             if (check.practic == 1) {
@@ -171,15 +194,15 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             val spinType = findViewById<Spinner>(R.id.spinnerSubjType)
             if (subjTypeArray.isNotEmpty()) {
                 spinType.onItemSelectedListener = this
-                val add: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item,
-                    subjTypeArray as List<Any?>)
+                val add: ArrayAdapter<*> = ArrayAdapter<Any?>(
+                    this, android.R.layout.simple_spinner_item,
+                    subjTypeArray as List<Any?>
+                )
                 add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinType.adapter = add
             } else {
                 spinType.isVisible = false
             }
-
-
         }
     }
 

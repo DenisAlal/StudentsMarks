@@ -80,7 +80,7 @@ class QrGradeActivity : AppCompatActivity() {
                 val listStudentsSplit: List<String> = it.text.split("|")
                 listStudent.add(listStudentsSplit[0])
                 listStudent.add(listStudentsSplit[1])
-                Toast.makeText(this, "ФИО: ${listStudentsSplit[0]}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "ФИО: ${listStudentsSplit[0]}", Toast.LENGTH_SHORT).show()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS

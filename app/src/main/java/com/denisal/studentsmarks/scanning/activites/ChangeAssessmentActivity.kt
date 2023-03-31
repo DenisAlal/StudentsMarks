@@ -1,10 +1,15 @@
 package com.denisal.studentsmarks.scanning.activites
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Toast
+import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityChangeAssessmentBinding
 import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
 import com.denisal.studentsmarks.dbfunctions.UpdateInDB
@@ -53,7 +58,19 @@ class ChangeAssessmentActivity : AppCompatActivity() {
             val dateIns = "$year-$month-$day"
             val check = update.updateMark(strIDMark,binding.editMark.text, dateIns)
             if (check) {
-                Toast.makeText(applicationContext, "Данные загружены", Toast.LENGTH_SHORT).show()
+                val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.success, null)
+                val mBuilderSuccess = AlertDialog.Builder(this)
+                    .setView(mDialogSuccess).setTitle("Данные изменены")
+                val windowSuccess = mBuilderSuccess.show()
+                object : CountDownTimer(1200, 600){
+                    override fun onTick(millisUntilFinished: Long) {
+                        Log.e("tik", "tak")
+                    }
+                    override fun onFinish() {
+                        windowSuccess.dismiss()
+                        finish()
+                    }
+                }.start()
             } else {
                 Toast.makeText(applicationContext, "Ошибка загрузки данных", Toast.LENGTH_SHORT).show()
             }
@@ -61,8 +78,19 @@ class ChangeAssessmentActivity : AppCompatActivity() {
         binding.delete.setOnClickListener{
             val check = delete.deleteMark(strIDMark)
             if (check) {
-                Toast.makeText(applicationContext, "Данные удалены", Toast.LENGTH_SHORT).show()
-                finish()
+                val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.fail, null)
+                val mBuilderSuccess = AlertDialog.Builder(this)
+                    .setView(mDialogSuccess).setTitle("Данные удалены")
+                val windowSuccess = mBuilderSuccess.show()
+                object : CountDownTimer(1200, 600){
+                    override fun onTick(millisUntilFinished: Long) {
+                        Log.e("tik", "tak")
+                    }
+                    override fun onFinish() {
+                        windowSuccess.dismiss()
+                        finish()
+                    }
+                }.start()
             } else {
                 Toast.makeText(applicationContext, "Ошибка удаления данных", Toast.LENGTH_SHORT).show()
             }
