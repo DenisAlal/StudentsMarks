@@ -1,26 +1,26 @@
 package com.denisal.studentsmarks.settingsactivity
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivityDeleteInfoBinding
-
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.SQLException
-import java.util.concurrent.TimeUnit
+import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
 
 
 class DeleteInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDeleteInfoBinding
     val checkStud = -1
     val checkGradeTraff = -1
+    private var deleteData: MutableList<Boolean> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDeleteInfoBinding.inflate(layoutInflater)
@@ -34,41 +34,60 @@ class DeleteInfoActivity : AppCompatActivity() {
         val removeStudents: CheckBox = binding.studentsCheck
         val removeCurse :CheckBox = binding.courseDelete
         val removeLesson:CheckBox = binding.lessonDelete
-        val removeGrade: CheckBox = binding.gradeDelete
         val accept: EditText = binding.acceptText
         Log.e("","$teacherID")
-        removeStudents.setOnClickListener{
-            binding.gradeDelete.isChecked = true
-        }
         removeCurse.setOnClickListener{
             removeLesson.isChecked = true
-            binding.gradeDelete.isChecked = true
-        }
-        removeLesson.setOnClickListener{
-            binding.gradeDelete.isChecked = true
+
         }
         btnAccept.setOnClickListener{
             val checkAcc = accept.text.toString()
+            val delete = DeleteFromDb()
             if(checkAcc == "I agree"){
+                deleteData.clear()
                 if (removeStudents.isChecked) {
-                    Thread(Runnable {
-                        deleteStudList()
-                    }).start()
-                }
-                if (removeGrade.isChecked) {
-                    Thread(Runnable {
-                        deleteGrade()
-                    }).start()
-                }
-                if (removeLesson.isChecked) {
-                    Thread(Runnable {
-                        deleteLesson()
-                    }).start()
+                    deleteData.add(true)
+                } else {
+                    deleteData.add(false)
                 }
                 if (removeCurse.isChecked) {
-                    Thread(Runnable {
-                        deleteCourse()
-                    }).start()
+                    deleteData.add(true)
+                } else {
+                    deleteData.add(false)
+                }
+                if (removeLesson.isChecked) {
+                    deleteData.add(true)
+                } else {
+                    deleteData.add(false)
+                }
+
+                val check = delete.deleteInfo(deleteData)
+                if (check) {
+                    val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.success, null)
+                    val mBuilderSuccess = AlertDialog.Builder(this)
+                        .setView(mDialogSuccess).setTitle("Удаление выполнено")
+                    val windowSuccess = mBuilderSuccess.show()
+                    object : CountDownTimer(1800, 600){
+                        override fun onTick(millisUntilFinished: Long) {
+                            Log.e("tik", "tak")
+                        }
+                        override fun onFinish() {
+                            windowSuccess.dismiss()
+                        }
+                    }.start()
+                } else {
+                    val mDialogFail = LayoutInflater.from(this).inflate(R.layout.fail, null)
+                    val mBuilderFail = AlertDialog.Builder(this)
+                        .setView(mDialogFail).setTitle("Удаление завершилось ошибкой")
+                    val windowFail = mBuilderFail.show()
+                    object : CountDownTimer(1800, 600){
+                        override fun onTick(millisUntilFinished: Long) {
+                            Log.e("tik", "tak")
+                        }
+                        override fun onFinish() {
+                            windowFail.dismiss()
+                        }
+                    }.start()
                 }
             } else {
                 val errorToast = Toast.makeText(
@@ -81,8 +100,6 @@ class DeleteInfoActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -91,42 +108,5 @@ class DeleteInfoActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-    private fun deleteStudList() {
-        TimeUnit.SECONDS.sleep(1)
-        runOnUiThread {startDelete()}
-        if (teacherID != -1) {
-            try {
-                Class.forName("com.mysql.jdbc.Driver")
-                val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val ps = cn.createStatement()
-                val insert = "DELETE FROM student WHERE teacher_id='$teacherID'"
-                ps.execute(insert)
-                ps?.close()
-                cn.close()
-            } catch (c: ClassNotFoundException) {
-                c.printStackTrace()
-            } catch (c: SQLException) {
-                c.printStackTrace()
-            }
-            runOnUiThread { deleted()}
-        }
-    }
-
-    private fun deleteGrade() {
-        Log.e("delete DB", "delete DB")
-    }
-    private fun deleteCourse() {
-        TODO("Not yet implemented")
-    }
-
-    private fun deleteLesson() {
-        TODO("Not yet implemented")
-    }
-    private fun startDelete(){
-    //действие при начале удаления
-    }
-    private fun deleted(){
-       // действие при конце
     }
 }

@@ -7,11 +7,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,9 +29,8 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 import com.denisal.studentsmarks.databinding.ActivityLoadAndSendStudentsBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
-
+import android.graphics.Color;
 class LoadAndSendStudentsActivity : AppCompatActivity() {
         private lateinit var binding: ActivityLoadAndSendStudentsBinding
         private val tag: String = "main"
@@ -47,9 +49,9 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             actionBar?.setHomeButtonEnabled(true)
             actionBar?.setDisplayHomeAsUpEnabled(true)
             actionBar?.title = "Загрузка данных о студентах"
-            binding.sendDataStud.isEnabled = false;
-            binding.success.isVisible = false
+            binding.sendDataStud.isEnabled = false
             binding.process.isVisible = false
+            binding.alert.isVisible = false
             Log.e("","$teacherID")
             init()
         }
@@ -109,15 +111,25 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 }).start()
 
             }
-            val loadManual = binding.loadStudentsManual
-            loadManual.setOnClickListener{
+            binding.loadStudentsManual.setOnClickListener{
                 val insert = InsertToDB()
                 val fioCheck = binding.fioET.text.toString()
                 val group = binding.groupET.text.toString()
                 if (fioCheck.isNotEmpty() && group.isNotEmpty()) {
                     val check = insert.insertOneStudent(fioCheck,group)
                     if(check) {
-                        Toast.makeText(this, "Данные загружены", Toast.LENGTH_SHORT).show()
+                        val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.success, null)
+                        val mBuilderSuccess = AlertDialog.Builder(this)
+                            .setView(mDialogSuccess).setTitle("Данные загружены")
+                        val windowSuccess = mBuilderSuccess.show()
+                        object : CountDownTimer(1800, 600){
+                            override fun onTick(millisUntilFinished: Long) {
+                                Log.e("tik", "tak")
+                            }
+                            override fun onFinish() {
+                                windowSuccess.dismiss()
+                            }
+                        }.start()
                     } else {
                         Toast.makeText(this, "Ошибка загрузки", Toast.LENGTH_SHORT).show()
                     }
@@ -148,7 +160,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                 addCategory(Intent.CATEGORY_OPENABLE)
             }
-            startActivityForResult(intent, pickFile)
+                startActivityForResult(intent, pickFile)
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -176,12 +188,13 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                                 }
                             }
                             newUri = uri.toString()
+                            copyFileAndExtract(newUri)
                             Log.e("Uri-------------------" , uri.toString())
                         }
                     }
                 }
             }
-            copyFileAndExtract(newUri)
+
         }
 
         private fun Uri.getExtention(context: Context): String? {
@@ -324,6 +337,9 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 }
             }
             Log.e("teacher_id", teacherID.toString())
+            binding.alert.isVisible = true
+            binding.alert.text = "Данные из файла загружены, для их" +
+                    "сохранения нажмите кнопку отправить данные"
             binding.sendDataStud.isEnabled = true;
         }
 
@@ -368,8 +384,20 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
         }
         private fun success() {
             binding.process.isVisible = false
-            binding.success.isVisible = true
             binding.linearLayout.isVisible = false
+            val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.success, null)
+            val mBuilderSuccess = AlertDialog.Builder(this)
+                .setView(mDialogSuccess).setTitle("Данные загружены")
+            val windowSuccess = mBuilderSuccess.show()
+            object : CountDownTimer(1800, 600){
+                override fun onTick(millisUntilFinished: Long) {
+                    Log.e("tik", "tak")
+                }
+                override fun onFinish() {
+                    windowSuccess.dismiss()
+                    finish()
+                }
+            }.start()
         }
 
 

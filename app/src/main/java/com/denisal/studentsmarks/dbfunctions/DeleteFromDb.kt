@@ -110,4 +110,40 @@ class DeleteFromDb {
         }
         return ret
     }
+    fun deleteInfo(deleteData: MutableList<Boolean>): Boolean {
+        var ret = true
+        if (teacherID != -1) {
+            thread {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver")
+                    val cn: Connection = DriverManager.getConnection(url, user, pass)
+                    val ps = cn.createStatement()
+                    if(deleteData[0]) {
+                        val insert = "DELETE FROM student WHERE teacher_id='$teacherID'"
+                        ps.execute(insert)
+                    }
+                    if(deleteData[1]) {
+                        val insert = "DELETE FROM course WHERE teacher_id='$teacherID'"
+                        ps.execute(insert)
+                    }
+                    if(deleteData[2]) {
+                        val insert = "DELETE FROM lesson WHERE teacher_id='$teacherID'"
+                        ps.execute(insert)
+                    }
+
+                    ps?.close()
+                    cn.close()
+                } catch (e: ClassNotFoundException) {
+                    ret = false
+                    e.printStackTrace()
+                } catch (e: SQLException) {
+                    ret = false
+                    e.printStackTrace()
+                }
+            }.join()
+        } else {
+            ret = false
+        }
+        return ret
+    }
 }

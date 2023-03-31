@@ -1,10 +1,14 @@
 package com.denisal.studentsmarks.settingsactivity
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityCreateCourseBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
@@ -45,7 +49,18 @@ class CreateCourseActivity : AppCompatActivity() {
                         Log.e("check", "$checkName $checkLect $checkPract")
                         val check = insert.insertCourse(checkName, checkLect, checkPract)
                         if(check) {
-                            Toast.makeText(this, "Предмет создан", Toast.LENGTH_SHORT).show()
+                            val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.success, null)
+                            val mBuilderSuccess = AlertDialog.Builder(this)
+                                .setView(mDialogSuccess).setTitle("Предмет создан")
+                            val windowSuccess = mBuilderSuccess.show()
+                            object : CountDownTimer(1800, 600){
+                                override fun onTick(millisUntilFinished: Long) {
+                                    Log.e("tik", "tak")
+                                }
+                                override fun onFinish() {
+                                    windowSuccess.dismiss()
+                                }
+                            }.start()
                         } else {
                             Toast.makeText(this, "Ошибка создания предмета", Toast.LENGTH_SHORT).show()
                         }
