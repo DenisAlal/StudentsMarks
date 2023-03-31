@@ -2,9 +2,11 @@ package com.denisal.studentsmarks.scanning.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.denisal.studentsmarks.LessonData
 import com.denisal.studentsmarks.R
@@ -26,8 +28,7 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val arrayEmptyView: LinearLayout = findViewById(R.id.emptyView)
-        arrayEmptyView.isVisible = false
+
         val actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -141,10 +142,16 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
             add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinLesson.adapter = add
         } else {
-            val arrayEmp: LinearLayout = findViewById(R.id.empty)
-            val arrayEmptyView: LinearLayout = findViewById(R.id.emptyView)
-            arrayEmp.isVisible = false
-            arrayEmptyView.isVisible = true
+            val builderError = AlertDialog.Builder(this)
+                .setTitle("Загрузка завершилась ошибкой")
+                .setMessage("Ваш список занятий для этого предмета пуст! " +
+                        "Для того чтобы начать сканирование сначала создайте занятие!")
+                .setIcon(R.drawable.baseline_error_outline_24_orange)
+            builderError.setPositiveButton("OK"){ _, _ ->
+                finish()
+            }
+            val alertDialogError: AlertDialog = builderError.create()
+            alertDialogError.show()
         }
 
     }

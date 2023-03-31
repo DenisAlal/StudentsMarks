@@ -72,6 +72,7 @@ class DeleteInfoActivity : AppCompatActivity() {
                             Log.e("tik", "tak")
                         }
                         override fun onFinish() {
+                            binding.acceptText.setText("")
                             windowSuccess.dismiss()
                         }
                     }.start()
@@ -85,6 +86,7 @@ class DeleteInfoActivity : AppCompatActivity() {
                             Log.e("tik", "tak")
                         }
                         override fun onFinish() {
+                            binding.acceptText.setText("")
                             windowFail.dismiss()
                         }
                     }.start()

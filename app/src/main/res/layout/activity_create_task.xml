@@ -81,31 +81,5 @@
             android:layout_height="wrap_content"
             android:text="Сохранить"/>
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Ваш список занятий для этого предмета пуст! Для того чтобы начать сканирование сначала создайте занятие!"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:contentDescription="Empty"
-            app:srcCompat="@drawable/baseline_event_busy_24_gray" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

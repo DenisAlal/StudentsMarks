@@ -1,8 +1,12 @@
 package com.denisal.studentsmarks.scanning.activites
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -31,10 +35,7 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         setContentView(R.layout.activity_create_subject)
         val db = GetFromDB()
         subjArray = db.getDataCourse()
-        val arrayEmpty: LinearLayout = findViewById(R.id.emptyArrayView)
-        arrayEmpty.isVisible = false
-        val successView: LinearLayout = findViewById(R.id.success)
-        successView.isVisible = false
+
         if (subjArray.isNotEmpty()) {
             val arrayForSpinnerSubj: ArrayList<String> = arrayListOf()
             for (index in subjArray.indices) {
@@ -52,7 +53,14 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         } else {
             val spinnerEmpty: LinearLayout = findViewById(R.id.emptyArray)
             spinnerEmpty.isVisible = false
-            arrayEmpty.isVisible = true
+            val builderError = AlertDialog.Builder(this)
+                .setTitle("Загрузка завершилась ошибкой")
+                .setMessage("Ваш список предметов пуст! " +
+                        "Для того чтобы создать занятие сначала создайте предмет!")
+                .setIcon(R.drawable.baseline_error_outline_24_orange)
+            builderError.setPositiveButton("OK"){ _, _ ->
+                finish()
+            }
         }
         init()
 
@@ -65,10 +73,7 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         val text2: TextView = findViewById(R.id.text4)
         val getText: EditText = findViewById(R.id.gradeTopic)
         val insertToDB = InsertToDB()
-        val successView: LinearLayout = findViewById(R.id.success)
-        val closeView: LinearLayout = findViewById(R.id.emptyArray)
-        val againSend: Button = findViewById(R.id.again)
-        val close: Button = findViewById(R.id.exit)
+
         text.text = "Выберите дату занятия, сейчас указана дата, $year-$month-$day"
         text2.text = "Выберите время занятия, сейчас указано время, $hour:$minute"
 
@@ -99,22 +104,26 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 val courseId = subjArray[idSelectedSubj.toInt()].id
                 val check = insertToDB.insertLeson(getText.text.toString(), date, time, courseId, selectedType)
                 if (check) {
-                    successView.isVisible = true
-                    closeView.isVisible = false
-                }
+                    val mBuilderSuccess = AlertDialog.Builder(this)
+                        .setTitle("Занятие добавлено")
+                        .setMessage("Добавить еще одно занятие?")
+                        .setIcon(R.drawable.baseline_check_circle_24)
+                    mBuilderSuccess.setPositiveButton("Да"){ _, _ ->
+                        getText.setText("")
+
+                    }
+                    mBuilderSuccess.setNegativeButton("Нет"){ _, _ ->
+                        getText.setText("")
+                        finish()
+                    }
+                    val alertDialogError: AlertDialog = mBuilderSuccess.create()
+                    alertDialogError.show()}
             } else {
                 Toast.makeText(applicationContext, "Введите тему занятия!", Toast.LENGTH_LONG).show()
             }
         }
 
-        againSend.setOnClickListener{
-            getText.setText("")
-            successView.isVisible = false
-            closeView.isVisible = true
-        }
-        close.setOnClickListener{
-            finish()
-        }
+
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
