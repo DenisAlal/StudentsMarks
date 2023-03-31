@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.HomeActivity
 import com.denisal.studentsmarks.databinding.ActivitySignInBinding
-import com.denisal.studentsmarks.uid
 import com.google.firebase.auth.FirebaseAuth
 
 
 class SignInActivity : AppCompatActivity() {
+
 
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -25,7 +25,11 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
+        binding.resetPass.setOnClickListener{
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            val intent = Intent(this, ResetPasswordActivity::class.java)
+            startActivity(intent)
+        }
         binding.button.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val pass = binding.passET.text.toString()
@@ -47,6 +51,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onStart() {
         super.onStart()
         val user = FirebaseAuth.getInstance().currentUser

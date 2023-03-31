@@ -64,6 +64,8 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             builderError.setPositiveButton("OK") { _, _ ->
                 finish()
             }
+            val alertDialogSuccess: AlertDialog = builderError.create()
+            alertDialogSuccess.show()
         }
         init()
 

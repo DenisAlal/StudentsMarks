@@ -12,30 +12,4 @@
         tools:itemCount="10"/>
 
 
-    <LinearLayout
-        android:id="@+id/emptyStudents"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Нет сведений о студентах"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/iconEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/baseline_folder_delete_24_gray" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

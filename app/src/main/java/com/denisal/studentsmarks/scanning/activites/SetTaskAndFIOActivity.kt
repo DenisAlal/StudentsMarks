@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.denisal.studentsmarks.*
@@ -24,7 +25,7 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Просмотр успеваемости"
-        binding.emptyViewTasks.isVisible = false
+
         loadData()
     }
     private fun goNext(assessment: Int, taskName: String, group: String, FIO: String, mark: String) {
@@ -98,7 +99,17 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
                 }
             } else {
                 binding.emptyTasks.isVisible = false
-                binding.emptyViewTasks.isVisible = true
+                val builderSucceed = AlertDialog.Builder(this)
+                    .setTitle("Ошибка загрузки")
+                    .setMessage(
+                        "Ваш список заданий для этого занятия пуст!"
+                    )
+                    .setIcon(R.drawable.baseline_error_outline_24_orange)
+                builderSucceed.setNegativeButton("ОК") { _, _ ->
+                    finish()
+                }
+                val alertDialogSuccess: AlertDialog = builderSucceed.create()
+                alertDialogSuccess.show()
             }
         } else {
             Log.e("bundle", "empty")

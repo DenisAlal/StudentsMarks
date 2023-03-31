@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.LessonData
+import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.databinding.ActivityTrafficViewBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
@@ -48,6 +50,17 @@ class TrafficViewActivity : AppCompatActivity() {
             val adapter = CustomAdapter(this,courseList,childMap)
             binding.expandableListView.setAdapter(adapter)
         } else {
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Ошибка загрузки")
+                .setMessage(
+                    "Данных о курсах/занятиях не было найдено"
+                )
+                .setIcon(R.drawable.baseline_error_outline_24_orange)
+            builderSucceed.setNegativeButton("ОК") { _, _ ->
+                finish()
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
             Toast.makeText(applicationContext, "Нет данных", Toast.LENGTH_LONG).show()
         }
         binding.expandableListView.setOnChildClickListener{ _, _, groupP, childP, _ ->

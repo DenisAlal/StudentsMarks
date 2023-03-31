@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityTrafficViewStudentsBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
@@ -23,7 +25,7 @@ class TrafficViewStudentsActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = "Просмотр успеваемости"
         val idLessonTraffic: Int = intent.getIntExtra("IDLesson", -1)
-        binding.emptyStudents.isVisible = false
+
         val courseList = mutableListOf<String>()
         val childMap = mutableMapOf<String,List<String>>()
         if(idLessonTraffic != -1) {
@@ -47,13 +49,23 @@ class TrafficViewStudentsActivity : AppCompatActivity() {
                 val adapter = CustomAdapter(this,courseList,childMap)
                 binding.expandableListViewGroupFio.setAdapter(adapter)
             } else {
-                binding.emptyStudents.isVisible = true
+                val builderSucceed = AlertDialog.Builder(this)
+                    .setTitle("Ошибка загрузки")
+                    .setMessage(
+                        "Внимание! Список занятий пуст," +
+                                " для отображения списка занятий необходимо их добавить!"
+                    )
+                    .setIcon(R.drawable.baseline_error_outline_24_orange)
+                builderSucceed.setNegativeButton("ОК") { _, _ ->
+                    finish()
+                }
+                val alertDialogSuccess: AlertDialog = builderSucceed.create()
+                alertDialogSuccess.show()
             }
         }
         binding.expandableListViewGroupFio.setOnChildClickListener{ _, _, groupP, childP, _ ->
             val date = courseList[groupP]
             val time = childMap[date]!![childP]
-
             true
         }
     }

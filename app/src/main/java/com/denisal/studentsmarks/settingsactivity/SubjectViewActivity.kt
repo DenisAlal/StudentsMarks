@@ -24,7 +24,7 @@ class SubjectViewActivity : AppCompatActivity(), SubjectsAdapter.MyClickListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject_view)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        visibleSetup()
+
         val actionBar = supportActionBar
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,12 +37,7 @@ class SubjectViewActivity : AppCompatActivity(), SubjectsAdapter.MyClickListener
         recyclerView.adapter = adapter
 
     }
-    private fun visibleSetup(){
-        val iconEmpty  = findViewById<ImageView>(R.id.iconEmpty)
-        val textEmpty  = findViewById<TextView>(R.id.textEmpty)
-        iconEmpty.isVisible = false
-        textEmpty.isVisible = false
-    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -60,15 +55,22 @@ class SubjectViewActivity : AppCompatActivity(), SubjectsAdapter.MyClickListener
         listView.isVisible = false
     }
     private fun finishLoad() {
-        val iconEmpty  = findViewById<ImageView>(R.id.iconEmpty)
-        val textEmpty  = findViewById<TextView>(R.id.textEmpty)
+
         val processLoading: ProgressBar = findViewById(R.id.processLoading)
         val listView: RecyclerView = findViewById(R.id.recyclerView)
         processLoading.isVisible = false
         listView.isVisible = true
         if (data.isEmpty()) {
-            textEmpty.isVisible = true
-            iconEmpty.isVisible = true
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Ошибка загрузки")
+                .setMessage("Внимание! Список предметов пуст," +
+                        " для отображения списка предметов необходимо их добавить!")
+                .setIcon(R.drawable.baseline_error_outline_24_orange)
+            builderSucceed.setNegativeButton("ОК"){ _, _ ->
+                finish()
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
         }
     }
     private fun getSubj() {
