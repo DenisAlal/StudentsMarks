@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.LessonData
+import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityChooseTimeAndDateTrafficBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class ChooseTimeAndDateTrafficActivity : AppCompatActivity() {
@@ -21,10 +24,19 @@ class ChooseTimeAndDateTrafficActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseTimeAndDateTrafficBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Просмотр успеваемости"
+        binding.goBack.setOnClickListener{
+            finish()
+        }
+        binding.goInfo.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно просмотреть успеваемость студентов")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         strLesson = intent.getStringExtra("Lesson")
         array = db.getLessonDateTime(strLesson.toString())
         Log.e("Check lesson2", strLesson.toString())

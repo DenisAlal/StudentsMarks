@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.StudentsData
 import com.denisal.studentsmarks.databinding.ActivityAssessmentBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
@@ -27,10 +29,19 @@ class AssessmentActivity : AppCompatActivity() {
         binding = ActivityAssessmentBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Выставление оценки"
+        binding.goBack.setOnClickListener{
+            finish()
+        }
+        binding.goInfo.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно выставить оценку")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         if(listStudent.isNotEmpty()) {
             binding.textFIO.text = "ФИО: " + listStudent[0]
             binding.textGroup.text = "Группа: " + listStudent[1]

@@ -13,6 +13,7 @@ import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.databinding.ActivityTrafficViewBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TrafficViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTrafficViewBinding
@@ -23,10 +24,22 @@ class TrafficViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTrafficViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Просмотр успеваемости"
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно выбрать предмет и занятие " +
+                        "по которому нужно отобразить посещаемость")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         courseArray = db.getDataCourse()
         lessonArray = db.getDataLesson()
         val courseList = mutableListOf<String>()

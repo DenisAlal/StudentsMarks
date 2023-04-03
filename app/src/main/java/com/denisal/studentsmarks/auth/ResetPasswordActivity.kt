@@ -7,8 +7,10 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 
 class ResetPasswordActivity : AppCompatActivity() {
@@ -17,15 +19,21 @@ class ResetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        val goBack: FloatingActionButton = findViewById(R.id.goBack)
+        goBack.setOnClickListener{
+            finish()
+        }
         actionBar?.title = "Восстановление пароля"
         val reset: Button = findViewById(R.id.resetPassword)
         auth = FirebaseAuth.getInstance()
         resetPass = findViewById(R.id.emailText)
         reset.setOnClickListener {
-            resetPassword(resetPass.text.toString())
+            if (resetPass.text.toString().isNotEmpty()) {
+
+                resetPassword(resetPass.text.toString())
+            } else {
+                Toast.makeText(applicationContext, "Ввежите свою почту", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -59,16 +67,5 @@ class ResetPasswordActivity : AppCompatActivity() {
                     }
                 }.start()
             }
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }

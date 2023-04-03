@@ -5,77 +5,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".scanning.activites.AssessmentActivity">
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        >
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/goBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:src="@drawable/baseline_navigate_before_24"
+            app:backgroundTint="?attr/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorSecondaryVariant" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/goInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:src="@drawable/outline_info_24"
+            app:backgroundTint="?attr/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorSecondaryVariant" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выставление оценки"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/rectangle"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/textFIO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ФИО:" />
+
+        <TextView
+            android:id="@+id/textGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="Группа: " />
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:dividerColor="?attr/colorSecondaryVariant"
+            android:layout_marginVertical="10dp"
+            />
+        <TextView
+            android:id="@+id/textDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp"
-                >
-
-                <TextView
-                    android:id="@+id/textFIO"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ФИО:" />
-
-                <TextView
-                    android:id="@+id/textGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Группа: " />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
+            android:text=""
+            android:textSize="16sp"
+            android:layout_marginVertical="10dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dateBtn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="20dp">
-            <TextView
-                android:id="@+id/textDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="16sp"
-                android:layout_marginVertical="10dp"/>
-            <Button
-                android:id="@+id/dateBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Укажите дату сдачи"
-                android:layout_marginVertical="10dp"/>
+            android:layout_height="wrap_content"
+            android:text="Укажите дату сдачи"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/button"
+            android:textColor="?attr/colorAccent"/>
 
-            <EditText
-                android:id="@+id/assessment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:ems="10"
-                android:hint="Введите оценку"
-                android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/assessment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:ems="10"
+            android:hint="Введите оценку"
+            android:inputType="textPersonName" />
 
-            <Button
-                android:id="@+id/saveAssessment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Сохранить оценку" />
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveAssessment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить оценку"
+            android:background="@drawable/button"
+            android:textColor="?attr/colorAccent"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

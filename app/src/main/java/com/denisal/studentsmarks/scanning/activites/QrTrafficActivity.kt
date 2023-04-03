@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class QrTrafficActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
@@ -28,12 +30,22 @@ class QrTrafficActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_traffic)
-        val actionBar = supportActionBar
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно отсканировать QR коды студентов")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         val strGetID: Int = intent.getIntExtra("LessonID", -1)
-        Log.e("LessonID", strGetID.toString())
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Сканирование посещаемости"
         if (ContextCompat.checkSelfPermission(this@QrTrafficActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this@QrTrafficActivity, arrayOf(Manifest.permission.CAMERA), 123)
         } else {
@@ -109,7 +121,7 @@ class QrTrafficActivity : AppCompatActivity() {
     }
 
     private fun startScanning() {
-        val change = findViewById<Button>(R.id.changeCam)
+        val change = findViewById<ImageButton>(R.id.changeCam)
         var i = 0
         change.setOnClickListener {
             if (i == 0) {

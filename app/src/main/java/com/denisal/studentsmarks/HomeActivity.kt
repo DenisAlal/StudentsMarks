@@ -50,10 +50,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun openFragment(fragment: Fragment) {
+       
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        transaction.replace(R.id.container, fragment).addToBackStack(null).commit()
 
     }
 

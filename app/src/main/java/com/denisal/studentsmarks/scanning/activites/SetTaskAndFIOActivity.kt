@@ -11,6 +11,7 @@ import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivitySetTaskAndFioactivityBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SetTaskAndFIOActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySetTaskAndFioactivityBinding
@@ -21,10 +22,21 @@ class SetTaskAndFIOActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySetTaskAndFioactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Просмотр успеваемости"
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно посмотреть на посещаемость студентов")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
 
         loadData()
     }

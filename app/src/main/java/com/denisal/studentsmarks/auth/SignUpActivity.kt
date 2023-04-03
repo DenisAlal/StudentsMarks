@@ -3,6 +3,7 @@ package com.denisal.studentsmarks.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.widget.Toast
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivitySignUpBinding
@@ -20,7 +21,10 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
-        binding.textView.setOnClickListener {
+        val first = "Зарегистрирован?  "
+        val next = "<B>Авторизироваться</B>"
+        binding.goToLog.text = Html.fromHtml(first + next)
+        binding.goToLog.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)

@@ -25,10 +25,19 @@ class ChangeAssessmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangeAssessmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Изменение оценки"
+        binding.goBack.setOnClickListener{
+            finish()
+        }
+        binding.goInfo.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно изменить оценку или удалить её")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         val update = UpdateInDB()
         val delete = DeleteFromDb()
         val strIDMark: Int = intent.getIntExtra("Assessment", -1)

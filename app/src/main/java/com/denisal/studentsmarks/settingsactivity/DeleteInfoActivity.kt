@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivityDeleteInfoBinding
 import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class DeleteInfoActivity : AppCompatActivity() {
@@ -26,10 +27,23 @@ class DeleteInfoActivity : AppCompatActivity() {
         binding = ActivityDeleteInfoBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Удаление данных"
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно удалить все данные, для начала нового семестра. " +
+                        "В зависимости от выбора будут устанавливаться зависимости удаления," +
+                        " менять данные зависимости нельзя!")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         val btnAccept: Button = binding.OK
         val removeStudents: CheckBox = binding.studentsCheck
         val removeCurse :CheckBox = binding.courseDelete
@@ -102,13 +116,4 @@ class DeleteInfoActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

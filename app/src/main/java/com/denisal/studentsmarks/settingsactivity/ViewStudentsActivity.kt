@@ -3,6 +3,7 @@ package com.denisal.studentsmarks.settingsactivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -24,17 +26,27 @@ class ViewStudentsActivity : AppCompatActivity(), StudentsAdapter.MyClickListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_student)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Список студентов"
         Thread {
            getStudents()
         }.start()
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = StudentsAdapter(data, this@ViewStudentsActivity)
         recyclerView.adapter = adapter
-
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("Для удаления студента, нажмите на окошко нужного студента")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

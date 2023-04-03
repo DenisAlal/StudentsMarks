@@ -16,6 +16,7 @@ import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -28,11 +29,22 @@ class CreateSubjectActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
     private var subjArray: MutableList<SubjData> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Успеваемость"
         setContentView(R.layout.activity_create_subject)
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно создать занятие")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         val db = GetFromDB()
         subjArray = db.getDataCourse()
 

@@ -3,6 +3,7 @@ package com.denisal.studentsmarks.settingsactivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -24,11 +26,21 @@ class SubjectViewActivity : AppCompatActivity(), SubjectsAdapter.MyClickListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject_view)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Список предметов"
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("Для удаления предмета, нажмите на окошко нужного предмета")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         Thread {
             getSubj()
         }.start()
@@ -38,15 +50,6 @@ class SubjectViewActivity : AppCompatActivity(), SubjectsAdapter.MyClickListener
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     private fun loading(){
         val processLoading: ProgressBar = findViewById(R.id.processLoading)

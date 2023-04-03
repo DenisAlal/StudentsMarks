@@ -11,6 +11,7 @@
         android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
+        android:textColor="?attr/colorSecondaryVariant"
         android:layout_marginStart="?android:attr/expandableListPreferredItemIndicatorLeft" />
 
 </LinearLayout>

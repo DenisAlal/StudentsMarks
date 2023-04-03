@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F2029"
     tools:context=".auth.SignInActivity">
 
 
@@ -21,33 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:orientation="vertical">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/goToReg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="15dp"
-                    android:background="#00000000"
-                    android:text="Зарегистрироваться"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <LinearLayout
-
-
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_rectangle"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:background="@drawable/bottom_rectangle">
 
             <TextView
                 android:id="@+id/authText"
@@ -58,35 +37,39 @@
                 android:textAlignment="center"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/authText">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="22dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    app:boxStrokeColor="#E53935"
-                    app:hintTextColor="#FFFFFF">
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/emailEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#FFFFFF"
                         android:hint="Введите почту"
-                        android:inputType="textEmailAddress"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
+                        android:inputType="textEmailAddress" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -94,48 +77,53 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="22dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    app:boxStrokeColor="#E53935"
-                    app:hintTextColor="#FFFFFF"
+                    android:layout_marginTop="24dp"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="#FFFFFF">
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/passET"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#FFFFFF"
                         android:hint="Введите пароль"
-                        android:inputType="textPassword"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
+                        android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-
                     android:id="@+id/resetPass"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="22dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="30dp"
                     android:gravity="right"
-                    android:text="Забыли пароль?"
-                    android:textColor="#FFFFFF" />
+                    android:text="Забыли пароль?" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:background="@drawable/button_auth"
+                    android:layout_marginHorizontal="22dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button"
+                    android:textColor="?attr/colorAccent"
                     android:text="Вход"
                     android:textStyle="bold" />
 
-
+                <TextView
+                    android:id="@+id/goToReg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textSize="16sp" />
             </LinearLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
 

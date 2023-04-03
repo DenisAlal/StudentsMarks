@@ -15,6 +15,7 @@ import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.databinding.ActivityCreateTaskBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private var subjArray: MutableList<SubjData> = mutableListOf()
@@ -29,11 +30,21 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Создание задания"
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно выбрать создать задание")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         subjArray = db.getDataCourse()
         init()
     }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivityChooseTaskGradeBinding
@@ -26,10 +27,19 @@ class ChooseTaskGradeActivity : AppCompatActivity(), AdapterView.OnItemSelectedL
         binding = ActivityChooseTaskGradeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Выбор задания"
+        binding.goBack.setOnClickListener{
+            finish()
+        }
+        binding.goInfo.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно выбрать задание по которому будет выставлена оценка")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         subjArray = db.getDataCourse()
         init()
     }

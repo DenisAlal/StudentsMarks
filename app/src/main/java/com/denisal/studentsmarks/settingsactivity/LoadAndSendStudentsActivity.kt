@@ -45,26 +45,13 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             binding = ActivityLoadAndSendStudentsBinding.inflate(layoutInflater)
             val view = binding.root
             setContentView(view)
-            val actionBar = supportActionBar
-            actionBar?.setHomeButtonEnabled(true)
-            actionBar?.setDisplayHomeAsUpEnabled(true)
-            actionBar?.title = "Загрузка данных о студентах"
             binding.sendDataStud.isEnabled = false
             binding.process.isVisible = false
             binding.alert.isVisible = false
             Log.e("","$teacherID")
             init()
         }
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            return when (item.itemId) {
-                android.R.id.home -> {
-                    deleteFile()
-                    finish()
-                    true
-                }
-                else -> super.onOptionsItemSelected(item)
-            }
-        }
+
         private fun deleteFile () {
             val dir = File(this.filesDir, "doc")
             file = File(dir, filenameDelete)
@@ -136,6 +123,9 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(applicationContext, "Необходимо заполнить все поля!", Toast.LENGTH_SHORT).show()
                 }
+            }
+            binding.goBack.setOnClickListener{
+                finish()
             }
         }
         private fun checkForStoragePermission() {
@@ -338,7 +328,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             }
             Log.e("teacher_id", teacherID.toString())
             binding.alert.isVisible = true
-            binding.alert.text = "Данные из файла загружены, для их" +
+            binding.alert.text = "Данные из файла загружены, для их " +
                     "сохранения нажмите кнопку отправить данные"
             binding.sendDataStud.isEnabled = true;
         }

@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -18,17 +20,28 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.denisal.studentsmarks.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class QrGradeActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar?.title = "Сканирование успеваемости студента"
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_grade)
-        val actionBar = supportActionBar
-        Log.e("task_id", "$id_task")
-        actionBar?.setHomeButtonEnabled(true);
-        actionBar?.setDisplayHomeAsUpEnabled(true);
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно отсканировать QR коды студентов")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         if (ContextCompat.checkSelfPermission(this@QrGradeActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this@QrGradeActivity, arrayOf(Manifest.permission.CAMERA), 123)
         } else {
@@ -55,7 +68,7 @@ class QrGradeActivity : AppCompatActivity() {
     }
 
     private fun startScanning() {
-        val change: Button = findViewById(R.id.changeCamGrade)
+        val change: ImageButton = findViewById(R.id.changeCamGrade)
         var i = 0
         change.setOnClickListener {
             if (i == 0) {

@@ -2,6 +2,7 @@ package com.denisal.studentsmarks.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.HomeActivity
@@ -18,6 +19,9 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val first = "Нет аккаунта?  "
+        val next = "<B>Зарегистрироваться</B>"
+        binding.goToReg.text = Html.fromHtml(first + next)
         firebaseAuth = FirebaseAuth.getInstance()
         binding.goToReg.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)

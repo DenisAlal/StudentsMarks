@@ -11,6 +11,7 @@ import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityTrafficViewStudentsBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class TrafficViewStudentsActivity : AppCompatActivity() {
@@ -20,12 +21,22 @@ class TrafficViewStudentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTrafficViewStudentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Просмотр успеваемости"
         val idLessonTraffic: Int = intent.getIntExtra("IDLesson", -1)
-
+        val back: FloatingActionButton = findViewById(R.id.goBack)
+        back.setOnClickListener{
+            finish()
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("В данном меню можно посмотреть на посещаемость студентов")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         val courseList = mutableListOf<String>()
         val childMap = mutableMapOf<String,List<String>>()
         if(idLessonTraffic != -1) {

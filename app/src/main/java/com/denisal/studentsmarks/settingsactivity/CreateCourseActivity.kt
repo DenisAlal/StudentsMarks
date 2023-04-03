@@ -20,13 +20,11 @@ class CreateCourseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val actionBar = supportActionBar
-        actionBar?.setHomeButtonEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.title = "Создание предмета"
         val db = GetFromDB()
         db.getTeacher()
-
+        binding.goBack.setOnClickListener{
+            finish()
+        }
         binding.createSubjectBtn.setOnClickListener{
             val checkName = binding.nameSub.text.toString()
             val insert = InsertToDB()
