@@ -17,12 +17,3 @@
         <item name="android:windowBackground">#101115</item>
     </style>
 </resources>
-<!--
- colorPrimary – цвет панели приложения.
-colorPrimaryDark - цвет строки состояния и контекстных панелей приложений; обычно это темная версия colorPrimary.
-colorAccent – цвет элементов управления пользовательского интерфейса, таких как флажки, переключатели и текстовые поля для редактирования.
-windowBackground – цвет фона экрана.
-textColorPrimary – цвет текста пользовательского интерфейса в панели приложений.
-statusBarColor – цвет строки состояния.
-navigationBarColor – цвет панели навигации.
--->

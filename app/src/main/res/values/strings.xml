@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ASSESSMENTS JOURNAL</string>
+    <string name="app_name">Assessment journal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="success">Success</string>
