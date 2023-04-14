@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".homefragments.SettingsFragment">
+    tools:context=".settingsactivity.homefragments.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -55,8 +55,20 @@ android:id="@+id/settingsLinear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingTop="40dp"
+        android:paddingTop="10dp"
         >
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:text="Темная тема"
+            android:textColor="?attr/colorSecondaryVariant"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/SCBSwitch" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loadStudents"
@@ -64,9 +76,10 @@ android:id="@+id/settingsLinear"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:text="Загрузка списка студентов"
             android:background="@drawable/button"
-            android:textColor="?attr/colorAccent"/>
+            android:text="Загрузка списка студентов"
+            android:textColor="?attr/colorAccent"
+            android:textColorHighlight="#4980f0" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/createSub"

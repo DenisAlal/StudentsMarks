@@ -37,7 +37,6 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
             val alertDialogSuccess: AlertDialog = builderSucceed.create()
             alertDialogSuccess.show()
         }
-
         Thread {
             getLessons()
         }.start()

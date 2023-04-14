@@ -18,4 +18,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#4980f0</item>
+        <item name="colorSwitchThumbNormal">#B3B3B3</item>
+        <item name="android:colorForeground">#42221f1f
+        </item>
+    </style>
 </resources>

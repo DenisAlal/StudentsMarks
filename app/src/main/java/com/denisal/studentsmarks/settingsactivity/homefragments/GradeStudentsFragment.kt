@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.homefragments
+package com.denisal.studentsmarks.settingsactivity.homefragments
 
 import android.content.Intent
 import android.os.Bundle

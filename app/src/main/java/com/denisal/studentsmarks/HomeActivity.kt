@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.denisal.studentsmarks.databinding.ActivityHomeBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
-import com.denisal.studentsmarks.homefragments.GradeStudentsFragment
-import com.denisal.studentsmarks.homefragments.SettingsFragment
-import com.denisal.studentsmarks.homefragments.TrafficStudentsFragment
+import com.denisal.studentsmarks.settingsactivity.homefragments.GradeStudentsFragment
+import com.denisal.studentsmarks.settingsactivity.homefragments.SettingsFragment
+import com.denisal.studentsmarks.settingsactivity.homefragments.TrafficStudentsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
