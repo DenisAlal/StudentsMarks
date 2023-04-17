@@ -21,4 +21,6 @@
     <color name="indigo">#3F51B5</color>
     <color name="attention">#E53935</color>
     <color name="grayWhite">#F1F1F1</color>
+    <color name="darkColor">#FF101115</color>
+    <color name="success">#4980f0</color>
 </resources>

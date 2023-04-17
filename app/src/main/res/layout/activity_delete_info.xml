@@ -75,21 +75,24 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="10dp"
-            android:text="Удалить список студентов?" />
+            android:text="Удалить список студентов?"
+            app:buttonTint="@color/success"/>
 
         <CheckBox
             android:id="@+id/courseDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:text="Удалить данные о предметах?" />
+            android:text="Удалить данные о предметах?"
+            app:buttonTint="@color/success"/>
 
         <CheckBox
             android:id="@+id/lessonDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:text="Удалить данные о занятиях?" />
+            android:text="Удалить данные о занятиях?"
+            app:buttonTint="@color/success"/>
 
         <TextView
             android:id="@+id/textView2"

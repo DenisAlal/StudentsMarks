@@ -18,8 +18,18 @@ class SubjectsAdapter(private val mList:List<ViewModelSubjects>, val listener: S
         val subjViewModel = mList[position]
         holder.tvID.text = subjViewModel.id.toString()
         holder.tvName.text = subjViewModel.name
-        holder.tvLection.text = subjViewModel.lecture
-        holder.tvPractic.text = subjViewModel.practic
+        val lecture: String = if (subjViewModel.lecture.toInt() == 1) {
+            "Да"
+        } else {
+            "Нет"
+        }
+        val practic: String = if (subjViewModel.practic.toInt() == 1) {
+            "Да"
+        } else {
+            "Нет"
+        }
+        holder.tvLection.text = lecture
+        holder.tvPractic.text = practic
     }
     override fun getItemCount(): Int {
         return  mList.size

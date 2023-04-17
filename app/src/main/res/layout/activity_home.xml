@@ -23,13 +23,12 @@
         app:elevation="10dp"
         app:itemIconTint="@drawable/selector_bottom_nav"
         app:itemTextColor="@drawable/selector_bottom_nav"
-
         app:labelVisibilityMode="labeled"
         app:menu="@menu/navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="?attr/colorPrimaryVariant"
+        android:color="?attr/colorPrimaryVariant"
         app:itemTextAppearanceActive="@style/BottomNavigationView.TextAppearance.Active"
         app:itemTextAppearanceInactive="@style/BottomNavigationView.TextAppearance.InActive"/>
 

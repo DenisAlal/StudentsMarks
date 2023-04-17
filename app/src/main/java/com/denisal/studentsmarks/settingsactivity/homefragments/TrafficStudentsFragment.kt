@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.scanning.activites.ChooseLessonTrafficActivity
 import com.denisal.studentsmarks.scanning.activites.CreateSubjectActivity
 import com.denisal.studentsmarks.scanning.activites.TrafficViewActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TrafficStudentsFragment : Fragment() {
 
@@ -35,6 +37,18 @@ class TrafficStudentsFragment : Fragment() {
         trafficView.setOnClickListener {
             val intent = Intent(activity, TrafficViewActivity::class.java)
             startActivity(intent)
+        }
+        val info: FloatingActionButton = view.findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(requireContext())
+                .setTitle("Информация")
+                .setMessage("На этой вкладке можно просмотреть посещаемость " +
+                        "обучающихся, и добавить информацию о посещаемости")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
         }
         return view
     }

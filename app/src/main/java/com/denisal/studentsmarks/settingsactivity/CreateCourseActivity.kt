@@ -13,6 +13,7 @@ import com.denisal.studentsmarks.databinding.ActivityCreateCourseBinding
 import com.denisal.studentsmarks.dbfunctions.GetFromDB
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
 import com.denisal.studentsmarks.teacherID
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CreateCourseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateCourseBinding
@@ -70,6 +71,18 @@ class CreateCourseActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(applicationContext, "Введите название предмета", Toast.LENGTH_SHORT).show()
             }
+        }
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(this)
+                .setTitle("Информация")
+                .setMessage("На этой вкладке можно создать предмет, и указать тип предмета, " +
+                        "если этот предмет проводится как и практикой так и лекцией укажите оба типа")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
         }
 
     }

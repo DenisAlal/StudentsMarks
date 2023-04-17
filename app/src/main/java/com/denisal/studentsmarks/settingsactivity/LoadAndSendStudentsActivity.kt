@@ -31,6 +31,8 @@ import java.sql.SQLException
 import com.denisal.studentsmarks.databinding.ActivityLoadAndSendStudentsBinding
 import com.denisal.studentsmarks.dbfunctions.InsertToDB
 import android.graphics.Color;
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 class LoadAndSendStudentsActivity : AppCompatActivity() {
         private lateinit var binding: ActivityLoadAndSendStudentsBinding
         private val tag: String = "main"
@@ -75,15 +77,32 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
             System.setProperty(
                 "org.apache.poi.javax.xml.stream.XMLInputFactory",
                 "com.fasterxml.aalto.stax.InputFactoryImpl"
-            );
+            )
             System.setProperty(
                 "org.apache.poi.javax.xml.stream.XMLOutputFactory",
                 "com.fasterxml.aalto.stax.OutputFactoryImpl"
-            );
+            )
             System.setProperty(
                 "org.apache.poi.javax.xml.stream.XMLEventFactory",
                 "com.fasterxml.aalto.stax.EventFactoryImpl"
-            );
+            )
+            val info: FloatingActionButton = findViewById(R.id.goInfo)
+            info.setOnClickListener{
+                val mDialogSuccess = LayoutInflater.from(this).inflate(R.layout.example_load_dialog, null)
+                val builderSucceed = AlertDialog.Builder(this)
+                    .setTitle("Информация")
+                    .setMessage("На этой вкладке можно добавить информацию о студентах, " +
+                            "чтобы добавить студентов с помощью файла необходимо " +
+                            " ФИО должно быть без пробелов в начале " +
+                            "и в конце, между фио по одноиу пробелу, файл сохранить нужно в формате .xlsx, " +
+                            "ниже пример того как должна быть устроена таблица")
+                    .setIcon(R.drawable.outline_info_24)
+                    .setView(mDialogSuccess)
+                builderSucceed.setPositiveButton("OK"){ _, _ ->
+                }
+                val alertDialogSuccess: AlertDialog = builderSucceed.create()
+                alertDialogSuccess.show()
+            }
             setupClickListener()
         }
         private fun setupClickListener() {

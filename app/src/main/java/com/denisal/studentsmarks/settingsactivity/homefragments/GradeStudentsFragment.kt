@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.scanning.activites.ChooseTaskGradeActivity
 import com.denisal.studentsmarks.scanning.activites.CreateSubjectActivity
 import com.denisal.studentsmarks.scanning.activites.CreateTaskActivity
 import com.denisal.studentsmarks.scanning.activites.GradeViewActivity
 import com.denisal.studentsmarks.uid
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class GradeStudentsFragment : Fragment() {
@@ -46,6 +48,17 @@ class GradeStudentsFragment : Fragment() {
         gradeView.setOnClickListener {
             val intent = Intent(activity, GradeViewActivity::class.java)
             startActivity(intent)
+        }
+        val info: FloatingActionButton = view.findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(requireContext())
+                .setTitle("Информация")
+                .setMessage("На этой вкладке можно просмотреть успеваемость обучающихся, и добавить информацию о успеваемости")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
         }
         return view
     }

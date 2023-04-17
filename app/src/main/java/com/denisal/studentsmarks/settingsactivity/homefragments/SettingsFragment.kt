@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.auth.SignInActivity
 import com.denisal.studentsmarks.settingsactivity.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.jakewharton.processphoenix.ProcessPhoenix
 
@@ -63,6 +65,23 @@ class SettingsFragment : Fragment() {
             val intent = Intent(activity, SignInActivity::class.java)
             startActivity(intent)
             activity?.finish()
+        }
+        val info: FloatingActionButton = view.findViewById(R.id.goInfo)
+        info.setOnClickListener{
+
+            val builderSucceed = AlertDialog.Builder(requireContext())
+
+                .setTitle("Информация")
+                .setMessage("На этой вкладке можно добавить информацию о студентах, создать предмет, " +
+                        "просмотреть списки загруженных студентов и созданных предметов и занятий, " +
+                        "очистить данные за текуйщий семестр и выйти из учетной записи, а также сменить " +
+                        "цветовое оформление")
+                .setIcon(R.drawable.outline_info_24)
+
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
         }
 
         val theme: SwitchCompat = view.findViewById(R.id.theme)
