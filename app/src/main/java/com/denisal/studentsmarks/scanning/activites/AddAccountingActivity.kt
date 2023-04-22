@@ -121,10 +121,10 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 val spinnerSubj: Spinner = findViewById(R.id.spinnerSubj)
                 val spinnerNumb: Spinner = findViewById(R.id.spinnerSubjNumber)
                 val selectedType = spinnerType.selectedItem.toString()
-                val idSelectedSubj = spinnerSubj.selectedItemId
+                val idSelectedSubj = spinnerSubj.selectedItemId.toInt()
                 val date = "$year-$month-$day"
                 val subjNumb = spinnerNumb.selectedItem.toString()
-                val courseId = subjArray[idSelectedSubj.toInt()].id
+                val courseId = subjArray[idSelectedSubj].id
                     //val check = insertToDB.insertLeson( getText.text.toString(), date, subjNumb, courseId, selectedType )
                     Log.e("adwda", "aboba")
             } else {
