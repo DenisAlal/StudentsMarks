@@ -10,8 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityCreateCourseBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
-import com.denisal.studentsmarks.dbfunctions.InsertToDB
+import com.denisal.studentsmarks.db.GetFromDB
+import com.denisal.studentsmarks.db.InsertToDB
 import com.denisal.studentsmarks.teacherID
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivityChooseLessonTrafficBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.db.GetFromDB
 
 class ChooseLessonTrafficActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private var subjArray: MutableList<SubjData> = mutableListOf()

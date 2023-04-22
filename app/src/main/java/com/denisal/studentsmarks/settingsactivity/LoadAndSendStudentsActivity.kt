@@ -11,7 +11,6 @@ import android.os.CountDownTimer
 import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -29,8 +28,7 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 import com.denisal.studentsmarks.databinding.ActivityLoadAndSendStudentsBinding
-import com.denisal.studentsmarks.dbfunctions.InsertToDB
-import android.graphics.Color;
+import com.denisal.studentsmarks.db.InsertToDB
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class LoadAndSendStudentsActivity : AppCompatActivity() {

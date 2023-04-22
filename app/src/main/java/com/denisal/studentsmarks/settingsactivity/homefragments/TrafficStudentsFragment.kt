@@ -10,7 +10,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.scanning.activites.ChooseLessonTrafficActivity
-import com.denisal.studentsmarks.scanning.activites.CreateSubjectActivity
+import com.denisal.studentsmarks.scanning.activites.AddAccountingActivity
 import com.denisal.studentsmarks.scanning.activites.TrafficViewActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -24,7 +24,7 @@ class TrafficStudentsFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_traffic_students, container, false)
         val createSubTraffic: Button = view.findViewById(R.id.createSubTraffic)
         createSubTraffic.setOnClickListener {
-            val intent = Intent(activity, CreateSubjectActivity::class.java)
+            val intent = Intent(activity, AddAccountingActivity::class.java)
             startActivity(intent)
         }
 

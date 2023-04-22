@@ -11,8 +11,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityChangeAssessmentBinding
-import com.denisal.studentsmarks.dbfunctions.DeleteFromDb
-import com.denisal.studentsmarks.dbfunctions.UpdateInDB
+import com.denisal.studentsmarks.db.DeleteFromDb
+import com.denisal.studentsmarks.db.UpdateInDB
 import java.util.*
 
 class ChangeAssessmentActivity : AppCompatActivity() {

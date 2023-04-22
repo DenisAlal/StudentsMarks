@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.denisal.studentsmarks.databinding.ActivityHomeBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.settingsactivity.homefragments.GradeStudentsFragment
 import com.denisal.studentsmarks.settingsactivity.homefragments.SettingsFragment
 import com.denisal.studentsmarks.settingsactivity.homefragments.TrafficStudentsFragment
@@ -52,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
     private fun openFragment(fragment: Fragment) {
        
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment).addToBackStack(null).commit()
+        transaction.replace(R.id.container, fragment).commit()
 
     }
 

@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.scanning.activites.ChooseTaskGradeActivity
-import com.denisal.studentsmarks.scanning.activites.CreateSubjectActivity
+import com.denisal.studentsmarks.scanning.activites.AddAccountingActivity
 import com.denisal.studentsmarks.scanning.activites.CreateTaskActivity
 import com.denisal.studentsmarks.scanning.activites.GradeViewActivity
 import com.denisal.studentsmarks.uid
@@ -29,11 +28,7 @@ class GradeStudentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_grade_students, container, false)
-        val createSubject: Button = view.findViewById(R.id.createSubject)
-        createSubject.setOnClickListener {
-            val intent = Intent(activity, CreateSubjectActivity::class.java)
-            startActivity(intent)
-        }
+
         val gradeTask: Button = view.findViewById(R.id.gradeTask)
         gradeTask.setOnClickListener {
             val intent = Intent(activity, CreateTaskActivity::class.java)
@@ -41,7 +36,7 @@ class GradeStudentsFragment : Fragment() {
         }
         val gradeScan: Button = view.findViewById(R.id.gradeScan)
         gradeScan.setOnClickListener {
-            val intent = Intent(activity, ChooseTaskGradeActivity::class.java)
+            val intent = Intent(activity, AddAccountingActivity::class.java)
             startActivity(intent)
         }
         val gradeView: Button = view.findViewById(R.id.gradeView)

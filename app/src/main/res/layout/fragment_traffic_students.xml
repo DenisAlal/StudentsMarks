@@ -34,7 +34,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Посещаемость обучающихся"
+        android:text="Посещаемость\n обучающихся"
         android:textColor="?attr/colorSecondaryVariant"
         android:textSize="26sp"
         android:textStyle="bold"

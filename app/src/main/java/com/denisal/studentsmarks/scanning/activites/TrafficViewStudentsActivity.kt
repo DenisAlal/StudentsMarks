@@ -3,13 +3,10 @@ package com.denisal.studentsmarks.scanning.activites
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityTrafficViewStudentsBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

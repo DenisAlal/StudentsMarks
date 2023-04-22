@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.databinding.ActivitySetTaskAndFioactivityBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

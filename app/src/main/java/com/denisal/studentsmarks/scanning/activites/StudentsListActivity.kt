@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivityStudentsListBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.scanning.StudentsAdapterQR
 import com.denisal.studentsmarks.studentArrayCheck
 import com.google.android.material.floatingactionbutton.FloatingActionButton

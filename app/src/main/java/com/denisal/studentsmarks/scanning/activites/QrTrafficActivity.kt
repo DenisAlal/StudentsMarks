@@ -18,8 +18,8 @@ import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.R
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
-import com.denisal.studentsmarks.dbfunctions.InsertToDB
+import com.denisal.studentsmarks.db.GetFromDB
+import com.denisal.studentsmarks.db.InsertToDB
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class QrTrafficActivity : AppCompatActivity() {

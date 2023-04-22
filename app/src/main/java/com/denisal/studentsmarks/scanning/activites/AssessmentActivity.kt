@@ -10,8 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.StudentsData
 import com.denisal.studentsmarks.databinding.ActivityAssessmentBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
-import com.denisal.studentsmarks.dbfunctions.InsertToDB
+import com.denisal.studentsmarks.db.GetFromDB
+import com.denisal.studentsmarks.db.InsertToDB
 import com.denisal.studentsmarks.id_task
 import com.denisal.studentsmarks.listStudent
 import java.util.*

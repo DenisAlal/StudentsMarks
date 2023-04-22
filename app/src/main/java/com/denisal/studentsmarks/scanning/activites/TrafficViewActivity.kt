@@ -11,7 +11,7 @@ import com.denisal.studentsmarks.LessonData
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.databinding.ActivityTrafficViewBinding
-import com.denisal.studentsmarks.dbfunctions.GetFromDB
+import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.scanning.CustomAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

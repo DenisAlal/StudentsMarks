@@ -50,9 +50,6 @@
             android:name=".scanning.activites.ChooseLessonTrafficActivity"
             android:exported="false" />
         <activity
-            android:name=".scanning.activites.ChooseTaskGradeActivity"
-            android:exported="false" />
-        <activity
             android:name=".scanning.activites.CreateTaskActivity"
             android:exported="false" />
         <activity
@@ -93,7 +90,7 @@
             android:name=".scanning.activites.GradeViewActivity"
             android:exported="false" />
         <activity
-            android:name=".scanning.activites.CreateSubjectActivity"
+            android:name=".scanning.activites.AddAccountingActivity"
             android:exported="false" />
         <activity
             android:name=".scanning.activites.QrTrafficActivity"
