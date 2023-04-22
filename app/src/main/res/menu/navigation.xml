@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/trafficStudents"
-        android:icon="@drawable/outline_people_alt_24"
-        android:title="Посещаемость" />
+        android:icon="@drawable/baseline_add_circle_outline_24"
+        android:title="Данные" />
 
     <item
         android:id="@+id/settings"

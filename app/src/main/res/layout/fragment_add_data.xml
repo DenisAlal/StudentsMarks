@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settingsactivity.homefragments.GradeStudentsFragment">
+    tools:context=".settingsactivity.homefragments.TrafficStudentsFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -34,18 +34,18 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Успеваемость\n обучающихся"
+        android:text="Добавление\n данных"
+        android:textAlignment="center"
         android:textColor="?attr/colorSecondaryVariant"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+
+        app:layout_constraintBottom_toTopOf="@+id/linearTraffic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearTraffic"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_weight="1"
@@ -55,50 +55,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingTop="40dp">
-
+        android:paddingTop="40dp"
+        >
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/gradeTask"
+            android:id="@+id/trafficScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/button"
-            android:text="Создание задания"
-            android:textColor="?attr/colorAccent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/gradeScan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/button"
-            android:text="Начать занятие"
-            android:textColor="?attr/colorAccent" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/gradeView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:text="Просмотр успеваемости"
+            android:text="Сканирование посещаемости"
             android:background="@drawable/button"
             android:textColor="?attr/colorAccent"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/trafficView2"
+            android:id="@+id/trafficView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/button"
             android:text="Просмотр посещаемости"
-            android:textColor="?attr/colorAccent" />
+            android:background="@drawable/button"
+            android:textColor="?attr/colorAccent"/>
 
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

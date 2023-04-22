@@ -21,12 +21,7 @@ class TrafficStudentsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_traffic_students, container, false)
-        val createSubTraffic: Button = view.findViewById(R.id.createSubTraffic)
-        createSubTraffic.setOnClickListener {
-            val intent = Intent(activity, AddAccountingActivity::class.java)
-            startActivity(intent)
-        }
+        val view =  inflater.inflate(R.layout.fragment_add_data, container, false)
 
         val trafficScan: Button = view.findViewById(R.id.trafficScan)
         trafficScan.setOnClickListener {

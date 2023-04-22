@@ -2,22 +2,23 @@ package com.denisal.studentsmarks.scanning.activites
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.SubjData
 import com.denisal.studentsmarks.db.GetFromDB
-import com.denisal.studentsmarks.db.InsertToDB
+import com.denisal.studentsmarks.db.session.SessionDB
+import com.denisal.studentsmarks.db.session.SessionData
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
+import kotlin.concurrent.thread
 
 class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val cal: Calendar = Calendar.getInstance()
@@ -25,34 +26,48 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
     private var month = getMonth(cal.get(Calendar.MONTH).toString())
     private var day = getDay(cal.get(Calendar.DAY_OF_MONTH).toString())
     private var subjArray: MutableList<SubjData> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val dbSession = SessionDB.getDB(this)
         setContentView(R.layout.activity_create_subject)
+        val db = GetFromDB()
         val back: FloatingActionButton = findViewById(R.id.goBack)
-        back.setOnClickListener{
+        back.setOnClickListener {
             finish()
         }
         val info: FloatingActionButton = findViewById(R.id.goInfo)
-        info.setOnClickListener{
+        info.setOnClickListener {
             val builderSucceed = AlertDialog.Builder(this)
                 .setTitle("Информация")
                 .setMessage("В данном меню можно создать занятие и перейти к сканированию студентов")
                 .setIcon(R.drawable.outline_info_24)
-            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            builderSucceed.setPositiveButton("OK") { _, _ ->
             }
             val alertDialogSuccess: AlertDialog = builderSucceed.create()
             alertDialogSuccess.show()
         }
+        val checkSession: ConstraintLayout = findViewById(R.id.emptySession)
+        checkSession.isVisible = false
+        thread {
+            val array = dbSession.getSessionDao().loadAllLesson()
+            if (array != null) {
+                if (array.isNotEmpty()) {
+                    finish()
+                    val intent = Intent(this, SessionActivity::class.java)
+                    startActivity(intent)
 
+                } else {
+                    checkSession.isVisible = true
+                }
+            }
+        }.join()
 
-        val db = GetFromDB()
         subjArray = db.getDataCourse()
-
         val listSubj: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val spinnNumb: Spinner = findViewById(R.id.spinnerSubjNumber)
         spinnNumb.onItemSelectedListener = this
-        val add: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, listSubj)
+        val add: ArrayAdapter<*> =
+            ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, listSubj)
         add.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnNumb.adapter = add
 
@@ -87,19 +102,17 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             val alertDialogSuccess: AlertDialog = builderError.create()
             alertDialogSuccess.show()
         }
-        init()
+        init(dbSession)
 
     }
 
-    private fun init() {
+
+    private fun init(dbSession: SessionDB) {
         val pickerDateBtn: Button = findViewById(R.id.pickDate)
         val save: Button = findViewById(R.id.goScan)
         val text: TextView = findViewById(R.id.text3G)
         val getText: EditText = findViewById(R.id.gradeTopic)
-        val insertToDB = InsertToDB()
         text.text = "Выберите дату занятия, сейчас указана дата, $year-$month-$day"
-
-
         pickerDateBtn.setOnClickListener {
             DatePickerDialog(
                 this,
@@ -123,17 +136,40 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 val selectedType = spinnerType.selectedItem.toString()
                 val idSelectedSubj = spinnerSubj.selectedItemId.toInt()
                 val date = "$year-$month-$day"
-                val subjNumb = spinnerNumb.selectedItem.toString()
-                val courseId = subjArray[idSelectedSubj].id
-                    //val check = insertToDB.insertLeson( getText.text.toString(), date, subjNumb, courseId, selectedType )
-                    Log.e("adwda", "aboba")
+                val subjNumb: Int = spinnerNumb.selectedItem as Int
+                val course = subjArray[idSelectedSubj]
+
+                val item = SessionData(
+                    null,
+                    course.id,
+                    course.name,
+                    getText.text.toString(),
+                    selectedType,
+                    date,
+                    subjNumb
+                )
+                Thread {
+                    val checkSession: ConstraintLayout = findViewById(R.id.emptySession)
+                    dbSession.getSessionDao().insertSession(item)
+                    val array = dbSession.getSessionDao().loadAllLesson()
+                    if (array != null) {
+                        if (array.isNotEmpty()) {
+                            finish()
+                            val intent = Intent(this, QrTrafficActivity::class.java)
+                            startActivity(intent)
+
+                        } else {
+                            checkSession.isVisible = true
+                        }
+                    }
+                }.start()
+
+                //val check = insertToDB.insertLeson( getText.text.toString(), date, subjNumb, courseId, selectedType )
             } else {
                 Toast.makeText(applicationContext, "Введите тему занятия!", Toast.LENGTH_LONG)
                     .show()
             }
         }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -142,6 +178,7 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 finish()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -162,15 +199,6 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
             newDay = "0$newDay"
         }
         return newDay
-    }
-
-    private fun getTime(day: String): String {
-        val newt = day.toInt()
-        var newTime = newt.toString()
-        if (day.length < 2) {
-            newTime = "0$newTime"
-        }
-        return newTime
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/emptySession"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".scanning.activites.AddAccountingActivity">
@@ -10,12 +11,11 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/goBack"
@@ -58,15 +58,16 @@
         android:id="@+id/emptyArray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/rectangle"
         android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="10dp"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:background="@drawable/rectangle">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:id="@+id/enterSubject"
             android:layout_width="match_parent"
@@ -87,53 +88,59 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/gradeTopic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Введите тему занятия"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:id="@+id/text1G"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Выберите предмет"
-            android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/spinnerSubj"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-        <TextView
-            android:id="@+id/text2G"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Выберите тип занятия"
-            android:textSize="16sp" />
-        <Spinner
-            android:id="@+id/spinnerSubjType"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-        <TextView
-            android:id="@+id/text4G"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Выберите номер занятия"
-            android:textSize="16sp" />
-        <Spinner
-            android:id="@+id/spinnerSubjNumber"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
+            <TextView
+                android:id="@+id/text1G"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Выберите предмет"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSubj"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/text2G"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Выберите тип занятия"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSubjType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/text4G"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Выберите номер занятия"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSubjNumber"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown" />
 
 
             <TextView
@@ -148,20 +155,20 @@
                 android:id="@+id/pickDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Выбрать дату занятия"
                 android:layout_marginVertical="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/button"
-                android:textColor="?attr/colorAccent"/>
+                android:text="Выбрать дату занятия"
+                android:textColor="?attr/colorAccent" />
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/goScan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/button"
                 android:text="Сканировать QR"
-                android:layout_marginTop="10dp"
                 android:textColor="?attr/colorAccent" />
 
         </LinearLayout>
