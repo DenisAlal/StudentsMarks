@@ -85,31 +85,32 @@ class DeleteFromDb {
         }
         return ret
     }
-    fun deleteOneLesson(idLesson: Int): Boolean {
-        var ret = true
-        if (teacherID != -1) {
-            thread {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver")
-                    val cn: Connection = DriverManager.getConnection(url, user, pass)
-                    val ps = cn.createStatement()
-                    val insert = "DELETE FROM lesson WHERE id = $idLesson"
-                    ps.execute(insert)
-                    ps?.close()
-                    cn.close()
-                } catch (e: ClassNotFoundException) {
-                    ret = false
-                    e.printStackTrace()
-                } catch (e: SQLException) {
-                    ret = false
-                    e.printStackTrace()
-                }
-            }.join()
-        } else {
-            ret = false
-        }
-        return ret
-    }
+     fun deleteOneTask(idTask: Int): Boolean {
+         var ret = true
+         if (teacherID != -1) {
+             thread {
+                 try {
+                     Class.forName("com.mysql.jdbc.Driver")
+                     val cn: Connection = DriverManager.getConnection(url, user, pass)
+                     val ps = cn.createStatement()
+                     val insert = "DELETE FROM task WHERE id = $idTask"
+                     ps.execute(insert)
+                     ps?.close()
+                     cn.close()
+                 } catch (e: ClassNotFoundException) {
+                     ret = false
+                     e.printStackTrace()
+                 } catch (e: SQLException) {
+                     ret = false
+                     e.printStackTrace()
+                 }
+             }.join()
+         } else {
+             ret = false
+         }
+         return ret
+     }
+
     fun deleteInfo(deleteData: MutableList<Boolean>): Boolean {
         var ret = true
         if (teacherID != -1) {

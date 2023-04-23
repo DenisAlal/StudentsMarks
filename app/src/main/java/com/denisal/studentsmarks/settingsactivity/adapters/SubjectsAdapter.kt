@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.settingsactivity
+package com.denisal.studentsmarks.settingsactivity.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.R
+import com.denisal.studentsmarks.settingsactivity.SubjectViewActivity
+import com.denisal.studentsmarks.settingsactivity.viewModels.ViewModelSubjects
 
 class SubjectsAdapter(private val mList:List<ViewModelSubjects>, val listener: SubjectViewActivity)
     :RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {

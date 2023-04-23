@@ -29,31 +29,13 @@
             android:name=".auth.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".settingsactivity.LessonViewActivity"
+            android:name=".settingsactivity.TaskViewActivity"
             android:exported="false" />
         <activity
             android:name=".settingsactivity.SubjectViewActivity"
             android:exported="false" />
         <activity
-            android:name=".scanning.activites.TrafficViewStudentsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.ChooseTimeAndDateTrafficActivity"
-            android:exported="false" />
-        <activity
             android:name=".scanning.activites.StudentsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.ChangeAssessmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.SetTaskAndFIOActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.AssessmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.ChooseLessonTrafficActivity"
             android:exported="false" />
         <activity
             android:name=".scanning.activites.CreateTaskActivity"
@@ -90,19 +72,10 @@
             android:name=".settingsactivity.DeleteInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".scanning.activites.TrafficViewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.GradeViewActivity"
-            android:exported="false" />
-        <activity
             android:name=".scanning.activites.AddAccountingActivity"
             android:exported="false" />
         <activity
             android:name=".scanning.activites.QrTrafficActivity"
-            android:exported="false" />
-        <activity
-            android:name=".scanning.activites.QrGradeActivity"
             android:exported="false" />
     </application>
 

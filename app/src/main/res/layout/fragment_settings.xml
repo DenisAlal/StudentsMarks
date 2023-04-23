@@ -43,9 +43,9 @@
 
 
     <LinearLayout
-android:id="@+id/settingsLinear"
+        android:id="@+id/settingsLinear"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="top"
         android:orientation="vertical"
@@ -53,7 +53,7 @@ android:id="@+id/settingsLinear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingTop="10dp"
+        android:paddingVertical="30dp"
         >
 
         <androidx.appcompat.widget.SwitchCompat
@@ -68,53 +68,7 @@ android:id="@+id/settingsLinear"
             android:textStyle="bold"
             android:theme="@style/SCBSwitch" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loadStudents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/button"
-            android:text="Загрузка списка студентов"
-            android:textColor="?attr/colorAccent"
-            android:textColorHighlight="#4980f0" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/createSub"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:text="Создание предмета"
-            android:background="@drawable/button"
-            android:textColor="?attr/colorAccent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/viewStud"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:text="Просмотр списка студентов"
-            android:background="@drawable/button"
-            android:textColor="?attr/colorAccent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/viewCourse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:text="Просмотр списка предметов"
-            android:background="@drawable/button"
-            android:textColor="?attr/colorAccent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/viewLesson"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
-            android:text="Просмотр списка занятий"
-            android:background="@drawable/button"
-            android:textColor="?attr/colorAccent"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/delInfo"
             android:layout_width="match_parent"

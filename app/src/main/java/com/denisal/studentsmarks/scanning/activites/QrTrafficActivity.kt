@@ -18,11 +18,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.asLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.budiyev.android.codescanner.*
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.db.InsertToDB
+import com.denisal.studentsmarks.db.session.SessionDB
+import com.denisal.studentsmarks.db.session.SessionData
+import com.denisal.studentsmarks.db.students.StudentsDB
+import com.denisal.studentsmarks.db.students.StudentsDataRoom
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -31,9 +37,8 @@ class QrTrafficActivity : AppCompatActivity() {
     val db = GetFromDB()
     private val insert = InsertToDB()
     private val arrayStudents = db.checkStudentQR()
-    private val checkedStudents: MutableList<StudentsData> = arrayListOf()
+    private val array: MutableList<StudentsData> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_traffic)
         val back: FloatingActionButton = findViewById(R.id.goBack)
@@ -65,10 +70,22 @@ class QrTrafficActivity : AppCompatActivity() {
             val intent = Intent(this, StudentsListActivity::class.java)
             startActivity(intent)
         }
+        val studDB = StudentsDB.getDB(this)
+        studDB.getStudentsDao().getStudents().asLiveData().observe(this) {List ->
+            array.clear()
+            List.forEach{
+                it.id?.let { it1 -> StudentsData(it1,  it.group, it.fio) }
+                    ?.let { it2 -> array.add(it2) }
+                Log.e("error", array.toString())
+            }
+        }
         val butSave: Button = findViewById(R.id.saveScanning)
         butSave.setOnClickListener{
-
+            finish()
+            val intent = Intent(this, SessionActivity::class.java)
+            startActivity(intent)
         }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -121,9 +138,10 @@ class QrTrafficActivity : AppCompatActivity() {
     }
 
     private fun addArray(listStudentQR: List<String>, codeScanner: CodeScanner) {
+        val studDB = StudentsDB.getDB(this)
         val mp: MediaPlayer = MediaPlayer.create(this, R.raw.notification)
         if(arrayStudents.any{ it.fullName == listStudentQR[0]} && arrayStudents.any{ it.group == listStudentQR[1]}) {
-            if (studentArrayCheck.any{ it.fio == listStudentQR[0]} && studentArrayCheck.any{ it.group == listStudentQR[1]}) {
+            if (array.any{ it.fullName == listStudentQR[0]} && array.any{ it.group == listStudentQR[1]}) {
                 val mDialogFail = LayoutInflater.from(this).inflate(R.layout.fail, null)
                 val mBuilderFail = AlertDialog.Builder(this)
                     .setView(mDialogFail).setTitle("Данный студент уже отсканирован")
@@ -154,13 +172,17 @@ class QrTrafficActivity : AppCompatActivity() {
 
                     }
                 }.start()
-                studentArrayCheck.add(StudentsArray(listStudentQR[0], listStudentQR[1]))
-                val student: StudentsData? = arrayStudents.find { it.fullName == listStudentQR[0] && it.group == listStudentQR[0] }
+                val student: StudentsData? = arrayStudents.find { it.fullName == listStudentQR[0] && it.group == listStudentQR[1] }
                 if (student != null) {
-                    checkedStudents.add(student)
-                    Log.e("", checkedStudents.toString())
+                    array.add(student)
+                    val arrayToInsert: MutableList<StudentsData> = arrayListOf()
+                    arrayToInsert.add(student)
+                    Log.e("", array.toString())
+                    val item = StudentsDataRoom(null, arrayToInsert[0].id, arrayToInsert[0].group, arrayToInsert[0].fullName)
+                    Thread{
+                        studDB.getStudentsDao().insertStudent(item)
+                    }.start()
                 }
-
             }
         } else {
             val mDialogFail = LayoutInflater.from(this).inflate(R.layout.fail, null)

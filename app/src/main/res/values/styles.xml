@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="endIconTint">@color/colorAccent</item>
-    </style>
+
     <style name="BottomNavigationView.TextAppearance.Active" parent="@style/TextAppearance.AppCompat.Medium">
         <item name="android:textSize">13sp</item>
     </style>
     <style name="BottomNavigationView.TextAppearance.InActive" parent="@android:style/TextAppearance">
         <item name="android:textSize">11sp</item>
     </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">#4980f0</item>
         <item name="colorSwitchThumbNormal">#B3B3B3</item>

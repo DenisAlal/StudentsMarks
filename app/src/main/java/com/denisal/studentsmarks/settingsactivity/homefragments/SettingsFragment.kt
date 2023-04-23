@@ -29,31 +29,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.fragment_settings, container, false)
-        val loadStud: Button = view.findViewById(R.id.loadStudents)
-        loadStud.setOnClickListener {
-            val intent = Intent(activity, LoadAndSendStudentsActivity::class.java)
-            startActivity(intent)
-        }
-        val createSubject: Button = view.findViewById(R.id.createSub)
-        createSubject.setOnClickListener{
-            val intent = Intent(activity, CreateCourseActivity::class.java)
-            startActivity(intent)
-        }
-        val viewStud: Button = view.findViewById(R.id.viewStud)
-        viewStud.setOnClickListener {
-            val intent = Intent(activity, ViewStudentsActivity::class.java)
-            startActivity(intent)
-        }
-        val viewCourse: Button = view.findViewById(R.id.viewCourse)
-        viewCourse.setOnClickListener {
-            val intent = Intent(activity, SubjectViewActivity::class.java)
-            startActivity(intent)
-        }
-        val viewLesson: Button = view.findViewById(R.id.viewLesson)
-        viewLesson.setOnClickListener {
-            val intent = Intent(activity, LessonViewActivity::class.java)
-            startActivity(intent)
-        }
+
         val deleteInformation: Button = view.findViewById(R.id.delInfo)
         deleteInformation.setOnClickListener {
             val intent = Intent(activity, DeleteInfoActivity::class.java)

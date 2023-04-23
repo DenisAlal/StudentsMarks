@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.StudentsArray
 
-class StudentsAdapterQR(private  val mList :List<StudentsArray>):RecyclerView.Adapter<StudentsAdapterQR.ViewHolder>() {
+class StudentsAdapterQR(private val mList: MutableList<StudentsArray>):RecyclerView.Adapter<StudentsAdapterQR.ViewHolder>() {
 
     override fun   onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.student_item_qr,parent,false)

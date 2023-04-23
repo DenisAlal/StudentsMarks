@@ -15,7 +15,7 @@ interface SessionDao {
     fun deleteSession()
     @Query("DELETE FROM session WHERE id = :id")
     fun deleteOneRow(id : Int):Int
-    @Query("DELETE FROM sqlite_sequence WHERE name = 'lesson';")
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'session';")
     fun resetAutoIncrementValueSession()
     @Query("SELECT * FROM session")
     fun loadAllLesson(): MutableList<SessionData?>?

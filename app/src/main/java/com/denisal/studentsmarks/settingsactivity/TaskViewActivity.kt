@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.db.DeleteFromDb
+import com.denisal.studentsmarks.settingsactivity.adapters.TasksAdapter
+import com.denisal.studentsmarks.settingsactivity.viewModels.ViewModelTasks
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
-    private val data = ArrayList<ViewModelLessons>()
+class TaskViewActivity : AppCompatActivity(), TasksAdapter.MyClickListener {
+    private val data = ArrayList<ViewModelTasks>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson_view)
@@ -28,7 +30,7 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
         info.setOnClickListener{
             val builderSucceed = AlertDialog.Builder(this)
                 .setTitle("Информация")
-                .setMessage("Для удаления занятия, нажмите на окошко нужного предмета")
+                .setMessage("Для удаления задания, нажмите на окошко нужного предмета")
                 .setIcon(R.drawable.outline_info_24)
             builderSucceed.setPositiveButton("OK"){ _, _ ->
             }
@@ -36,10 +38,10 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
             alertDialogSuccess.show()
         }
         Thread {
-            getLessons()
+            getTasks()
         }.start()
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = LessonAdapter(data, this@LessonViewActivity)
+        val adapter = TasksAdapter(data, this@TaskViewActivity)
         recyclerView.adapter = adapter
 
     }
@@ -62,8 +64,8 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
             val builderSucceed = AlertDialog.Builder(this)
                 .setTitle("Ошибка загрузки")
                 .setMessage(
-                    "Внимание! Список занятий пуст," +
-                            " для отображения списка занятий необходимо их добавить!"
+                    "Внимание! Список заданий пуст," +
+                            " для отображения списка заданий необходимо их добавить!"
                 )
                 .setIcon(R.drawable.baseline_error_outline_24_orange)
             builderSucceed.setNegativeButton("ОК") { _, _ ->
@@ -74,7 +76,7 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
         }
     }
 
-    private fun getLessons() {
+    private fun getTasks() {
 
         runOnUiThread {
             loading()
@@ -83,16 +85,14 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
             try {
                 Class.forName("com.mysql.jdbc.Driver")
                 val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val searchAccounts = "SELECT * FROM lesson WHERE teacher_id = '$teacherID'"
+                val searchAccounts = "SELECT * FROM task INNER JOIN course ON course_id = course.id WHERE teacher_id = '$teacherID'"
                 val searchAccountsQuery = cn.prepareStatement(searchAccounts)
                 val result = searchAccountsQuery.executeQuery()
                 while (result.next()) {
-                    val id = result.getInt(1)
-                    val name = result.getString(2)
-                    val date = result.getString(4)
-                    val time = result.getString(5)
-                    val lessonType = result.getString(7)
-                    data.add(ViewModelLessons(id, name, date, time, lessonType))
+                    val idTask = result.getInt(1)
+                    val taskName = result.getString(2)
+                    val courseName = result.getString(5)
+                    data.add(ViewModelTasks(idTask, taskName, courseName))
                 }
                 cn.close()
             } catch (e: ClassNotFoundException) {
@@ -112,21 +112,20 @@ class LessonViewActivity : AppCompatActivity(), LessonAdapter.MyClickListener {
         val builderSucceed = AlertDialog.Builder(this)
             .setTitle("Удалить занятие из списка?")
             .setMessage(
-                "Внимание! Удаление предмета произведет удаление данные о успеваемости " +
-                        "и посещаемости из системы по этому предмету!"
+                "Внимание! Подтвердите удаление!"
             )
             .setIcon(R.drawable.baseline_error_outline_24_orange)
         builderSucceed.setNegativeButton("Удалить") { _, _ ->
             val recycler: RecyclerView = findViewById(R.id.recyclerView)
             recycler.removeAllViewsInLayout();
             val delete = DeleteFromDb()
-            delete.deleteOneLesson(data[position].id)
+            delete.deleteOneTask(data[position].id)
             data.clear()
             Thread {
-                getLessons()
+                getTasks()
             }.start()
             recycler.layoutManager = LinearLayoutManager(this)
-            val adapter = LessonAdapter(data, this@LessonViewActivity)
+            val adapter = TasksAdapter(data, this@TaskViewActivity)
             recycler.adapter = adapter
         }
         builderSucceed.setPositiveButton("Отмена") { _, _ ->

@@ -29,7 +29,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvIDLesson"
+                android:id="@+id/tvID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -47,13 +47,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Название: "
+                android:text="Предмет: "
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvNameLesson"
+                android:id="@+id/tvNameCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -72,65 +72,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Дата: "
+                android:text="Задание: "
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvDate"
+                android:id="@+id/tvNameTask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="00.00.0000"
-                android:textColor="?attr/colorSecondaryVariant"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Время: "
-                android:textColor="?attr/colorSecondaryVariant"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text=" 0:0:0"
-                android:textColor="?attr/colorSecondaryVariant"
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Тип занятия: "
-                android:textColor="?attr/colorSecondaryVariant"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvLessonType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="лекция"
+                android:text="1"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="18sp"/>
 

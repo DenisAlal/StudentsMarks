@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.*
 import com.denisal.studentsmarks.db.DeleteFromDb
+import com.denisal.studentsmarks.settingsactivity.adapters.StudentsAdapter
+import com.denisal.studentsmarks.settingsactivity.viewModels.ViewModelStudents
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.Connection
 import java.sql.DriverManager

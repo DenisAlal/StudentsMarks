@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.settingsactivity
+package com.denisal.studentsmarks.settingsactivity.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.denisal.studentsmarks.R
+import com.denisal.studentsmarks.settingsactivity.TaskViewActivity
+import com.denisal.studentsmarks.settingsactivity.viewModels.ViewModelTasks
 
-class LessonAdapter(private val mList:List<ViewModelLessons>, val listener: LessonViewActivity)
-    :RecyclerView.Adapter<LessonAdapter.ViewHolder>() {
+class TasksAdapter(private val mList:List<ViewModelTasks>, val listener: TaskViewActivity)
+    :RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
     override fun   onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.lesson_item,parent,false)
         return ViewHolder(view)
@@ -16,22 +18,20 @@ class LessonAdapter(private val mList:List<ViewModelLessons>, val listener: Less
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val studentsViewModel = mList[position]
-        holder.tvIDLesson.text = studentsViewModel.id.toString()
-        holder.tvNameLesson.text = studentsViewModel.name
-        holder.tvDate.text = studentsViewModel.date
-        holder.tvTime.text = studentsViewModel.time
-        holder.tvLessonType.text = studentsViewModel.lessonType
+        holder.tvID.text = studentsViewModel.id.toString()
+        holder.tvNameCourse.text = studentsViewModel.courseName
+        holder.tvNameTask.text = studentsViewModel.name
+
 
     }
     override fun getItemCount(): Int {
         return  mList.size
     }
     inner class ViewHolder(itemView :View):RecyclerView.ViewHolder(itemView){
-        val tvIDLesson :TextView = itemView.findViewById(R.id.tvIDLesson)
-        val tvNameLesson :TextView = itemView.findViewById(R.id.tvNameLesson)
-        val tvDate :TextView = itemView.findViewById(R.id.tvDate)
-        val tvTime :TextView = itemView.findViewById(R.id.tvTime)
-        val tvLessonType :TextView = itemView.findViewById(R.id.tvLessonType)
+        val tvID :TextView = itemView.findViewById(R.id.tvID)
+        val tvNameCourse :TextView = itemView.findViewById(R.id.tvNameCourse)
+        val tvNameTask: TextView = itemView.findViewById(R.id.tvNameTask)
+
 
         init {
             itemView.setOnClickListener{

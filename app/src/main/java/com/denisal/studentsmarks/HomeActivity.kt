@@ -10,7 +10,7 @@ import com.denisal.studentsmarks.databinding.ActivityHomeBinding
 import com.denisal.studentsmarks.db.GetFromDB
 import com.denisal.studentsmarks.settingsactivity.homefragments.GradeStudentsFragment
 import com.denisal.studentsmarks.settingsactivity.homefragments.SettingsFragment
-import com.denisal.studentsmarks.settingsactivity.homefragments.TrafficStudentsFragment
+import com.denisal.studentsmarks.settingsactivity.homefragments.AddDataFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.trafficStudents -> {
-                    openFragment(TrafficStudentsFragment.newInstance())
+                    openFragment(AddDataFragment.newInstance())
                     return@setOnItemSelectedListener true
                 }
                 R.id.settings -> {

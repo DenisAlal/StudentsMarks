@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.db.session
+package com.denisal.studentsmarks.db.students
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StudentsDao {
     @Insert
-    fun insertStudent(students: StudentsData)
+    fun insertStudent(students: StudentsDataRoom)
     @Query("SELECT * FROM students")
-    fun getStudents(): Flow<List<StudentsData>>
+    fun getStudents(): Flow<List<StudentsDataRoom>>
     @Query("DELETE FROM students")
     fun deleteStudents()
     @Query("DELETE FROM students WHERE id = :id")
@@ -18,5 +18,5 @@ interface StudentsDao {
     @Query("DELETE FROM sqlite_sequence WHERE name = 'students';")
     fun resetAutoIncrementValueStudents()
     @Query("SELECT * FROM students")
-    fun loadAllStudents(): MutableList<StudentsData?>?
+    fun loadAllStudents(): MutableList<StudentsDataRoom?>?
 }

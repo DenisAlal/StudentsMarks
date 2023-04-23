@@ -7,6 +7,7 @@ import com.denisal.studentsmarks.HomeActivity
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivitySessionBinding
 import com.denisal.studentsmarks.db.session.SessionDB
+import com.denisal.studentsmarks.db.students.StudentsDB
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.concurrent.thread
 
@@ -14,6 +15,7 @@ class SessionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySessionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         val dbSession = SessionDB.getDB(this)
+        val dbStudents = StudentsDB.getDB(this)
         super.onCreate(savedInstanceState)
         binding = ActivitySessionBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -27,6 +29,10 @@ class SessionActivity : AppCompatActivity() {
             thread{
                 dbSession.getSessionDao().deleteSession()
                 dbSession.getSessionDao().resetAutoIncrementValueSession()
+            }.join()
+            thread{
+                dbStudents.getStudentsDao().deleteStudents()
+                dbStudents.getStudentsDao().resetAutoIncrementValueStudents()
             }.join()
             finish()
             val intent = Intent(this, HomeActivity::class.java)
