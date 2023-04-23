@@ -338,6 +338,7 @@ class LoadAndSendStudentsActivity : AppCompatActivity() {
                     }
                     val convertToInt: Int = val1.toInt()
                     studData.add(StudentsData(convertToInt, newGroup, val4))
+                    Log.e("studData", studData.toString())
                     Log.w("read exel", "$val1 $val2 $val3 $val4")
                 } else {
                     Log.w("read exel", "ignore")

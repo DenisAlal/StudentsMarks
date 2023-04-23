@@ -1,4 +1,4 @@
-package com.denisal.studentsmarks.scanning
+package com.denisal.studentsmarks.scanning.adapters
 
 import com.denisal.studentsmarks.databinding.ChildLayoutBinding
 import com.denisal.studentsmarks.databinding.GroupLayoutBinding

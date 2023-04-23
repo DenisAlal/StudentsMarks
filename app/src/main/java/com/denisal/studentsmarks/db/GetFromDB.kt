@@ -115,59 +115,6 @@ class GetFromDB() {
         }.join()
         return studentArray
     }
-    fun getDataAssessments(taskID: Int): MutableList<DataAssessments> {
-        val assessmentsArray: MutableList<DataAssessments> = mutableListOf()
-        thread {
-            try {
-                Class.forName("com.mysql.jdbc.Driver")
-                val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val sql = "SELECT * FROM assessment WHERE task_id = '$taskID'"
-                val query = cn.prepareStatement(sql)
-                val result = query.executeQuery()
-                while (result.next()) {
-                    val id = result.getInt(1)
-                    val value = result.getString(2)
-                    val date = result.getString(3)
-                    val studentIdAssess = result.getInt(4)
-                    val taskIdAssess = result.getInt(5)
-                    assessmentsArray.add(DataAssessments(id, value, date, studentIdAssess, taskIdAssess))
-                }
-                cn.close()
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
-        }.join()
-        return assessmentsArray
-    }
-    fun getDataLesson(): MutableList<LessonData> {
-        val lessonArray: MutableList<LessonData> = mutableListOf()
-        thread {
-            try {
-                Class.forName("com.mysql.jdbc.Driver")
-                val cn: Connection = DriverManager.getConnection(url, user, pass)
-                val sql = "SELECT * FROM lesson WHERE teacher_id = '$teacherID'"
-                val query = cn.prepareStatement(sql)
-                val result = query.executeQuery()
-                while (result.next()) {
-                    val id = result.getInt(1)
-                    val name = result.getString(2)
-                    val date = result.getString(4)
-                    val time = result.getString(5)
-                    val courseId = result.getInt(6)
-                    val lessonType = result.getString(7)
-                    lessonArray.add(LessonData(id, name, date, time, courseId, lessonType))
-                }
-                cn.close()
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
-        }.join()
-        return lessonArray
-    }
 
     fun getArraySubjDuplicate(courseName: String): Boolean {
         var ret = false

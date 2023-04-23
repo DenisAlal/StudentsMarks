@@ -108,7 +108,6 @@ class TaskViewActivity : AppCompatActivity(), TasksAdapter.MyClickListener {
     }
 
     override fun onClick(position: Int) {
-
         val builderSucceed = AlertDialog.Builder(this)
             .setTitle("Удалить занятие из списка?")
             .setMessage(

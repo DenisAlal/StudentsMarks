@@ -23,6 +23,9 @@
         android:theme="@style/Theme.StudentsMarks"
         tools:targetApi="31">
         <activity
+            android:name=".scanning.activites.AddAssessmentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".scanning.activites.SessionActivity"
             android:exported="false" />
         <activity

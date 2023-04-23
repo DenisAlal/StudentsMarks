@@ -3,16 +3,14 @@ package com.denisal.studentsmarks.scanning.activites
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
 import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.StudentsArray
 import com.denisal.studentsmarks.databinding.ActivityStudentsListBinding
 import com.denisal.studentsmarks.db.students.StudentsDB
-import com.denisal.studentsmarks.scanning.StudentsAdapterQR
+import com.denisal.studentsmarks.scanning.adapters.StudentsAdapterQR
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlin.concurrent.thread
 
 class StudentsListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudentsListBinding
