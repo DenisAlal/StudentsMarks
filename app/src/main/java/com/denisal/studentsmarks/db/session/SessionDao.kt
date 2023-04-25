@@ -19,4 +19,6 @@ interface SessionDao {
     fun resetAutoIncrementValueSession()
     @Query("SELECT * FROM session")
     fun loadAllLesson(): MutableList<SessionData?>?
+    @Query("SELECT * FROM session")
+    fun loadOneLesson() : MutableList<SessionData>
 }

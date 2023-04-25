@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -78,11 +79,16 @@ class AddAssessmentsActivity : AppCompatActivity(), AssessSessionAdapter.MyClick
         binding.addAssess.setOnClickListener{
             val value = binding.setMark.text.toString()
             val date = "$year-$month-$day"
-            thread{
-                dbAssess.getAssesDao().insertAssess(AssesDataRoom(null,
-                value, binding.choiceTask.selectedItem.toString(),date,
-                idStud,listTasks[binding.choiceTask.selectedItemId.toInt()].idTask))
-            }.join()
+            if (value.isNotEmpty()) {
+                thread{
+                    dbAssess.getAssesDao().insertAssess(AssesDataRoom(null,
+                        value, binding.choiceTask.selectedItem.toString(),date,
+                        idStud,listTasks[binding.choiceTask.selectedItemId.toInt()].idTask))
+                }.join()
+            } else {
+                Toast.makeText(applicationContext, "Введите оценку!", Toast.LENGTH_SHORT).show()
+            }
+
         }
         binding.deleteButt.setOnClickListener{
             val builderSucceed = AlertDialog.Builder(this)
@@ -93,6 +99,7 @@ class AddAssessmentsActivity : AppCompatActivity(), AssessSessionAdapter.MyClick
                 val dbStud = StudentsDB.getDB(this)
                 thread {
                     dbStud.getStudentsDao().deleteOneStudent(idStud)
+                    finish()
                 }.join()
             }
             builderSucceed.setPositiveButton("Отмена"){ _, _ ->

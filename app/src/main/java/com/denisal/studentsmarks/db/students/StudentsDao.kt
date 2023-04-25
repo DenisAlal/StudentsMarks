@@ -13,10 +13,12 @@ interface StudentsDao {
     fun getStudents(): Flow<List<StudentsDataRoom>>
     @Query("DELETE FROM students")
     fun deleteStudents()
-    @Query("DELETE FROM students WHERE id = :id")
+    @Query("DELETE FROM students WHERE idStud = :id")
     fun deleteOneStudent(id : Int):Int
     @Query("DELETE FROM sqlite_sequence WHERE name = 'students';")
     fun resetAutoIncrementValueStudents()
     @Query("SELECT * FROM students")
     fun loadAllStudents(): MutableList<StudentsDataRoom?>?
+    @Query("SELECT * FROM students")
+    fun loadAllStudentsArray(): MutableList<StudentsDataRoom>
 }

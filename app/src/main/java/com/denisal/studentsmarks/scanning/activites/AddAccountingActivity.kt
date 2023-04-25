@@ -29,7 +29,7 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dbSession = SessionDB.getDB(this)
-        setContentView(R.layout.activity_create_subject)
+        setContentView(R.layout.activity_add_accounting)
         val db = GetFromDB()
         val back: FloatingActionButton = findViewById(R.id.goBack)
         back.setOnClickListener {
@@ -63,7 +63,7 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         }.join()
 
         subjArray = db.getDataCourse()
-        val listSubj: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val listSubj: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7)
         val spinnNumb: Spinner = findViewById(R.id.spinnerSubjNumber)
         spinnNumb.onItemSelectedListener = this
         val add: ArrayAdapter<*> =
@@ -203,6 +203,9 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
         val subjTypeArray: MutableList<String> = mutableListOf()
+        val listTime: List<String> = arrayListOf("8:30 - 10:00" , "10:10 - 11:40", "12:10 - 13:40",
+            "13:50 - 15:20", "15:30 - 17:00", "17:10 - 18:40", "18:50 - 20:20")
+        val textChecked: TextView = findViewById(R.id.checkedText)
         if (parent.id == R.id.spinnerSubj) {
             val check = subjArray[position]
             if (check.lecture == 1) {
@@ -224,6 +227,11 @@ class AddAccountingActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 spinType.isVisible = false
             }
         }
+        if(parent.id == R.id.spinnerSubjNumber) {
+            val textVal = "Время выбранного занятия: " + listTime[position]
+            textChecked.text = textVal
+        }
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
