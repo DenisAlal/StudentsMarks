@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/courseNameGrade"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="courseName"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/lessonNameGrade"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="lessonName"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/taskNameGrade"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="taskName"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/groupGrade"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="group"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/fioGrade"
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="fio"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/dateGrade"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="date"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/valueGrade"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/table_content_cell_bg"
+        android:text="value"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

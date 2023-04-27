@@ -11,8 +11,9 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.scanning.activites.AddAccountingActivity
-import com.denisal.studentsmarks.scanning.activites.CreateTaskActivity
 import com.denisal.studentsmarks.uid
+import com.denisal.studentsmarks.viewsgrade.TrafficViewActivity
+import com.denisal.studentsmarks.viewsgrade.GradeViewActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -31,6 +32,16 @@ class GradeStudentsFragment : Fragment() {
         val gradeScan: Button = view.findViewById(R.id.gradeScan)
         gradeScan.setOnClickListener {
             val intent = Intent(activity, AddAccountingActivity::class.java)
+            startActivity(intent)
+        }
+        val gradeView: Button = view.findViewById(R.id.gradeView)
+        gradeView.setOnClickListener {
+            val intent = Intent(activity, GradeViewActivity::class.java)
+            startActivity(intent)
+        }
+        val trafficView: Button = view.findViewById(R.id.trafficView)
+        trafficView.setOnClickListener {
+            val intent = Intent(activity, TrafficViewActivity::class.java)
             startActivity(intent)
         }
 
