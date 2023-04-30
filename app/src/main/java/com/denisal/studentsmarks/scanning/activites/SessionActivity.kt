@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.denisal.studentsmarks.HomeActivity
 import com.denisal.studentsmarks.R
 import com.denisal.studentsmarks.databinding.ActivitySessionBinding
-import com.denisal.studentsmarks.db.assessments.AssesDataRoom
 import com.denisal.studentsmarks.db.assessments.AssessDB
 import com.denisal.studentsmarks.db.session.SessionDB
 import com.denisal.studentsmarks.db.session.SessionData
 import com.denisal.studentsmarks.db.students.StudentsDB
-import com.denisal.studentsmarks.db.students.StudentsDataRoom
 import com.denisal.studentsmarks.db.tasks.TasksDB
 import com.denisal.studentsmarks.db.tasks.TasksDataRoom
 import com.denisal.studentsmarks.pass
@@ -26,6 +24,7 @@ import com.denisal.studentsmarks.scanning.viewmodels.ViewModelStudentsSession
 import com.denisal.studentsmarks.teacherID
 import com.denisal.studentsmarks.url
 import com.denisal.studentsmarks.user
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -38,6 +37,17 @@ class SessionActivity : AppCompatActivity(), StudentsSessionAdapter.MyClickListe
         val dbStudents = StudentsDB.getDB(this)
         val dbSess = SessionDB.getDB(this)
         super.onCreate(savedInstanceState)
+        val info: FloatingActionButton = findViewById(R.id.goInfo)
+        info.setOnClickListener{
+            val builderSucceed = AlertDialog.Builder(applicationContext)
+                .setTitle("Информация")
+                .setMessage("На этой вкладке можно добавить информацию о студентах, и завершить занятие, после нажатия на которое данные будут сохраненны данные)")
+                .setIcon(R.drawable.outline_info_24)
+            builderSucceed.setPositiveButton("OK"){ _, _ ->
+            }
+            val alertDialogSuccess: AlertDialog = builderSucceed.create()
+            alertDialogSuccess.show()
+        }
         binding = ActivitySessionBinding.inflate(layoutInflater)
         binding.buttomButtons.isVisible = false
         binding.recyclerViewStudentsSession.isVisible = false

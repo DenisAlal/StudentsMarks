@@ -32,7 +32,7 @@ class CreateTaskActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         info.setOnClickListener{
             val builderSucceed = AlertDialog.Builder(this)
                 .setTitle("Информация")
-                .setMessage("В данном меню можно выбрать создать задание")
+                .setMessage("В данном меню можно создать задание")
                 .setIcon(R.drawable.outline_info_24)
             builderSucceed.setPositiveButton("OK"){ _, _ ->
             }

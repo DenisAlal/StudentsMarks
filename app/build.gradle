@@ -51,6 +51,7 @@ dependencies {
     //noinspection GradleDependency
     implementation("mysql:mysql-connector-java:5.1.25")
     implementation 'com.jakewharton:process-phoenix:2.1.2'
+
     implementation 'androidx.room:room-ktx:2.5.1'
     kapt 'androidx.room:room-compiler:2.5.1'
     implementation('androidx.lifecycle:lifecycle-livedata-ktx:2.6.1')

@@ -61,8 +61,8 @@ class AddDataFragment : Fragment() {
         info.setOnClickListener{
             val builderSucceed = AlertDialog.Builder(requireContext())
                 .setTitle("Информация")
-                .setMessage("На этой вкладке можно просмотреть посещаемость " +
-                        "обучающихся, и добавить информацию о посещаемости")
+                .setMessage("На этой вкладке можно добавить информацию о студентах, создать предмет, " +
+                    "просмотреть списки загруженных студентов и созданных предметов и занятий)")
                 .setIcon(R.drawable.outline_info_24)
             builderSucceed.setPositiveButton("OK"){ _, _ ->
             }

@@ -35,6 +35,11 @@ class SettingsFragment : Fragment() {
             val intent = Intent(activity, DeleteInfoActivity::class.java)
             startActivity(intent)
         }
+        val saveDataActivity: Button = view.findViewById(R.id.saveData)
+        saveDataActivity.setOnClickListener{
+            val intent = Intent(activity, SaveDataActivity::class.java)
+            startActivity(intent)
+        }
         val logOut: Button = view.findViewById(R.id.logOut)
         logOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut();
@@ -48,9 +53,7 @@ class SettingsFragment : Fragment() {
             val builderSucceed = AlertDialog.Builder(requireContext())
 
                 .setTitle("Информация")
-                .setMessage("На этой вкладке можно добавить информацию о студентах, создать предмет, " +
-                        "просмотреть списки загруженных студентов и созданных предметов и занятий, " +
-                        "очистить данные за текуйщий семестр и выйти из учетной записи, а также сменить " +
+                .setMessage("На этой вкладке можно сохранить  посещаемость и успеваемость в файл,очистить данные за текуйщий семестр и выйти из учетной записи, а также сменить " +
                         "цветовое оформление")
                 .setIcon(R.drawable.outline_info_24)
 
