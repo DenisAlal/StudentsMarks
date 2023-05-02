@@ -11,6 +11,7 @@ import com.denisal.studentsmarks.pass
 import com.denisal.studentsmarks.teacherID
 import com.denisal.studentsmarks.url
 import com.denisal.studentsmarks.user
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.sql.Connection
@@ -23,7 +24,7 @@ class SaveDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save_data)
-        val goBack: Button = findViewById(R.id.goBack)
+        val goBack: FloatingActionButton = findViewById(R.id.goBack)
         goBack.setOnClickListener{
             finish()
         }

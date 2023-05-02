@@ -37,22 +37,22 @@ class SessionActivity : AppCompatActivity(), StudentsSessionAdapter.MyClickListe
         val dbStudents = StudentsDB.getDB(this)
         val dbSess = SessionDB.getDB(this)
         super.onCreate(savedInstanceState)
-        val info: FloatingActionButton = findViewById(R.id.goInfo)
-        info.setOnClickListener{
-            val builderSucceed = AlertDialog.Builder(applicationContext)
-                .setTitle("Информация")
-                .setMessage("На этой вкладке можно добавить информацию о студентах, и завершить занятие, после нажатия на которое данные будут сохраненны данные)")
-                .setIcon(R.drawable.outline_info_24)
-            builderSucceed.setPositiveButton("OK"){ _, _ ->
-            }
-            val alertDialogSuccess: AlertDialog = builderSucceed.create()
-            alertDialogSuccess.show()
-        }
         binding = ActivitySessionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+           val info: FloatingActionButton = findViewById(R.id.goInfo)
+               info.setOnClickListener{
+                    val builderSucceed = AlertDialog.Builder(applicationContext)
+                        .setTitle("Информация")
+                        .setMessage("На этой вкладке можно добавить информацию о студентах, и завершить занятие, после нажатия на которое данные будут сохраненны данные)")
+                        .setIcon(R.drawable.outline_info_24)
+                    builderSucceed.setPositiveButton("OK"){ _, _ ->
+                    }
+                    val alertDialogSuccess: AlertDialog = builderSucceed.create()
+                    alertDialogSuccess.show()
+          }
         binding.buttomButtons.isVisible = false
         binding.recyclerViewStudentsSession.isVisible = false
         binding.processLoading.isVisible = false
-        setContentView(binding.root)
         var lesson: MutableList<SessionData> = arrayListOf()
         Thread {
             runOnUiThread { loading() }
